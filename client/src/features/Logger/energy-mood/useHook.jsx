@@ -3,6 +3,7 @@ import { validateInput } from "./helpers";
 import { buildPayload } from "./utils";
 import { submit } from "./service";
 import { id } from "../../test/id";
+import { handleToast } from "../../toast/utils";
 
 export const useHook = (currentUserId) => {
   const [energy, setEnergy] = useState(65);
@@ -37,7 +38,9 @@ export const useHook = (currentUserId) => {
     try {
       setIsSubmitting(true);
       setError("");
-      await submit(payload);
+      const res = await submit(payload);
+
+      handleToast(res.message, "success");
 
       setIsSubmitted(true);
     } catch (err) {
