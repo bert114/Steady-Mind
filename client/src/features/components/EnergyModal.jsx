@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import { useHook } from "../Logger/energy-mood/useHook";
+import { useModalStore } from "../Logger/useModalStore";
 
 const MOODS = ["Happy", "Calm", "Neutral", "Restless", "Anxious", "Exhausted"];
 
-const EnergyMoodModal = ({ isOpen, onClose, currentUserId }) => {
+const EnergyMoodModal = ({ currentUserId }) => {
   const {
     energy,
     selectedMood,
@@ -15,6 +16,8 @@ const EnergyMoodModal = ({ isOpen, onClose, currentUserId }) => {
     handleSubmit,
     resetForm,
   } = useHook();
+
+  const { isOpen, modalType, openModal, closeModal } = useModalStore();
 
   if (!isOpen) return null;
 
@@ -29,7 +32,7 @@ const EnergyMoodModal = ({ isOpen, onClose, currentUserId }) => {
               <button
                 type="button"
                 className="close-trigger"
-                onClick={onClose}
+                onClick={closeModal}
                 aria-label="Dismiss window"
               >
                 &times;
@@ -88,7 +91,11 @@ const EnergyMoodModal = ({ isOpen, onClose, currentUserId }) => {
             )}
 
             <footer className="panel-actions">
-              <button type="button" className="action-subtle" onClick={onClose}>
+              <button
+                type="button"
+                className="action-subtle"
+                onClick={closeModal}
+              >
                 Dismiss
               </button>
               <button type="submit" className="action-solid">
@@ -106,7 +113,7 @@ const EnergyMoodModal = ({ isOpen, onClose, currentUserId }) => {
               className="action-solid"
               onClick={() => {
                 resetForm();
-                onClose(); // Hides the modal after acknowledgment
+                closeModal(); // Hides the modal after acknowledgment
               }}
             >
               Acknowledge

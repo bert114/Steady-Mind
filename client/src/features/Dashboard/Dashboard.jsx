@@ -8,10 +8,12 @@ import LoadingState from "../../components/states/LoadingState";
 import Modal from "../Logger/Modal";
 import EnergyMoodModal from "../components/EnergyModal";
 import Battery from "../battery/Battery.jsx";
+import { useModalStore } from "../Logger/useModalStore.js";
 
 function Dashboard({ set }) {
+  const { isOpen, modalType, openModal, closeModal } = useModalStore();
+
   const [viewState, setViewState] = useState("loading");
-  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     const timer = window.setTimeout(() => {
@@ -40,9 +42,17 @@ function Dashboard({ set }) {
             <button
               type="button"
               className="action-solid"
-              onClick={() => setIsModalOpen(true)}
+              onClick={() => openModal("energy")}
             >
-              + Log state
+              + Log Energy
+            </button>
+
+            <button
+              type="button"
+              className="action-solid"
+              onClick={() => openModal("interaction")}
+            >
+              + Log interaction
             </button>
           </div>
 
@@ -75,11 +85,7 @@ function Dashboard({ set }) {
         currentUserId="primary_user"
       /> */}
 
-      <Modal
-        type={"energy-mood"}
-        isOpen={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
-      />
+      <Modal />
     </section>
   );
 }

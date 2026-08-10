@@ -3,7 +3,7 @@ import { validateInput } from "./helpers";
 import { buildPayload } from "./utils";
 import { submit } from "./service";
 import { id } from "../../test/id";
-import { handleToast } from "../../toast/utils";
+import { handleToast } from "../../toast/toast.util";
 import { setBatteryData } from "../../battery/utils";
 
 export const useHook = (currentUserId) => {

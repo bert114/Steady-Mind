@@ -1,7 +1,13 @@
 import EnergyMoodModal from "../components/EnergyModal";
+import InteractionModal from "./interaction/InteractionModal.jsx";
+import { useModalStore } from "./useModalStore.js";
 
-function Modal({ onClose, type, isOpen }) {
-  return <EnergyMoodModal onClose={onClose} isOpen={isOpen} />;
+function Modal() {
+  const { isOpen, modalType, openModal, closeModal } = useModalStore();
+
+  // if (true) return <></>;
+
+  return modalType === "energy" ? <EnergyMoodModal /> : <InteractionModal />;
 }
 
 export default Modal;
