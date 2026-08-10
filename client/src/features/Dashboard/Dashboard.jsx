@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import "../../components/scss/Main.scss";
-import Battery from "../../components/Battery";
 import DailyInteractionsCard from "../../components/DailyInteractionsCard";
 import DailyMood from "../../components/DailyMood";
 import StateTrigger from "../../components/SatesTrigger";
@@ -8,8 +7,9 @@ import EmptyState from "../../components/states/EmptySate";
 import LoadingState from "../../components/states/LoadingState";
 import Modal from "../Logger/Modal";
 import EnergyMoodModal from "../components/EnergyModal";
+import Battery from "../battery/Battery.jsx";
 
-function Dashboard() {
+function Dashboard({ set }) {
   const [viewState, setViewState] = useState("loading");
   const [isModalOpen, setIsModalOpen] = useState(false);
 

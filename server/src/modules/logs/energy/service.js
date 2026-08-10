@@ -18,7 +18,7 @@ export const insertLog = async (userId, logDate, energyLevel, moodScore) => {
   ]);
 
   console.log("Inserted/Updated log:", row);
-  return row;
+  return row[0];
 };
 
 export const fetchLogsByUserId = async (userId) => {

@@ -1,9 +1,10 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { validateInput } from "./helpers";
 import { buildPayload } from "./utils";
 import { submit } from "./service";
 import { id } from "../../test/id";
 import { handleToast } from "../../toast/utils";
+import { setBatteryData } from "../../battery/utils";
 
 export const useHook = (currentUserId) => {
   const [energy, setEnergy] = useState(65);
@@ -11,6 +12,17 @@ export const useHook = (currentUserId) => {
   const [error, setError] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [response, setResponse] = useState(null);
+
+  useEffect(() => {
+    if (!response) {
+      return;
+    }
+
+    handleToast(response.message, "success");
+    setBatteryData(response);
+    setIsSubmitted(true);
+  }, [response]);
 
   const handleEnergyChange = (e) => {
     const value = Number(e.target.value);
@@ -40,9 +52,7 @@ export const useHook = (currentUserId) => {
       setError("");
       const res = await submit(payload);
 
-      handleToast(res.message, "success");
-
-      setIsSubmitted(true);
+      setResponse(res);
     } catch (err) {
       console.log(err);
       setError(
