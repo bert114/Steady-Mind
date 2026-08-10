@@ -1,14 +1,7 @@
 import React, { useState } from "react";
 import { useHook } from "../Logger/energy-mood/useHook";
 
-const MOODS = [
-  "Focused",
-  "Stable",
-  "Restless",
-  "Depleted",
-  "Driven",
-  "At ease",
-];
+const MOODS = ["Happy", "Calm", "Neutral", "Restless", "Anxious", "Exhausted"];
 
 const EnergyMoodModal = ({ isOpen, onClose, currentUserId }) => {
   const {
@@ -108,7 +101,14 @@ const EnergyMoodModal = ({ isOpen, onClose, currentUserId }) => {
             <span className="status-indicator-dot" />
             <h3>Recorded</h3>
             <p>Data successfully bound to the current timeline.</p>
-            <button type="button" className="action-solid" onClick={resetForm}>
+            <button
+              type="button"
+              className="action-solid"
+              onClick={() => {
+                resetForm();
+                onClose(); // Hides the modal after acknowledgment
+              }}
+            >
               Acknowledge
             </button>
           </div>

@@ -4,6 +4,7 @@ import { mapMoodToScore } from "./utils.js";
 
 export const createLog = async (req, res, next) => {
   try {
+    console.log(`${JSON.stringify(req.body)}`);
     const { userId, timestamp, energyLevel, mood } = req.body;
     const logDate = new Date().toISOString().split("T")[0];
     const moodScore = mapMoodToScore(mood);

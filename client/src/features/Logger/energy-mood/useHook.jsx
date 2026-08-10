@@ -2,6 +2,7 @@ import { useState } from "react";
 import { validateInput } from "./helpers";
 import { buildPayload } from "./utils";
 import { submit } from "./service";
+import { id } from "../../test/id";
 
 export const useHook = (currentUserId) => {
   const [energy, setEnergy] = useState(65);
@@ -30,12 +31,14 @@ export const useHook = (currentUserId) => {
       return;
     }
 
-    const payload = buildPayload(currentUserId, energy, selectedMood);
+    // need to change pa
+    const payload = buildPayload(id, energy, selectedMood);
 
     try {
       setIsSubmitting(true);
       setError("");
       await submit(payload);
+
       setIsSubmitted(true);
     } catch (err) {
       console.log(err);
