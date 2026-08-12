@@ -1,4 +1,5 @@
 import { apiClient } from "../../api/axiosClient.js";
+import { id } from "../../test/id.js";
 
 export const socialService = {
   logInteraction: async (interactionPayload) => {
@@ -15,5 +16,15 @@ export const socialService = {
       console.error("Service Error: Failed to log interaction", error);
       throw error;
     }
+  },
+
+  getUserInteractions: async (userId) => {
+    const response = await apiClient.get(
+      `/logs/interactions/userInteraction/${id}`,
+    );
+
+    console.log(response.data.message);
+
+    return response.data;
   },
 };

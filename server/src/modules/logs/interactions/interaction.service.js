@@ -1,6 +1,7 @@
 import db from "../../../config/db.js";
 import { formatLogDate } from "./interaction.helper.js";
 import {
+  FETCH_ALL_USER_INTERACTIONS_QUERY,
   INSERT_INTERACTION_QUERY,
   UPSERT_DAILY_LOG_QUERY,
 } from "./interaction.query.js";
@@ -33,4 +34,13 @@ export const saveInteractionRecord = async ({
   console.log("test", interactionResult);
 
   return interactionResult[0];
+};
+
+export const getAllUserSocialInteractions = async (clerkUserId) => {
+  const interactions = await db.query(FETCH_ALL_USER_INTERACTIONS_QUERY, [
+    clerkUserId,
+  ]);
+
+  console.log(interactions);
+  return interactions;
 };
