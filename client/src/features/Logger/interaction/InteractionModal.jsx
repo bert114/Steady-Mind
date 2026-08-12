@@ -71,11 +71,11 @@ const InteractionModal = ({ currentUserId }) => {
               {DURATIONS.map((d) => (
                 <button
                   type="button"
-                  key={d}
-                  className={`matrix-node ${formData.duration === d ? "active" : ""}`}
-                  onClick={() => handleChange("duration", d)}
+                  key={d.value}
+                  className={`matrix-node ${formData.duration === d.value ? "active" : ""}`}
+                  onClick={() => handleChange("duration", d.value)}
                 >
-                  {d}
+                  {d.label}
                 </button>
               ))}
             </div>
@@ -86,20 +86,22 @@ const InteractionModal = ({ currentUserId }) => {
               <label htmlFor="drain-slider">Drain score</label>
               <span className="metric-readout">
                 {formData.drainScore}
-                <small>/10</small>
+                <small> (-5 to 5)</small>
               </span>
             </div>
             <div className="gauge-track" aria-hidden="true">
               <div
                 className="gauge-indicator"
-                style={{ width: `${(formData.drainScore / 10) * 100}%` }}
+                style={{
+                  width: `${((Number(formData.drainScore) + 5) / 10) * 100}%`,
+                }}
               />
             </div>
             <input
               id="drain-slider"
               type="range"
-              min="1"
-              max="10"
+              min="-5"
+              max="5"
               step="1"
               value={formData.drainScore}
               onChange={(e) => handleChange("drainScore", e.target.value)}

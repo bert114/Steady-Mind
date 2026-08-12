@@ -6,6 +6,7 @@ import { clerkMiddleware } from "@clerk/express";
 import dashboardRoutes from "./modules/dashboard/routes.js";
 import logsRoutes from "./modules/logs/routes.js";
 import errorHandler from "./middleware/errorHandler.js";
+import interactionRoutes from "./modules/logs/interactions/interaction.route.js";
 import AppError from "./utils/AppError.js";
 
 import energyRoute from "./modules/logs/energy/route.js";
@@ -25,6 +26,7 @@ if (process.env.CLERK_ENABLED === "true") {
 
 app.use("/api/v1/dashboard", dashboardRoutes);
 app.use("/api/v1/logs/energy", energyRoute);
+app.use("/api/v1/logs/interactions", interactionRoutes);
 
 app.all("*", (req, res, next) => {
   next(new AppError(`Can't find ${req.originalUrl} on this server!`, 404));

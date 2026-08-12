@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { handleToast } from "../../toast/toast.util.js";
 import { useModalStore } from "../useModalStore.js";
+import { id } from "../../test/id.js";
+import { socialService } from "./Interaction.service.js";
 
 export const useInteractionHook = (currentUserId) => {
   const { isOpen, modalType, openModal, closeModal } = useModalStore();
@@ -9,7 +11,7 @@ export const useInteractionHook = (currentUserId) => {
     relationship: "",
     personName: "",
     duration: "",
-    drainScore: 5,
+    drainScore: 0,
   });
 
   const [error, setError] = useState("");
@@ -24,7 +26,7 @@ export const useInteractionHook = (currentUserId) => {
       relationship: "",
       personName: "",
       duration: "",
-      drainScore: 5,
+      drainScore: 0,
     });
     setError("");
   };
@@ -42,13 +44,15 @@ export const useInteractionHook = (currentUserId) => {
     }
 
     const interactionPayload = {
-      userId: currentUserId || "primary_user",
+      user_id: id || currentUserId || "primary_user",
+      relationship_type: formData.relationship,
+      custom_name: formData.personName.trim() || null,
+      duration_minutes: Number(formData.duration),
+      drain_score: Number(formData.drainScore),
       timestamp: new Date().toISOString(),
-      relationship: formData.relationship,
-      personName: formData.personName.trim() || null,
-      duration: formData.duration,
-      drainScore: Number(formData.drainScore),
     };
+
+    socialService.logInteraction(interactionPayload);
 
     console.log("Interaction logged:", interactionPayload);
 
