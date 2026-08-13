@@ -10,7 +10,7 @@ import interactionRoutes from "./modules/logs/interactions/interaction.route.js"
 import AppError from "./utils/AppError.js";
 import burnOutRoute from "./modules/burnout/burnout.route.js";
 
-import energyRoute from "./modules/logs/energy/route.js";
+import energyRoute from "./modules/logs/energy/energy.route.js";
 import requestLogger from "./middleware/reqLogger.js";
 
 const app = express();

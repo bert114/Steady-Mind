@@ -19,3 +19,17 @@ export async function getUserBurnoutStatus(clerkId) {
   const rawEvaluation = evaluateBurnoutRisk(dailyLogs, interactions);
   return formatBurnoutStatus(rawEvaluation);
 }
+
+export async function calculateUserBurnoutRisk(clerkId) {
+  const exists = await checkUserExists(clerkId);
+  if (!exists) {
+    throwError(`User with ID '${clerkId}' not found.`, 404);
+  }
+
+  const dailyLogs = await fetchRecentDailyLogs(clerkId);
+  const interactions = await fetchRecentInteractions(clerkId);
+
+  const rawEvaluation = evaluateBurnoutRisk(dailyLogs, interactions);
+
+  return formatBurnoutStatus(rawEvaluation);
+}
