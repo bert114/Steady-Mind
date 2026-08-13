@@ -1,6 +1,5 @@
-import AppError from "../../../utils/AppError.js";
-import { RELATIONSHIP_ID_MAP } from "./interaction.utils.js";
 import throwError from "../../../utils/throwError.js";
+import { RELATIONSHIP_ID_MAP } from "./interaction.utils.js";
 import {
   getAllUserSocialInteractions,
   saveInteractionRecord,
@@ -11,17 +10,19 @@ export const createInteraction = async (req, res, next) => {
     const {
       user_id,
       custom_name,
+      relationship_type,
       duration_minutes,
       drain_score,
       timestamp,
-      relationship_type_id,
     } = req.body;
 
-    console.log(req.body);
+    const relationship_type_id = relationship_type
+      ? RELATIONSHIP_ID_MAP[relationship_type]
+      : null;
 
-    const savedInteraction = await saveInteractionRecord({
+    const { savedInteraction, burnoutRisk } = await saveInteractionRecord({
       user_id,
-      custom_name,
+      custom_name: custom_name || null,
       duration_minutes,
       drain_score,
       timestamp,
@@ -30,9 +31,11 @@ export const createInteraction = async (req, res, next) => {
 
     res.status(201).json({
       status: "success",
-      message: "Social interaction saved and dashboard updated successfully.",
+      message:
+        "Social interaction saved and burnout evaluation updated successfully.",
       data: {
         interaction: savedInteraction,
+        burnoutRisk,
       },
     });
   } catch (error) {
@@ -51,7 +54,7 @@ export const getUserSocialInteractions = async (req, res, next) => {
     const interactions = await getAllUserSocialInteractions(id);
 
     return res.status(200).json({
-      success: true,
+      status: "success",
       data: interactions,
     });
   } catch (error) {

@@ -1,11 +1,11 @@
-import db from "../../../config/db.js";
 import { formatLogDate } from "./interaction.helper.js";
 import {
   FETCH_ALL_USER_INTERACTIONS_QUERY,
   INSERT_INTERACTION_QUERY,
   UPSERT_DAILY_LOG_QUERY,
 } from "./interaction.query.js";
-
+import { calculateUserBurnoutRisk } from "../../burnout/burnout.service.js";
+import db from "../../../config/db.js";
 export const saveInteractionRecord = async ({
   user_id,
   custom_name,
@@ -20,8 +20,6 @@ export const saveInteractionRecord = async ({
   const logResult = await db.query(UPSERT_DAILY_LOG_QUERY, [user_id, logDate]);
   const dailyLogId = logResult[0].id;
 
-  console.log(dailyLogId);
-
   const interactionResult = await db.query(INSERT_INTERACTION_QUERY, [
     dailyLogId,
     relationship_type_id ?? null,
@@ -31,16 +29,16 @@ export const saveInteractionRecord = async ({
     interactionTime,
   ]);
 
-  console.log("test", interactionResult);
+  const savedInteraction = interactionResult[0];
 
-  return interactionResult[0];
+  const burnoutRisk = await calculateUserBurnoutRisk(user_id);
+
+  return {
+    savedInteraction,
+    burnoutRisk,
+  };
 };
 
 export const getAllUserSocialInteractions = async (clerkUserId) => {
-  const interactions = await db.query(FETCH_ALL_USER_INTERACTIONS_QUERY, [
-    clerkUserId,
-  ]);
-
-  console.log(interactions);
-  return interactions;
+  return await db.query(FETCH_ALL_USER_INTERACTIONS_QUERY, [clerkUserId]);
 };

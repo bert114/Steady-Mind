@@ -1,4 +1,4 @@
-const UPSERT_DAILY_LOG_QUERY = `
+export const UPSERT_DAILY_LOG_QUERY = `
   INSERT INTO daily_logs (user_id, log_date, battery_level, mood_score)
   VALUES ($1, $2, 100, 3)
   ON CONFLICT (user_id, log_date) 
@@ -6,7 +6,7 @@ const UPSERT_DAILY_LOG_QUERY = `
   RETURNING id;
 `;
 
-const INSERT_INTERACTION_QUERY = `
+export const INSERT_INTERACTION_QUERY = `
   INSERT INTO social_interactions (
     daily_log_id, 
     relationship_type_id, 
@@ -36,5 +36,3 @@ export const FETCH_ALL_USER_INTERACTIONS_QUERY = `
   WHERE dl.user_id = $1
   ORDER BY si.interaction_time DESC;
 `;
-
-export { INSERT_INTERACTION_QUERY, UPSERT_DAILY_LOG_QUERY };
