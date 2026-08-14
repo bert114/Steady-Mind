@@ -11,6 +11,7 @@ import Battery from "../battery/Battery.jsx";
 import { useModalStore } from "../Logger/useModalStore.js";
 import { useDashboard } from "./useDashboard.jsx";
 import Burnout from "../burnout/Burnout.jsx";
+import RecoveryActivity from "../recovery/RecoveryActivity.jsx";
 
 function Dashboard({ userId = "user_clerk_123" }) {
   const { openModal } = useModalStore();
@@ -75,6 +76,8 @@ function Dashboard({ userId = "user_clerk_123" }) {
       <article className="dashboard-card dashboard-card--wide">
         <DailyMood score={metrics?.moodScore} />
       </article>
+
+      <RecoveryActivity riskLevel={burnoutRisk.riskLevel} />
 
       <Modal />
     </section>

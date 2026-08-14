@@ -12,6 +12,7 @@ import burnOutRoute from "./modules/burnout/burnout.route.js";
 
 import energyRoute from "./modules/logs/energy/energy.route.js";
 import requestLogger from "./middleware/reqLogger.js";
+import recoveryRouter from "./modules/recovery/recovery.route.js";
 
 const app = express();
 
@@ -29,6 +30,7 @@ app.use("/api/v1/dashboard", dashboardRoutes);
 app.use("/api/v1/logs/energy", energyRoute);
 app.use("/api/v1/logs/interactions", interactionRoutes);
 app.use("/api/v1/burnout", burnOutRoute);
+app.use("/api/v1/recovery", recoveryRouter);
 
 app.all("*", (req, res, next) => {
   next(new AppError(`Can't find ${req.originalUrl} on this server!`, 404));
