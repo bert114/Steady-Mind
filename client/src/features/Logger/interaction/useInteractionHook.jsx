@@ -10,6 +10,8 @@ import {
 } from "./Interaction.utils.js";
 import { useCallback } from "react";
 import { useEffect } from "react";
+import { changeStatus } from "../../burnout/burnoutUtils.js";
+import { refreshDashboard } from "../../Dashboard/dashboard.service.js";
 
 export const useInteractionHook = (currentUserId) => {
   const { closeModal } = useModalStore();
@@ -47,10 +49,12 @@ export const useInteractionHook = (currentUserId) => {
     try {
       const res = await socialService.logInteraction(payload);
 
+      changeStatus(res.data.burnoutRisk);
+
+      await refreshDashboard();
       handleToast(res.message, "success", 3000);
 
       handleDismiss();
-      fetchInteraction();
     } catch (err) {
       const errorMsg =
         err?.response?.data?.message || "Failed to record interaction.";
@@ -67,7 +71,6 @@ export const useInteractionHook = (currentUserId) => {
     try {
       const data = await socialService.getUserInteractions(id);
 
-      console.log(data);
       //setInteractions(data);
     } catch (err) {
       const errorMsg =

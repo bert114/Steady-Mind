@@ -11,7 +11,6 @@ export async function recordEnergyLog(
 ) {
   const logDate = formatLogDate(rawDate);
 
-  // 1. Save or update daily log entry
   const dailyLog = await upsertDailyLog(
     clerkId,
     logDate,
@@ -21,6 +20,8 @@ export async function recordEnergyLog(
 
   // 2. Re-evaluate burnout risk based on updated daily log
   const burnoutRisk = await calculateUserBurnoutRisk(clerkId);
+
+  console.log("check", dailyLog);
 
   return {
     dailyLog,

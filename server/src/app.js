@@ -3,7 +3,7 @@ import cors from "cors";
 import helmet from "helmet";
 import { clerkMiddleware } from "@clerk/express";
 
-import dashboardRoutes from "./modules/dashboard/routes.js";
+import dashboardRoutes from "./modules/dashboard/dashboard.route.js";
 import logsRoutes from "./modules/logs/routes.js";
 import errorHandler from "./middleware/errorHandler.js";
 import interactionRoutes from "./modules/logs/interactions/interaction.route.js";

@@ -27,6 +27,7 @@ export async function calculateUserBurnoutRisk(clerkId) {
   }
 
   const dailyLogs = await fetchRecentDailyLogs(clerkId);
+
   const interactions = await fetchRecentInteractions(clerkId);
 
   const rawEvaluation = evaluateBurnoutRisk(dailyLogs, interactions);

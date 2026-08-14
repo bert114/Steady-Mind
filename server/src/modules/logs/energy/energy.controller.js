@@ -3,6 +3,7 @@ import { recordEnergyLog, fetchEnergyLog } from "./energy.service.js";
 export async function handleCreateEnergyLog(req, res, next) {
   try {
     const { clerkId, batteryLevel, moodScore, logDate } = req.body;
+
     const result = await recordEnergyLog(
       clerkId,
       batteryLevel,
@@ -10,7 +11,10 @@ export async function handleCreateEnergyLog(req, res, next) {
       logDate,
     );
 
+    console.log(result);
+
     res.status(201).json({
+      message: "energy log updated",
       status: "success",
       data: result,
     });

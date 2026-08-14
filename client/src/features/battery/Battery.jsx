@@ -2,16 +2,19 @@ import React, { useEffect } from "react";
 import "./battery.scss";
 import { useBatteryStore } from "./useBatteryStore.js";
 
-export default function Battery() {
-  const { percentage, caption, label } = useBatteryStore();
+export default function Battery({ level }) {
+  const { percentage, caption, label, setPercentage } = useBatteryStore();
 
   useEffect(() => {
-    // Tracks any changes to percentage, caption, or label in real time
+    if (level !== undefined && level !== null) {
+      setPercentage(level);
+    }
+  }, [level, setPercentage]);
+
+  useEffect(() => {
     console.log(
       `Battery state updated: ${percentage}%, Status: "${caption}", Label: "${label}"`,
     );
-
-    // Perform any side effects here (e.g., syncing with backend storage, triggering animations)
   }, [percentage, caption, label]);
 
   const radius = 82;

@@ -5,6 +5,8 @@ import { submit } from "./service";
 import { id } from "../../test/id";
 import { handleToast } from "../../toast/toast.util";
 import { setBatteryData } from "../../battery/utils";
+import { changeStatus } from "../../burnout/burnoutUtils";
+import { refreshDashboard } from "../../Dashboard/dashboard.service";
 
 export const useHook = (currentUserId) => {
   const [energy, setEnergy] = useState(65);
@@ -20,6 +22,8 @@ export const useHook = (currentUserId) => {
     }
 
     handleToast(response.message, "success");
+
+    changeStatus(response.data.burnoutRisk);
     setBatteryData(response);
     setIsSubmitted(true);
   }, [response]);
@@ -37,7 +41,7 @@ export const useHook = (currentUserId) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    1;
     const validationError = validateInput(energy, selectedMood);
     if (validationError) {
       setError(validationError);
@@ -46,12 +50,14 @@ export const useHook = (currentUserId) => {
 
     // need to change pa
     const payload = buildPayload(id, energy, selectedMood);
+    console.log(payload);
 
     try {
       setIsSubmitting(true);
       setError("");
       const res = await submit(payload);
 
+      await refreshDashboard();
       setResponse(res);
     } catch (err) {
       console.log(err);

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import "../../components/scss/Main.scss";
 import DailyInteractionsCard from "../../components/DailyInteractionsCard";
 import DailyMood from "../../components/DailyMood";
@@ -9,81 +9,72 @@ import Modal from "../Logger/Modal";
 import EnergyMoodModal from "../components/EnergyModal";
 import Battery from "../battery/Battery.jsx";
 import { useModalStore } from "../Logger/useModalStore.js";
+import { useDashboard } from "./useDashboard.jsx";
+import Burnout from "../burnout/Burnout.jsx";
 
-function Dashboard({ set }) {
-  const { isOpen, modalType, openModal, closeModal } = useModalStore();
+function Dashboard({ userId = "user_clerk_123" }) {
+  const { openModal } = useModalStore();
+  const { dashboardData, isLoading, error, refetch } = useDashboard(userId);
 
-  const [viewState, setViewState] = useState("loading");
+  if (isLoading) return <LoadingState />;
+  if (error) return <EmptyState message={error} />;
+  if (!dashboardData) return <EmptyState />;
 
-  useEffect(() => {
-    const timer = window.setTimeout(() => {
-      setViewState("ready");
-    }, 900);
-
-    return () => window.clearTimeout(timer);
-  }, []);
+  const { metrics, burnoutRisk, recentInteractions } = dashboardData;
 
   return (
     <section className="dashboard-shell">
-      {viewState === "loading" ? <LoadingState /> : null}
+      <Burnout burnoutRisk={burnoutRisk} />
+      <div
+        className="dashboard-actions-bar"
+        style={{
+          marginBottom: "16px",
+          display: "flex",
+          justifyContent: "flex-end",
+          gap: "8px",
+        }}
+      >
+        <button
+          type="button"
+          className="action-solid"
+          onClick={() => openModal("energy")}
+        >
+          + Log Energy
+        </button>
 
-      {viewState === "empty" ? <EmptyState /> : null}
+        <button
+          type="button"
+          className="action-solid"
+          onClick={() => openModal("interaction")}
+        >
+          + Log interaction
+        </button>
+      </div>
 
-      {viewState === "ready" ? (
-        <>
-          <div
-            className="dashboard-actions-bar"
-            style={{
-              marginBottom: "16px",
-              display: "flex",
-              justifyContent: "flex-end",
-            }}
-          >
-            <button
-              type="button"
-              className="action-solid"
-              onClick={() => openModal("energy")}
+      <div className="dashboard-grid">
+        <article className="dashboard-card dashboard-card--primary">
+          <div className="card-heading">
+            <div>
+              <p className="card-kicker">Energy Reserve</p>
+              <h3>{burnoutRisk?.title || "How the day is holding up"}</h3>
+            </div>
+            <span
+              className={`card-pill card-pill--${burnoutRisk?.riskLevel?.toLowerCase() || "green"}`}
             >
-              + Log Energy
-            </button>
-
-            <button
-              type="button"
-              className="action-solid"
-              onClick={() => openModal("interaction")}
-            >
-              + Log interaction
-            </button>
+              {burnoutRisk?.riskLevel || "STEADY"}
+            </span>
           </div>
+          <Battery level={metrics?.batteryLevel ?? 0} />
+        </article>
 
-          <div className="dashboard-grid">
-            <article className="dashboard-card dashboard-card--primary">
-              <div className="card-heading">
-                <div>
-                  <p className="card-kicker">Energy reserve</p>
-                  <h3>How the day is holding up</h3>
-                </div>
-                <span className="card-pill">steady</span>
-              </div>
-              <Battery />
-            </article>
+        <article className="dashboard-card">
+          <DailyInteractionsCard interactions={recentInteractions} />
+        </article>
+      </div>
 
-            <article className="dashboard-card">
-              <DailyInteractionsCard />
-            </article>
-          </div>
-
-          <article className="dashboard-card dashboard-card--wide">
-            <DailyMood />
-          </article>
-        </>
-      ) : null}
-
-      {/* <EnergyMoodModal
-        isOpen={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
-        currentUserId="primary_user"
-      /> */}
+      <article className="dashboard-card dashboard-card--wide">
+        <DailyMood score={metrics?.moodScore} />
+      </article>
 
       <Modal />
     </section>

@@ -1,6 +1,6 @@
 export const buildPayload = (userId, energyLevel, mood) => ({
-  userId: userId || "primary_user",
-  timestamp: new Date().toISOString(),
-  energyLevel: Number(energyLevel),
-  mood,
+  clerkId: userId || "primary_user",
+  logDate: new Date().toISOString(),
+  batteryLevel: Number(energyLevel),
+  moodScore: mood,
 });

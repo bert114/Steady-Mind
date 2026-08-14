@@ -1,4 +1,5 @@
 import "./App.css";
+import Burnout from "./features/burnout/Burnout.jsx";
 import Dashboard from "./features/Dashboard/Dashboard.jsx";
 import Toast from "./features/toast/Toast.jsx";
 
@@ -6,6 +7,7 @@ function App() {
   return (
     <div className="app-shell">
       <Toast />
+
       <main className="main-content">
         <Dashboard />
       </main>

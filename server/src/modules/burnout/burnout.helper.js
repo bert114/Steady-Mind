@@ -1,5 +1,5 @@
 const LOW_BATTERY_THRESHOLD = 40;
-const HIGH_DRAIN_THRESHOLD = 7;
+const HIGH_DRAIN_THRESHOLD = -3;
 
 export function evaluateBurnoutRisk(dailyLogs, interactions) {
   const lowBatteryStreak = calculateLowBatteryStreak(dailyLogs);
@@ -73,7 +73,7 @@ function calculateHighDrainStreak(interactions) {
   if (!interactions || interactions.length === 0) return 0;
   let streak = 0;
   for (const interaction of interactions) {
-    if (interaction.drain_score >= HIGH_DRAIN_THRESHOLD) {
+    if (interaction.drain_score <= HIGH_DRAIN_THRESHOLD) {
       streak++;
     } else {
       break;
