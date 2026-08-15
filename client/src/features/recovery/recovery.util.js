@@ -5,6 +5,7 @@ export function formatActivityList(activities = []) {
     effort: activity.effort_level || "Standard",
     usageCount: activity.usage_count || 0,
     rating: activity.success_score || 0,
+    isCompleted: activity.is_completed || false,
   }));
 }
 
@@ -12,3 +13,18 @@ export function isElevatedRisk(riskLevel) {
   const targetRisks = ["RED", "YELLOW"];
   return targetRisks.includes(riskLevel);
 }
+
+export const buildRecoverySessionPayload = (
+  activityId,
+  rating = 5,
+  interactionId = 1,
+  isComplete = true,
+) => {
+  return {
+    activityId: Number(activityId),
+
+    interactionId: Number(interactionId),
+    rating,
+    is_complete: Boolean(isComplete),
+  };
+};

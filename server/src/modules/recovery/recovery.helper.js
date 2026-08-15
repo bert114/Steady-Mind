@@ -1,5 +1,7 @@
-export function recommendRecoveryAction(riskLevel, availableActivities) {
-  if (riskLevel === "GREEN") {
+export function recommendRecoveryAction(riskLevel, availableActivities = []) {
+  const normalizedRisk = String(riskLevel).toUpperCase();
+
+  if (normalizedRisk.includes("GREEN") || normalizedRisk.includes("STABLE")) {
     return {
       recommended: false,
       message: "Your energy is stable. Maintain standard routines.",
@@ -7,20 +9,29 @@ export function recommendRecoveryAction(riskLevel, availableActivities) {
     };
   }
 
-  // Simple, deterministic heuristic mapping (No AI)
-  const targetEffort = riskLevel === "RED" ? "LOW" : "MEDIUM";
-  const filtered = availableActivities.filter(
-    (act) => act.effort_level === targetEffort || !act.effort_level,
-  );
+  const isHighRisk =
+    normalizedRisk.includes("RED") || normalizedRisk.includes("HIGH");
+  const targetEffort = isHighRisk ? "LOW" : "MEDIUM";
+
+  const filtered = availableActivities.filter((act) => {
+    if (!act.effort_level) return true;
+    return String(act.effort_level).toUpperCase() === targetEffort;
+  });
+
+  const selectedActivities =
+    filtered.length > 0 ? filtered : availableActivities.slice(0, 3);
+
+  const sanitizedActivities = selectedActivities.map((act) => ({
+    ...act,
+    is_completed: act.is_completed === true,
+  }));
 
   return {
     recommended: true,
     riskLevel,
-    message:
-      riskLevel === "RED"
-        ? "High burnout risk detected! We strongly recommend immediate low-effort recovery."
-        : "Warning level detected. Consider selecting a light recovery activity.",
-    suggestedActivities:
-      filtered.length > 0 ? filtered : availableActivities.slice(0, 3),
+    message: isHighRisk
+      ? "High burnout risk detected! We strongly recommend immediate low-effort recovery."
+      : "Warning level detected. Consider selecting a light recovery activity.",
+    suggestedActivities: sanitizedActivities,
   };
 }

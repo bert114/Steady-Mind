@@ -3,28 +3,31 @@ import { useRecoveryStore } from "./useRecoveryStore";
 import { useRecovery } from "./useRecoveryHook";
 import "./recovery.css";
 import { useState } from "react";
+import { useEffect } from "react";
 
-function RecoveryActivity({ riskLevel }) {
+function RecoveryActivity({ riskLevel, interactionCauseId, data }) {
   const { isElevated, recommendations, loading, completeActivity } =
     useRecovery(riskLevel);
 
+  useEffect(() => console.log(data), [data]);
+
   const [activeFeedbackId, setActiveFeedbackId] = useState(null);
 
-  const handleRatingSelect = (activityId, ratingScore) => {
-    completeActivity(activityId, ratingScore);
+  const handleRatingSelect = async (activityId, ratingScore) => {
+    await completeActivity(activityId, ratingScore);
     setActiveFeedbackId(null);
   };
 
   if (!isElevated) return null;
 
+  const pendingCount = recommendations.filter((act) => !act.isCompleted).length;
+
   return (
     <div className="recovery-card">
       <div className="recovery-header">
-        <h4 className="recovery-title">Pending Recovery Actions</h4>
+        <h4 className="recovery-title">Recovery Actions</h4>
         {recommendations.length > 0 && (
-          <span className="pending-badge">
-            {recommendations.length} Pending
-          </span>
+          <span className="pending-badge">{pendingCount} Pending</span>
         )}
       </div>
 
@@ -33,7 +36,10 @@ function RecoveryActivity({ riskLevel }) {
       ) : (
         <div className="recovery-list">
           {recommendations.map((activity) => (
-            <div key={activity.id} className="recovery-item">
+            <div
+              key={activity.id}
+              className={`recovery-item ${activity.isCompleted ? "completed" : ""}`}
+            >
               <div className="recovery-item-header">
                 <div className="activity-info">
                   <p className="activity-name">{activity.name}</p>
@@ -44,17 +50,20 @@ function RecoveryActivity({ riskLevel }) {
 
                 <button
                   onClick={() =>
-                    setActiveFeedbackId(
-                      activeFeedbackId === activity.id ? null : activity.id,
-                    )
+                    completeActivity(activity.id, 5, interactionCauseId, true)
                   }
-                  className="task-complete-btn"
+                  disabled={activity.isCompleted}
+                  className={`px-4 py-2 rounded-md ${
+                    activity.isCompleted
+                      ? "bg-green-100 text-green-700"
+                      : "bg-blue-600 text-white hover:bg-blue-700"
+                  }`}
                 >
-                  {activeFeedbackId === activity.id ? "Cancel" : "Mark Done"}
+                  {activity.isCompleted ? "Completed ✓" : "Mark Done"}
                 </button>
               </div>
 
-              {activeFeedbackId === activity.id && (
+              {activeFeedbackId === activity.id && !activity.isCompleted && (
                 <div className="feedback-inline">
                   <p className="feedback-question">
                     Did this activity help you feel better?
@@ -64,19 +73,19 @@ function RecoveryActivity({ riskLevel }) {
                       onClick={() => handleRatingSelect(activity.id, 5)}
                       className="rating-btn"
                     >
-                      Yes, a lot!
+                      Yes, a lot! 🙌
                     </button>
                     <button
                       onClick={() => handleRatingSelect(activity.id, 3)}
                       className="rating-btn"
                     >
-                      A little
+                      A little 🙂
                     </button>
                     <button
                       onClick={() => handleRatingSelect(activity.id, 1)}
                       className="rating-btn"
                     >
-                      Not really
+                      Not really 🙁
                     </button>
                   </div>
                 </div>

@@ -1,14 +1,16 @@
 import { id } from "../../../../client/src/features/test/id.js";
 import {
   getRecoveryRecommendations,
-  logRecoveryAction,
   getUserDashboardState,
+  logRecoveryAction,
 } from "./recovery.service.js";
 
 export async function handleGetRecommendations(req, res, next) {
   try {
     const { clerkId } = req.params;
     const recommendations = await getRecoveryRecommendations(id);
+
+    //console.log(recommendations);
 
     res.status(200).json({
       status: "success",
@@ -23,8 +25,6 @@ export async function handleExecuteRecovery(req, res, next) {
   try {
     const { clerkId } = req.params;
     const { interactionId, activityId, rating } = req.body;
-
-    console.log(req.body);
 
     const session = await logRecoveryAction(
       clerkId,

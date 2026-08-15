@@ -1,16 +1,5 @@
 import db from "../../config/db.js";
 
-export async function fetchCopingActivities(clerkId) {
-  const result = await db.query(
-    `SELECT id, name, effort_level, success_score, usage_count 
-     FROM coping_activities 
-     WHERE user_id = $1 OR user_id IS NULL 
-     ORDER BY success_score DESC, usage_count DESC`,
-    [clerkId],
-  );
-  return result;
-}
-
 export async function createRecoverySession(
   clerkId,
   interactionId,
@@ -18,13 +7,12 @@ export async function createRecoverySession(
   rating,
 ) {
   const result = await db.query(
-    `INSERT INTO recovery_sessions (interaction_id, activity_id, rating, completed_at)
-     VALUES ($1, $2, $3, NOW())
-     RETURNING id, interaction_id, activity_id, rating, completed_at`,
+    `INSERT INTO recovery_sessions (interaction_id, activity_id, rating, is_complete, completed_at)
+     VALUES ($1, $2, $3, TRUE, NOW())
+     RETURNING id, interaction_id, activity_id, rating, is_complete, completed_at`,
     [interactionId, activityId, rating],
   );
 
-  // Increment usage count on the selected activity
   await db.query(
     `UPDATE coping_activities 
      SET usage_count = usage_count + 1 
@@ -32,7 +20,7 @@ export async function createRecoverySession(
     [activityId],
   );
 
-  return result[0];
+  return result;
 }
 
 export async function fetchDashboardState(clerkId) {
@@ -53,5 +41,35 @@ export async function fetchDashboardState(clerkId) {
      LIMIT 5`,
     [clerkId],
   );
+  return result;
+}
+
+export async function fetchCopingActivities(clerkId) {
+  const result = await db.query(
+    `SELECT 
+        ca.id, 
+        ca.name, 
+        ca.effort_level, 
+        ca.success_score, 
+        ca.usage_count,
+        CASE 
+          WHEN completed_today.id IS NOT NULL THEN TRUE 
+          ELSE FALSE 
+        END AS is_completed
+     FROM coping_activities ca
+     LEFT JOIN (
+       SELECT rs.id, rs.activity_id
+       FROM recovery_sessions rs
+       JOIN social_interactions si ON rs.interaction_id = si.id
+       JOIN daily_logs dl ON si.daily_log_id = dl.id
+       WHERE dl.user_id = $1 
+         AND rs.completed_at::date = CURRENT_DATE
+         AND rs.is_complete = TRUE
+     ) completed_today ON ca.id = completed_today.activity_id
+     WHERE ca.user_id = $1 OR ca.user_id IS NULL 
+     ORDER BY ca.success_score DESC, ca.usage_count DESC`,
+    [clerkId],
+  );
+
   return result;
 }

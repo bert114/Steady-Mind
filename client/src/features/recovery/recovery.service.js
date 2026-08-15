@@ -5,10 +5,18 @@ export const recoveryService = {
     const response = await apiClient.get(
       `/recovery/recommendations/${clerkId}`,
     );
+
     return response.data;
   },
 
   logAction: async (clerkId, { interactionId, activityId, rating }) => {
+    const test = {
+      activityId,
+      interactionId,
+      activityId,
+      rating,
+    };
+
     const response = await apiClient.post(`/recovery/action/${clerkId}`, {
       interactionId,
       activityId,

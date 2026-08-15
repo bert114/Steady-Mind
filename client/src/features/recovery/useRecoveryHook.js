@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { isElevatedRisk } from "./recovery.util";
+import { buildRecoverySessionPayload, isElevatedRisk } from "./recovery.util";
 import { id } from "../test/id";
 import { useRecoveryStore } from "./useRecoveryStore";
 
@@ -19,17 +19,28 @@ export function useRecovery(riskLevel) {
 
   useEffect(() => {
     if (elevated && clerkId) {
-      fetchRecommendations(clerkId);
+      fetchRecommendations(id);
     }
   }, [elevated, clerkId, fetchRecommendations]);
 
-  const handleComplete = async (activityId, rating = 5, interactionId = 1) => {
+  useEffect(() => {});
+
+  const handleComplete = async (
+    activityId,
+    rating = 5,
+    interactionId = 1,
+    isComplete = true,
+  ) => {
     if (!clerkId) return;
-    return await completeActivity(clerkId, {
-      interactionId,
+
+    const payload = buildRecoverySessionPayload(
       activityId,
       rating,
-    });
+      interactionId,
+      isComplete,
+    );
+
+    return await completeActivity(clerkId, payload);
   };
 
   return {

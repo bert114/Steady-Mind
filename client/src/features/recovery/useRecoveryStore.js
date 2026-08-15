@@ -1,5 +1,4 @@
 import { create } from "zustand";
-
 import { formatActivityList } from "./recovery.util";
 import { recoveryService } from "./recovery.service";
 
@@ -9,7 +8,6 @@ export const useRecoveryStore = create((set, get) => ({
   loading: false,
   error: null,
 
-  // Fetch recommendations
   fetchRecommendations: async (clerkId) => {
     if (!clerkId) return;
     set({ loading: true, error: null });
@@ -28,12 +26,12 @@ export const useRecoveryStore = create((set, get) => ({
     }
   },
 
-  // Log a completed activity and automatically update store state
   completeActivity: async (
     clerkId,
     { interactionId = 1, activityId, rating = 5 },
   ) => {
     set({ loading: true, error: null });
+
     try {
       const res = await recoveryService.logAction(clerkId, {
         interactionId,
@@ -42,10 +40,9 @@ export const useRecoveryStore = create((set, get) => ({
       });
 
       if (res.status === "success") {
-        // Filter out completed activity from local state
         set((state) => ({
-          recommendations: state.recommendations.filter(
-            (act) => act.id !== activityId,
+          recommendations: state.recommendations.map((act) =>
+            act.id === activityId ? { ...act, isCompleted: true } : act,
           ),
           loading: false,
         }));

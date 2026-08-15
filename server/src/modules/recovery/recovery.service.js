@@ -22,6 +22,7 @@ export async function getRecoveryRecommendations(clerkId) {
     burnoutStatus.riskLevel,
     activities,
   );
+
   return formatRecoveryResponse(rawRecommendation);
 }
 
@@ -31,11 +32,6 @@ export async function logRecoveryAction(
   activityId,
   rating,
 ) {
-  const exists = await checkUserExists(clerkId);
-  if (!exists) {
-    throwError(`User with ID '${clerkId}' not found.`, 404);
-  }
-
   return await createRecoverySession(
     clerkId,
     interactionId,

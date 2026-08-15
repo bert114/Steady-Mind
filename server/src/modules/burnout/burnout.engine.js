@@ -17,5 +17,6 @@ export default async function getUserBurnoutStatus(clerkId) {
   const interactions = await fetchRecentInteractions(clerkId);
 
   const rawEvaluation = evaluateBurnoutRisk(dailyLogs, interactions);
+
   return formatBurnoutStatus(rawEvaluation);
 }

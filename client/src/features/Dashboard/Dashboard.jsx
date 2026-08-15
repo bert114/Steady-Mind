@@ -77,7 +77,11 @@ function Dashboard({ userId = "user_clerk_123" }) {
         <DailyMood score={metrics?.moodScore} />
       </article>
 
-      <RecoveryActivity riskLevel={burnoutRisk.riskLevel} />
+      <RecoveryActivity
+        data={burnoutRisk}
+        riskLevel={burnoutRisk.riskLevel}
+        interactionCauseId={burnoutRisk.latestInteraction.id}
+      />
 
       <Modal />
     </section>

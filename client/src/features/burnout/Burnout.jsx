@@ -38,7 +38,7 @@ export const BurnoutRiskSkeleton = () => (
   </div>
 );
 const Burnout = ({
-  burnoutRisk, // Received directly as a prop from Dashboard
+  burnoutRisk,
   cardTitle = "Burnout Status",
   showSignalsBreakdown = true,
 }) => {

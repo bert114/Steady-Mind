@@ -5,33 +5,29 @@ export const useBurnoutStore = create((set) => ({
   isLoading: false,
   error: null,
   setBurnoutData: (data) => set({ burnoutRisk: data }),
-  fetchBurnoutRisk: async () => {
-    set({ isLoading: true, error: null });
-    try {
-      // Mock API Response matching your JSON structure
-      const mockApiResponse = {
-        status: "success",
-        data: {
-          burnoutRisk: {
-            riskLevel: "GREEN",
-            title: "Stable",
-            reasons: [
-              "Your energy and interaction patterns show normal recovery levels.",
-            ],
-            signals: {
-              currentBattery: 85,
-              lowBatteryStreak: 0,
-              highDrainStreak: 0,
-            },
-            evaluatedAt: "2026-08-13T13:19:54.158Z",
-          },
-        },
-      };
+  fetchBurnoutRisk: async (userId) => {
+    if (!userId) {
+      console.warn("No user ID provided to fetchBurnoutRisk");
+      return;
+    }
 
-      await new Promise((resolve) => setTimeout(resolve, 500));
-      set({ burnoutRisk: mockApiResponse.data.burnoutRisk, isLoading: false });
+    set({ isLoading: true, error: null });
+
+    try {
+      const response = await fetch(`/api/v1/burnout/${userId}`);
+
+      const result = await response.json();
+
+      set({
+        burnoutRisk: result.data.burnoutRisk,
+        isLoading: false,
+      });
     } catch (err) {
-      set({ error: "Failed to load burnout evaluation.", isLoading: false });
+      console.error("Error fetching burnout risk:", err);
+      set({
+        error: "Failed to load burnout evaluation.",
+        isLoading: false,
+      });
     }
   },
 }));
