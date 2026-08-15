@@ -22,14 +22,14 @@ function RecoveryActivity({ riskLevel, interactionCauseId }) {
   return (
     <div className="recovery-card">
       <div className="recovery-header">
-        <h4 className="recovery-title">Recovery Actions</h4>
+        <h4 className="recovery-title">Recovery</h4>
         {recommendations.length > 0 && (
-          <span className="pending-badge">{pendingCount} Pending</span>
+          <span className="pending-badge">{pendingCount} to do</span>
         )}
       </div>
 
       {loading && recommendations.length === 0 ? (
-        <p className="recovery-loading">Loading suggestions...</p>
+        <p className="recovery-loading">Loading recovery ideas...</p>
       ) : (
         <div className="recovery-list">
           {recommendations.map((activity) => (
@@ -43,10 +43,9 @@ function RecoveryActivity({ riskLevel, interactionCauseId }) {
                   <span className="activity-effort">
                     Effort: {activity.effort}
                   </span>
-                  {/* INLINE DISPLAY: Show the saved rating once completed */}
                   {activity.isCompleted && activity.lastRating && (
                     <span className="activity-rating-saved text-sm text-gray-500 ml-2">
-                      Rated: {activity.lastRating}/5
+                      Saved rating: {activity.lastRating}/5
                     </span>
                   )}
                 </div>
@@ -56,38 +55,36 @@ function RecoveryActivity({ riskLevel, interactionCauseId }) {
                     onClick={() => setActiveFeedbackId(activity.id)}
                     className="recovery-action-button"
                   >
-                    Mark Done
+                    Track it
                   </button>
                 )}
 
                 {activity.isCompleted && (
-                  <span className="completed-badge">Completed ✓</span>
+                  <span className="completed-badge">Done</span>
                 )}
               </div>
 
               {activeFeedbackId === activity.id && !activity.isCompleted && (
                 <div className="feedback-inline">
-                  <p className="feedback-question">
-                    Did this activity help you feel better?
-                  </p>
+                  <p className="feedback-question">Did this help?</p>
                   <div className="rating-options">
                     <button
                       onClick={() => handleRatingSelect(activity.id, 5)}
                       className="rating-btn"
                     >
-                      Yes, a lot! 🙌
+                      Yes, a lot
                     </button>
                     <button
                       onClick={() => handleRatingSelect(activity.id, 3)}
                       className="rating-btn"
                     >
-                      A little 🙂
+                      A little
                     </button>
                     <button
                       onClick={() => handleRatingSelect(activity.id, 1)}
                       className="rating-btn"
                     >
-                      Not really 🙁
+                      Not really
                     </button>
                   </div>
                 </div>

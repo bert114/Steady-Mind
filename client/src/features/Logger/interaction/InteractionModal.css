@@ -11,13 +11,13 @@
 }
 
 .modal-panel {
-  background: linear-gradient(180deg, #fffdf9 0%, #f7f2ea 100%);
-  border: 1px solid rgba(149, 111, 72, 0.18);
+  background: linear-gradient(180deg, #fffefb 0%, #eef5ee 100%);
+  border: 1px solid rgba(77, 111, 79, 0.18);
   border-radius: 22px;
   padding: 28px 24px 22px;
   width: min(420px, calc(100vw - 24px));
   box-sizing: border-box;
-  box-shadow: 0 22px 45px rgba(53, 39, 28, 0.14);
+  box-shadow: 0 22px 45px rgba(30, 49, 41, 0.14);
 }
 
 .panel-header {

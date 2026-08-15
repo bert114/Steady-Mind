@@ -1,12 +1,9 @@
-import { useEffect } from "react";
 import "../../components/scss/Main.scss";
 import DailyInteractionsCard from "../../components/DailyInteractionsCard";
 import DailyMood from "../../components/DailyMood";
-import StateTrigger from "../../components/SatesTrigger";
 import EmptyState from "../../components/states/EmptySate";
 import LoadingState from "../../components/states/LoadingState";
 import Modal from "../Logger/Modal";
-import EnergyMoodModal from "../components/EnergyModal";
 import Battery from "../battery/Battery.jsx";
 import { useModalStore } from "../Logger/useModalStore.js";
 import { useDashboard } from "./useDashboard.jsx";
@@ -15,7 +12,7 @@ import RecoveryActivity from "../recovery/RecoveryActivity.jsx";
 
 function Dashboard({ userId = "user_clerk_123" }) {
   const { openModal } = useModalStore();
-  const { dashboardData, isLoading, error, refetch } = useDashboard(userId);
+  const { dashboardData, isLoading, error } = useDashboard(userId);
 
   if (isLoading) return <LoadingState />;
   if (error) return <EmptyState message={error} />;
@@ -25,18 +22,19 @@ function Dashboard({ userId = "user_clerk_123" }) {
 
   return (
     <section className="dashboard-shell">
-      <div className="dashboard-topbar">
-        <div>
-          <p className="dashboard-kicker">Daily overview</p>
-          <h2 className="dashboard-title">Your energy landscape</h2>
+      <header className="dashboard-topbar">
+        <div className="dashboard-intro">
+          <p className="dashboard-kicker">Today</p>
+          <h2 className="dashboard-title">Your energy snapshot</h2>
         </div>
+
         <div className="dashboard-actions-bar">
           <button
             type="button"
             className="action-solid"
             onClick={() => openModal("energy")}
           >
-            + Log Energy
+            Log energy
           </button>
 
           <button
@@ -44,37 +42,43 @@ function Dashboard({ userId = "user_clerk_123" }) {
             className="action-solid"
             onClick={() => openModal("interaction")}
           >
-            + Log interaction
+            Log interaction
           </button>
         </div>
-      </div>
+      </header>
 
-      <Burnout burnoutRisk={burnoutRisk} />
-
-      <div className="dashboard-grid">
-        <article className="dashboard-card dashboard-card--primary">
-          <div className="card-heading">
-            <div>
-              <p className="card-kicker">Energy Reserve</p>
-              <h3>{burnoutRisk?.title || "How the day is holding up"}</h3>
-            </div>
-            <span
-              className={`card-pill card-pill--${burnoutRisk?.riskLevel?.toLowerCase() || "green"}`}
-            >
-              {burnoutRisk?.riskLevel || "STEADY"}
+      <article className="energy-spotlight">
+        <div className="energy-spotlight__copy">
+          <p className="energy-spotlight__eyebrow">Current energy</p>
+          <div className="energy-spotlight__value-wrap">
+            <span className="energy-spotlight__value">
+              {metrics?.batteryLevel ?? 0}
             </span>
+            <span className="energy-spotlight__scale">/100</span>
           </div>
-          <Battery level={metrics?.batteryLevel ?? 0} />
-        </article>
+          <p className="energy-spotlight__context">
+            {burnoutRisk?.title || "How today feels"}
+          </p>
+        </div>
 
-        <article className="dashboard-card">
-          <DailyInteractionsCard interactions={recentInteractions} />
-        </article>
+        <div className="energy-spotlight__visual">
+          <Battery level={metrics?.batteryLevel ?? 0} />
+        </div>
+      </article>
+
+      <div className="editorial-layout">
+        <section className="editorial-section editorial-section--status">
+          <Burnout burnoutRisk={burnoutRisk} />
+        </section>
+
+        <section className="editorial-section editorial-section--mood">
+          <DailyMood score={metrics?.moodScore} />
+        </section>
       </div>
 
-      <article className="dashboard-card dashboard-card--wide">
-        <DailyMood score={metrics?.moodScore} />
-      </article>
+      <section className="editorial-section editorial-section--interaction">
+        <DailyInteractionsCard interactions={recentInteractions} />
+      </section>
 
       <RecoveryActivity
         data={burnoutRisk}

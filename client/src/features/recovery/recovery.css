@@ -1,9 +1,9 @@
 .recovery-card {
-  padding: 1.5rem;
-  background: linear-gradient(180deg, #fffaf1 0%, #f9f2e8 100%);
-  border: 1px solid #e8d2ad;
-  border-radius: 1.25rem;
-  box-shadow: 0 14px 32px rgba(76, 53, 24, 0.08);
+  padding: 0;
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
   font-family: "Segoe UI", sans-serif;
   color: #2d241e;
 }
@@ -31,14 +31,14 @@
 
 .pending-badge {
   font-size: 0.72rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
+  font-weight: 600;
+  letter-spacing: 0.04em;
   text-transform: uppercase;
-  color: #7a4a1a;
-  background: #f6e6c9;
-  padding: 0.35rem 0.7rem;
-  border-radius: 999px;
-  border: 1px solid rgba(122, 74, 26, 0.2);
+  color: var(--secondary-deep);
+  background: transparent;
+  padding: 0;
+  border-radius: 0;
+  border: none;
 }
 
 .recovery-loading {
@@ -54,11 +54,12 @@
 }
 
 .recovery-item {
-  padding: 0.9rem 1rem;
-  background: rgba(255, 255, 255, 0.62);
-  border: 1px solid rgba(154, 118, 76, 0.22);
-  border-radius: 0.9rem;
-  box-shadow: 0 6px 18px rgba(93, 69, 42, 0.04);
+  padding: 0.85rem 0;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid var(--border);
+  border-radius: 0;
+  box-shadow: none;
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
@@ -98,20 +99,20 @@
   align-items: center;
   width: fit-content;
   margin-top: 0.2rem;
-  padding: 0.2rem 0.55rem;
-  border-radius: 999px;
-  background: #efe2d0;
-  color: #6e4215;
-  font-size: 0.7rem;
-  font-weight: 700;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
+  padding: 0;
+  border-radius: 0;
+  background: transparent;
+  color: var(--secondary-deep);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0;
+  text-transform: none;
 }
 
 .recovery-action-button {
   padding: 0.6rem 0.9rem;
   border: 1px solid #31271f;
-  border-radius: 999px;
+  border-radius: 0;
   background: #31271f;
   color: #f8f2ea;
   font-size: 0.76rem;
@@ -127,7 +128,6 @@
 
 .recovery-action-button:hover {
   transform: translateY(-1px);
-  box-shadow: 0 8px 16px rgba(49, 39, 31, 0.18);
   background: #1f1a17;
 }
 

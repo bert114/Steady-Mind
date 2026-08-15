@@ -1,36 +1,45 @@
 .card {
-  border-radius: 18px;
-  padding: 22px 20px;
-  background: linear-gradient(180deg, #fffdf9 0%, #f7f2ea 100%);
-  border: 1px solid rgba(149, 111, 72, 0.18);
-  box-shadow: 0 16px 32px rgba(55, 42, 28, 0.08);
+  border-radius: 0;
+  padding: 0 0 18px;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid rgba(31, 27, 26, 0.12);
+  box-shadow: none;
   font-family: "Segoe UI", sans-serif;
-  max-width: 440px;
   width: 100%;
   box-sizing: border-box;
 }
 
-/* Status Themes */
-.card.themeGREEN {
-  border-left: 6px solid #2f8f5b;
+.card.themegreen {
+  border-left: 0;
 }
-.card.themeYELLOW {
-  border-left: 6px solid #c88a2d;
+.card.themeyellow {
+  border-left: 0;
 }
-.card.themeRED {
-  border-left: 6px solid #ba4b3f;
+.card.themered {
+  border-left: 0;
 }
 
 .header {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-end;
+  gap: 12px;
   margin-bottom: 16px;
+}
+
+.burnout-kicker {
+  margin: 0 0 6px;
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--secondary);
+  font-weight: 700;
 }
 
 .title {
   margin: 0;
-  font-size: 1.15rem;
+  font-size: clamp(1.3rem, 1.8vw, 1.7rem);
   font-weight: 700;
   color: #201915;
   font-family: Georgia, "Times New Roman", serif;
@@ -39,116 +48,68 @@
 .badge {
   display: inline-flex;
   align-items: center;
-  padding: 5px 12px;
-  border-radius: 9999px;
-  font-size: 0.75rem;
-  font-weight: 800;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
+  padding: 0;
+  border-radius: 0;
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: none;
+  letter-spacing: 0.02em;
 }
 
-.badgeGREEN {
-  background-color: #dff5e8;
-  color: #195d3d;
+.badgegreen {
+  color: #1d5a3d;
 }
-.badgeYELLOW {
-  background-color: #f8e7c4;
-  color: #82561d;
+.badgeyellow {
+  color: #8a5c1e;
 }
-.badgeRED {
-  background-color: #f8d8d7;
+.badgered {
   color: #8d3029;
 }
 
-/* Signals Grid */
-.signalsGrid {
+.signals-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 10px;
-  background: rgba(255, 255, 255, 0.5);
-  padding: 12px;
-  border-radius: 12px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
   margin-bottom: 16px;
-  border: 1px solid rgba(149, 111, 72, 0.12);
 }
 
-.metricBox {
+.metric-box {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  text-align: center;
-  background: rgba(255, 255, 255, 0.25);
-  border-radius: 10px;
-  padding: 10px 8px;
+  gap: 6px;
+  padding-top: 8px;
+  border-top: 1px solid var(--border);
 }
 
-.metricValue {
-  font-size: 1.15rem;
-  font-weight: 800;
-  color: #1c1a19;
+.metric-value {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--ink);
+  font-family: var(--display-font);
 }
 
-.metricLabel {
-  font-size: 0.7rem;
-  color: #6b5d52;
-  margin-top: 2px;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
+.metric-label {
+  font-size: 0.72rem;
+  color: var(--muted);
 }
 
-/* Reasons List */
-.reasonsSection {
+.reasons-section {
   margin-top: 12px;
 }
 
-.reasonsHeader {
-  font-size: 0.8rem;
-  font-weight: 700;
-  color: #63534b;
-  margin: 0 0 8px 0;
-  letter-spacing: 0.07em;
-  text-transform: uppercase;
-}
-
-.reasonsList {
+.reasons-list {
   margin: 0;
   padding-left: 18px;
   color: #2a241f;
-  font-size: 0.88rem;
-  line-height: 1.5;
+  font-size: 0.95rem;
+  line-height: 1.6;
 }
 
-.reasonsList li {
-  margin-bottom: 6px;
+.reasons-list li + li {
+  margin-top: 6px;
 }
 
-/* Skeleton Loading State */
-.skeletonCard {
-  border-radius: 18px;
-  padding: 20px;
-  background: linear-gradient(180deg, #fffdf9 0%, #f7f2ea 100%);
-  border: 1px solid rgba(149, 111, 72, 0.18);
-  max-width: 440px;
-  width: 100%;
-}
-
-.skeletonBox {
-  background: linear-gradient(90deg, #f0e7dc 25%, #e7daca 50%, #f0e7dc 75%);
-  background-size: 200% 100%;
-  animation: pulse 1.5s infinite;
-  border-radius: 8px;
-}
-
-@keyframes pulse {
-  0% {
-    background-position: 200% 0;
-  }
-  100% {
-    background-position: -200% 0;
-  }
-}
-
-.errorCard {
+.error-card {
   border-radius: 16px;
   padding: 16px;
   background-color: #f8e3e1;
