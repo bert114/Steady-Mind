@@ -1,16 +1,11 @@
 .recovery-card {
-  padding: 1.25rem;
-  background-color: #fffbeb;
-  border: 1px solid #fde68a;
-  border-radius: 0.75rem;
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05);
-  font-family:
-    system-ui,
-    -apple-system,
-    BlinkMacSystemFont,
-    "Segoe UI",
-    Roboto,
-    sans-serif;
+  padding: 1.5rem;
+  background: linear-gradient(180deg, #fffaf1 0%, #f9f2e8 100%);
+  border: 1px solid #e8d2ad;
+  border-radius: 1.25rem;
+  box-shadow: 0 14px 32px rgba(76, 53, 24, 0.08);
+  font-family: "Segoe UI", sans-serif;
+  color: #2d241e;
 }
 
 .recovery-card * {
@@ -21,154 +16,193 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 0.75rem;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
 }
 
 .recovery-title {
   margin: 0;
-  font-size: 1rem;
+  font-size: 1.15rem;
   font-weight: 700;
-  color: #78350f;
+  letter-spacing: 0.03em;
+  color: #2b1f18;
+  font-family: Georgia, "Times New Roman", serif;
 }
 
 .pending-badge {
-  font-size: 0.75rem;
-  font-weight: 600;
-  color: #b45309;
-  background-color: #fef3c7;
-  padding: 0.2rem 0.5rem;
-  border-radius: 1rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #7a4a1a;
+  background: #f6e6c9;
+  padding: 0.35rem 0.7rem;
+  border-radius: 999px;
+  border: 1px solid rgba(122, 74, 26, 0.2);
 }
 
 .recovery-loading {
   margin: 0;
   font-size: 0.875rem;
-  color: #b45309;
+  color: #7a4a1a;
 }
 
 .recovery-list {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 0.8rem;
 }
 
 .recovery-item {
-  padding: 0.75rem 1rem;
-  background-color: #ffffff;
-  border: 1px solid #fef3c7;
-  border-radius: 0.5rem;
-  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.03);
+  padding: 0.9rem 1rem;
+  background: rgba(255, 255, 255, 0.62);
+  border: 1px solid rgba(154, 118, 76, 0.22);
+  border-radius: 0.9rem;
+  box-shadow: 0 6px 18px rgba(93, 69, 42, 0.04);
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 0.75rem;
 }
 
 .recovery-item-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 0.8rem;
 }
 
 .activity-info {
   display: flex;
+  flex: 1;
   flex-direction: column;
-  gap: 0.125rem;
+  gap: 0.15rem;
 }
 
 .activity-name {
   margin: 0;
-  font-size: 0.875rem;
-  font-weight: 600;
+  font-size: 0.96rem;
+  font-weight: 700;
   color: #1f2937;
 }
 
 .activity-effort {
-  font-size: 0.75rem;
-  font-weight: 500;
-  color: #6b7280;
-  text-transform: uppercase;
-  letter-spacing: 0.025em;
-}
-
-.task-complete-btn {
-  padding: 0.375rem 0.75rem;
-  background-color: #ffffff;
-  border: 1px solid #d97706;
-  color: #d97706;
-  font-size: 0.75rem;
+  font-size: 0.72rem;
   font-weight: 600;
-  border-radius: 0.375rem;
-  cursor: pointer;
-  transition: all 0.15s ease-in-out;
+  color: #7a6656;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
 }
 
-.task-complete-btn:hover {
-  background-color: #fef3c7;
-  border-color: #b45309;
-  color: #b45309;
+.activity-rating-saved {
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  margin-top: 0.2rem;
+  padding: 0.2rem 0.55rem;
+  border-radius: 999px;
+  background: #efe2d0;
+  color: #6e4215;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.recovery-action-button {
+  padding: 0.6rem 0.9rem;
+  border: 1px solid #31271f;
+  border-radius: 999px;
+  background: #31271f;
+  color: #f8f2ea;
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition:
+    transform 0.18s ease,
+    box-shadow 0.18s ease,
+    background 0.18s ease;
+}
+
+.recovery-action-button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 16px rgba(49, 39, 31, 0.18);
+  background: #1f1a17;
 }
 
 .feedback-inline {
-  padding-top: 0.5rem;
-  border-top: 1px dashed #fde68a;
+  padding: 0.8rem 0.9rem;
+  border-top: 1px dashed rgba(122, 74, 26, 0.24);
   display: flex;
   flex-direction: column;
-  gap: 0.375rem;
+  gap: 0.7rem;
+  background: rgba(255, 248, 238, 0.75);
+  border-radius: 0.75rem;
 }
 
 .feedback-question {
   margin: 0;
-  font-size: 0.75rem;
-  font-weight: 600;
-  color: #78350f;
+  font-size: 0.76rem;
+  font-weight: 700;
+  color: #65411d;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
 }
 
 .rating-options {
-  display: flex;
-  gap: 0.375rem;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.45rem;
 }
 
 .rating-btn {
   flex: 1;
-  padding: 0.375rem 0.5rem;
-  background-color: #fffbeb;
-  border: 1px solid #fde68a;
-  color: #78350f;
-  font-size: 0.75rem;
-  font-weight: 600;
-  border-radius: 0.25rem;
+  min-height: 2.5rem;
+  padding: 0.55rem 0.45rem;
+  background: #fffdf9;
+  border: 1px solid rgba(122, 74, 26, 0.25);
+  color: #402f22;
+  font-size: 0.72rem;
+  font-weight: 700;
+  border-radius: 0.7rem;
   cursor: pointer;
-  transition: all 0.15s ease;
+  transition:
+    background 0.15s ease,
+    transform 0.15s ease,
+    border-color 0.15s ease;
 }
 
 .rating-btn:hover {
-  background-color: #fef3c7;
-  border-color: #d97706;
+  background: #f7efe2;
+  border-color: rgba(122, 74, 26, 0.6);
+  transform: translateY(-1px);
 }
 
 .recovery-default {
   display: none;
 }
 
-/* Styling for completed activity state */
 .recovery-item.completed {
-  background-color: #f9fafb;
-  border-color: #e5e7eb;
-  opacity: 0.8;
+  background: rgba(239, 234, 224, 0.72);
+  border-color: rgba(62, 136, 94, 0.26);
 }
 
 .recovery-item.completed .activity-name {
   text-decoration: line-through;
-  color: #6b7280;
+  color: #5b6b5a;
 }
 
 .completed-badge {
-  font-size: 0.75rem;
-  font-weight: 700;
-  color: #059669;
-  background-color: #d1fae5;
-  padding: 0.25rem 0.625rem;
-  border-radius: 0.375rem;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: #1f5d42;
+  background: #dff5e8;
+  border: 1px solid rgba(31, 93, 66, 0.12);
+  padding: 0.5rem 0.7rem;
+  border-radius: 999px;
   display: inline-flex;
   align-items: center;
 }

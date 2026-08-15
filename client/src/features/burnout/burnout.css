@@ -1,16 +1,10 @@
 .card {
-  border-radius: 12px;
-  padding: 20px;
-  background-color: #ffffff;
-  border: 1px solid #e2e8f0;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-  font-family:
-    system-ui,
-    -apple-system,
-    BlinkMacSystemFont,
-    "Segoe UI",
-    Roboto,
-    sans-serif;
+  border-radius: 18px;
+  padding: 22px 20px;
+  background: linear-gradient(180deg, #fffdf9 0%, #f7f2ea 100%);
+  border: 1px solid rgba(149, 111, 72, 0.18);
+  box-shadow: 0 16px 32px rgba(55, 42, 28, 0.08);
+  font-family: "Segoe UI", sans-serif;
   max-width: 440px;
   width: 100%;
   box-sizing: border-box;
@@ -18,13 +12,13 @@
 
 /* Status Themes */
 .card.themeGREEN {
-  border-left: 6px solid #16a34a;
+  border-left: 6px solid #2f8f5b;
 }
 .card.themeYELLOW {
-  border-left: 6px solid #d97706;
+  border-left: 6px solid #c88a2d;
 }
 .card.themeRED {
-  border-left: 6px solid #dc2626;
+  border-left: 6px solid #ba4b3f;
 }
 
 .header {
@@ -36,44 +30,46 @@
 
 .title {
   margin: 0;
-  font-size: 1.125rem;
-  font-weight: 600;
-  color: #1e293b;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #201915;
+  font-family: Georgia, "Times New Roman", serif;
 }
 
 .badge {
   display: inline-flex;
   align-items: center;
-  padding: 4px 12px;
+  padding: 5px 12px;
   border-radius: 9999px;
-  font-size: 0.875rem;
-  font-weight: 600;
+  font-size: 0.75rem;
+  font-weight: 800;
   text-transform: uppercase;
-  letter-spacing: 0.025em;
+  letter-spacing: 0.08em;
 }
 
 .badgeGREEN {
-  background-color: #dcfce7;
-  color: #15803d;
+  background-color: #dff5e8;
+  color: #195d3d;
 }
 .badgeYELLOW {
-  background-color: #fef3c7;
-  color: #b45309;
+  background-color: #f8e7c4;
+  color: #82561d;
 }
 .badgeRED {
-  background-color: #fee2e2;
-  color: #b91c1c;
+  background-color: #f8d8d7;
+  color: #8d3029;
 }
 
 /* Signals Grid */
 .signalsGrid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 8px;
-  background-color: #f8fafc;
+  gap: 10px;
+  background: rgba(255, 255, 255, 0.5);
   padding: 12px;
-  border-radius: 8px;
+  border-radius: 12px;
   margin-bottom: 16px;
+  border: 1px solid rgba(149, 111, 72, 0.12);
 }
 
 .metricBox {
@@ -81,18 +77,23 @@
   flex-direction: column;
   align-items: center;
   text-align: center;
+  background: rgba(255, 255, 255, 0.25);
+  border-radius: 10px;
+  padding: 10px 8px;
 }
 
 .metricValue {
-  font-size: 1.25rem;
-  font-weight: 700;
-  color: #0f172a;
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: #1c1a19;
 }
 
 .metricLabel {
-  font-size: 0.75rem;
-  color: #64748b;
+  font-size: 0.7rem;
+  color: #6b5d52;
   margin-top: 2px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
 }
 
 /* Reasons List */
@@ -101,39 +102,41 @@
 }
 
 .reasonsHeader {
-  font-size: 0.875rem;
-  font-weight: 600;
-  color: #475569;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #63534b;
   margin: 0 0 8px 0;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
 }
 
 .reasonsList {
   margin: 0;
-  padding-left: 20px;
-  color: #334155;
-  font-size: 0.875rem;
+  padding-left: 18px;
+  color: #2a241f;
+  font-size: 0.88rem;
+  line-height: 1.5;
 }
 
 .reasonsList li {
   margin-bottom: 6px;
-  line-height: 1.4;
 }
 
 /* Skeleton Loading State */
 .skeletonCard {
-  border-radius: 12px;
+  border-radius: 18px;
   padding: 20px;
-  background-color: #ffffff;
-  border: 1px solid #e2e8f0;
+  background: linear-gradient(180deg, #fffdf9 0%, #f7f2ea 100%);
+  border: 1px solid rgba(149, 111, 72, 0.18);
   max-width: 440px;
   width: 100%;
 }
 
 .skeletonBox {
-  background: linear-gradient(90deg, #f1f5f9 25%, #e2e8f0 50%, #f1f5f9 75%);
+  background: linear-gradient(90deg, #f0e7dc 25%, #e7daca 50%, #f0e7dc 75%);
   background-size: 200% 100%;
   animation: pulse 1.5s infinite;
-  border-radius: 4px;
+  border-radius: 8px;
 }
 
 @keyframes pulse {
@@ -146,10 +149,10 @@
 }
 
 .errorCard {
-  border-radius: 12px;
+  border-radius: 16px;
   padding: 16px;
-  background-color: #fef2f2;
-  border: 1px solid #fecaca;
-  color: #991b1b;
-  font-size: 0.875rem;
+  background-color: #f8e3e1;
+  border: 1px solid #e8b8b3;
+  color: #7d2a28;
+  font-size: 0.88rem;
 }

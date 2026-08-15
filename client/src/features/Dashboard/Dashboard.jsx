@@ -25,32 +25,31 @@ function Dashboard({ userId = "user_clerk_123" }) {
 
   return (
     <section className="dashboard-shell">
-      <Burnout burnoutRisk={burnoutRisk} />
-      <div
-        className="dashboard-actions-bar"
-        style={{
-          marginBottom: "16px",
-          display: "flex",
-          justifyContent: "flex-end",
-          gap: "8px",
-        }}
-      >
-        <button
-          type="button"
-          className="action-solid"
-          onClick={() => openModal("energy")}
-        >
-          + Log Energy
-        </button>
+      <div className="dashboard-topbar">
+        <div>
+          <p className="dashboard-kicker">Daily overview</p>
+          <h2 className="dashboard-title">Your energy landscape</h2>
+        </div>
+        <div className="dashboard-actions-bar">
+          <button
+            type="button"
+            className="action-solid"
+            onClick={() => openModal("energy")}
+          >
+            + Log Energy
+          </button>
 
-        <button
-          type="button"
-          className="action-solid"
-          onClick={() => openModal("interaction")}
-        >
-          + Log interaction
-        </button>
+          <button
+            type="button"
+            className="action-solid"
+            onClick={() => openModal("interaction")}
+          >
+            + Log interaction
+          </button>
+        </div>
       </div>
+
+      <Burnout burnoutRisk={burnoutRisk} />
 
       <div className="dashboard-grid">
         <article className="dashboard-card dashboard-card--primary">

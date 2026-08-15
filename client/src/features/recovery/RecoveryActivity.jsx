@@ -53,41 +53,39 @@ function RecoveryActivity({ riskLevel, interactionCauseId }) {
 
                 {!activity.isCompleted && (
                   <button
-                    onClick={() => setActiveFeedbackId(activity.id)} // Open rating options
-                    className="px-4 py-2 rounded-md bg-blue-600 text-white hover:bg-blue-700"
+                    onClick={() => setActiveFeedbackId(activity.id)}
+                    className="recovery-action-button"
                   >
                     Mark Done
                   </button>
                 )}
 
                 {activity.isCompleted && (
-                  <span className="px-4 py-2 rounded-md bg-green-100 text-green-700">
-                    Completed ✓
-                  </span>
+                  <span className="completed-badge">Completed ✓</span>
                 )}
               </div>
 
               {activeFeedbackId === activity.id && !activity.isCompleted && (
-                <div className="feedback-inline mt-3 p-3 bg-gray-50 rounded-md">
-                  <p className="feedback-question text-sm font-medium mb-2">
+                <div className="feedback-inline">
+                  <p className="feedback-question">
                     Did this activity help you feel better?
                   </p>
-                  <div className="rating-options flex gap-2">
+                  <div className="rating-options">
                     <button
                       onClick={() => handleRatingSelect(activity.id, 5)}
-                      className="rating-btn px-3 py-1 bg-white border rounded hover:bg-gray-100"
+                      className="rating-btn"
                     >
                       Yes, a lot! 🙌
                     </button>
                     <button
                       onClick={() => handleRatingSelect(activity.id, 3)}
-                      className="rating-btn px-3 py-1 bg-white border rounded hover:bg-gray-100"
+                      className="rating-btn"
                     >
                       A little 🙂
                     </button>
                     <button
                       onClick={() => handleRatingSelect(activity.id, 1)}
-                      className="rating-btn px-3 py-1 bg-white border rounded hover:bg-gray-100"
+                      className="rating-btn"
                     >
                       Not really 🙁
                     </button>
