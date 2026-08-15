@@ -6,6 +6,7 @@ export function formatActivityList(activities = []) {
     usageCount: activity.usage_count || 0,
     rating: activity.success_score || 0,
     isCompleted: activity.is_completed || false,
+    lastRating: activity.last_rating || null,
   }));
 }
 
@@ -22,7 +23,6 @@ export const buildRecoverySessionPayload = (
 ) => {
   return {
     activityId: Number(activityId),
-
     interactionId: Number(interactionId),
     rating,
     is_complete: Boolean(isComplete),

@@ -55,10 +55,11 @@ export async function fetchCopingActivities(clerkId) {
         CASE 
           WHEN completed_today.id IS NOT NULL THEN TRUE 
           ELSE FALSE 
-        END AS is_completed
+        END AS is_completed,
+        completed_today.rating AS last_rating
      FROM coping_activities ca
      LEFT JOIN (
-       SELECT rs.id, rs.activity_id
+       SELECT rs.id, rs.activity_id, rs.rating
        FROM recovery_sessions rs
        JOIN social_interactions si ON rs.interaction_id = si.id
        JOIN daily_logs dl ON si.daily_log_id = dl.id

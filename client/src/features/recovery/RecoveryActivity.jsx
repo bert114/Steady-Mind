@@ -5,16 +5,13 @@ import "./recovery.css";
 import { useState } from "react";
 import { useEffect } from "react";
 
-function RecoveryActivity({ riskLevel, interactionCauseId, data }) {
+function RecoveryActivity({ riskLevel, interactionCauseId }) {
   const { isElevated, recommendations, loading, completeActivity } =
     useRecovery(riskLevel);
-
-  useEffect(() => console.log(data), [data]);
-
   const [activeFeedbackId, setActiveFeedbackId] = useState(null);
 
   const handleRatingSelect = async (activityId, ratingScore) => {
-    await completeActivity(activityId, ratingScore);
+    await completeActivity(activityId, ratingScore, interactionCauseId, true);
     setActiveFeedbackId(null);
   };
 
@@ -46,44 +43,51 @@ function RecoveryActivity({ riskLevel, interactionCauseId, data }) {
                   <span className="activity-effort">
                     Effort: {activity.effort}
                   </span>
+                  {/* INLINE DISPLAY: Show the saved rating once completed */}
+                  {activity.isCompleted && activity.lastRating && (
+                    <span className="activity-rating-saved text-sm text-gray-500 ml-2">
+                      Rated: {activity.lastRating}/5
+                    </span>
+                  )}
                 </div>
 
-                <button
-                  onClick={() =>
-                    completeActivity(activity.id, 5, interactionCauseId, true)
-                  }
-                  disabled={activity.isCompleted}
-                  className={`px-4 py-2 rounded-md ${
-                    activity.isCompleted
-                      ? "bg-green-100 text-green-700"
-                      : "bg-blue-600 text-white hover:bg-blue-700"
-                  }`}
-                >
-                  {activity.isCompleted ? "Completed ✓" : "Mark Done"}
-                </button>
+                {!activity.isCompleted && (
+                  <button
+                    onClick={() => setActiveFeedbackId(activity.id)} // Open rating options
+                    className="px-4 py-2 rounded-md bg-blue-600 text-white hover:bg-blue-700"
+                  >
+                    Mark Done
+                  </button>
+                )}
+
+                {activity.isCompleted && (
+                  <span className="px-4 py-2 rounded-md bg-green-100 text-green-700">
+                    Completed ✓
+                  </span>
+                )}
               </div>
 
               {activeFeedbackId === activity.id && !activity.isCompleted && (
-                <div className="feedback-inline">
-                  <p className="feedback-question">
+                <div className="feedback-inline mt-3 p-3 bg-gray-50 rounded-md">
+                  <p className="feedback-question text-sm font-medium mb-2">
                     Did this activity help you feel better?
                   </p>
-                  <div className="rating-options">
+                  <div className="rating-options flex gap-2">
                     <button
                       onClick={() => handleRatingSelect(activity.id, 5)}
-                      className="rating-btn"
+                      className="rating-btn px-3 py-1 bg-white border rounded hover:bg-gray-100"
                     >
                       Yes, a lot! 🙌
                     </button>
                     <button
                       onClick={() => handleRatingSelect(activity.id, 3)}
-                      className="rating-btn"
+                      className="rating-btn px-3 py-1 bg-white border rounded hover:bg-gray-100"
                     >
                       A little 🙂
                     </button>
                     <button
                       onClick={() => handleRatingSelect(activity.id, 1)}
-                      className="rating-btn"
+                      className="rating-btn px-3 py-1 bg-white border rounded hover:bg-gray-100"
                     >
                       Not really 🙁
                     </button>

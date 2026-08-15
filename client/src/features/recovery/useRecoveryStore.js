@@ -1,7 +1,6 @@
 import { create } from "zustand";
 import { formatActivityList } from "./recovery.util";
 import { recoveryService } from "./recovery.service";
-
 export const useRecoveryStore = create((set, get) => ({
   recommendations: [],
   dashboardState: null,
@@ -42,7 +41,10 @@ export const useRecoveryStore = create((set, get) => ({
       if (res.status === "success") {
         set((state) => ({
           recommendations: state.recommendations.map((act) =>
-            act.id === activityId ? { ...act, isCompleted: true } : act,
+            act.id === activityId
+              ? // Store the submitted rating as 'lastRating' for UI display
+                { ...act, isCompleted: true, lastRating: rating }
+              : act,
           ),
           loading: false,
         }));
