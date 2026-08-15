@@ -10,13 +10,13 @@
   box-sizing: border-box;
 }
 
-.card.themegreen {
+.card.theme-green {
   border-left: 0;
 }
-.card.themeyellow {
+.card.theme-yellow {
   border-left: 0;
 }
-.card.themered {
+.card.theme-red {
   border-left: 0;
 }
 
@@ -56,13 +56,13 @@
   letter-spacing: 0.02em;
 }
 
-.badgegreen {
+.badge-green {
   color: #1d5a3d;
 }
-.badgeyellow {
+.badge-yellow {
   color: #8a5c1e;
 }
-.badgered {
+.badge-red {
   color: #8d3029;
 }
 

@@ -38,7 +38,6 @@ const DailyMood = () => {
   return (
     <div className="widget-card">
       <div className="widget-header">
-        <span className="widget-icon">◌</span>
         <span className="widget-title">Mood trend</span>
       </div>
 

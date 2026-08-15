@@ -9,7 +9,7 @@ const DEFAULT_STATUS_TEXT = {
 
 const Burnout = ({
   burnoutRisk,
-  cardTitle = "Status",
+  cardTitle = "Current state",
   showSignalsBreakdown = true,
 }) => {
   if (!burnoutRisk) {
