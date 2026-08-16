@@ -83,7 +83,7 @@ function Dashboard({ userId = "user_clerk_123" }) {
       <RecoveryActivity
         data={burnoutRisk}
         riskLevel={burnoutRisk.riskLevel}
-        interactionCauseId={burnoutRisk.latestInteraction.id}
+        interactionCauseId={burnoutRisk.latestInteraction?.id}
       />
 
       <Modal />

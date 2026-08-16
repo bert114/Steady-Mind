@@ -13,9 +13,9 @@ export default function Battery() {
         <svg className="progress-ring" width="220" height="220">
           <defs>
             <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stopColor="#a9553d" />
-              <stop offset="50%" stopColor="#8d5a3a" />
-              <stop offset="100%" stopColor="#5d6b4e" />
+              <stop offset="0%" stopColor="#2d4a2b" />
+              <stop offset="50%" stopColor="#7d8471" />
+              <stop offset="100%" stopColor="#a4ac86" />
             </linearGradient>
           </defs>
           <circle

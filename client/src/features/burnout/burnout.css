@@ -3,7 +3,7 @@
   padding: 0 0 18px;
   background: transparent;
   border: none;
-  border-bottom: 1px solid rgba(31, 27, 26, 0.12);
+  border-bottom: 1px solid rgba(45, 74, 43, 0.18);
   box-shadow: none;
   font-family: "Segoe UI", sans-serif;
   width: 100%;
@@ -57,13 +57,13 @@
 }
 
 .badge-green {
-  color: #1d5a3d;
+  color: #2d4a2b;
 }
 .badge-yellow {
-  color: #8a5c1e;
+  color: #7d8471;
 }
 .badge-red {
-  color: #8d3029;
+  color: #2d4a2b;
 }
 
 .signals-grid {

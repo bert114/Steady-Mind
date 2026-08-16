@@ -2,21 +2,25 @@
   font-family: Inter, "Segoe UI", Roboto, sans-serif;
   line-height: 1.5;
   font-weight: 400;
-  color: #1d1b1a;
-  background: #f5f1eb;
+  color: #2d4a2b;
+  background: #faf9f6;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  --ink: #1f1b1a;
-  --muted: #5d5852;
-  --accent: #c79a4f;
-  --accent-deep: #9a6d2d;
-  --secondary: #4f6252;
-  --secondary-deep: #364b3e;
-  --paper: #f8f4ee;
-  --panel: #f1eee9;
-  --border: rgba(31, 27, 26, 0.12);
+  --forest-green: #2d4a2b;
+  --sage: #7d8471;
+  --olive: #a4ac86;
+  --ivory: #faf9f6;
+  --ink: #2d4a2b;
+  --muted: #7d8471;
+  --accent: #a4ac86;
+  --accent-deep: #7d8471;
+  --secondary: #7d8471;
+  --secondary-deep: #2d4a2b;
+  --paper: #faf9f6;
+  --panel: #faf9f6;
+  --border: rgba(45, 74, 43, 0.18);
   --display-font:
     "Iowan Old Style", "Palatino Linotype", "Book Antiqua", Georgia, serif;
 }
@@ -29,7 +33,7 @@ body {
   margin: 0;
   min-width: 320px;
   min-height: 100vh;
-  background: #f5f2ee;
+  background: var(--ivory);
   color: var(--ink);
 }
 
@@ -178,6 +182,22 @@ input {
 .action-solid,
 .action-subtle {
   border-radius: 0 !important;
+}
+
+.action-solid {
+  background: var(--forest-green);
+  color: var(--ivory);
+  border: 1px solid var(--forest-green);
+}
+
+.action-solid:hover {
+  background: #233f2a;
+}
+
+.action-subtle {
+  background: rgba(125, 132, 113, 0.12);
+  color: var(--forest-green);
+  border: 1px solid rgba(45, 74, 43, 0.2);
 }
 
 .energy-spotlight {

@@ -18,7 +18,6 @@ export async function recordEnergyLog(
     moodScore,
   );
 
-  // 2. Re-evaluate burnout risk based on updated daily log
   const burnoutRisk = await calculateUserBurnoutRisk(clerkId);
 
   console.log("check", dailyLog);
