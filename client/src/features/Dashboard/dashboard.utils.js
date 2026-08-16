@@ -32,3 +32,15 @@ export const formatTime = (isoString) => {
     minute: "2-digit",
   });
 };
+
+export const mood = {
+  formatMood: [
+    { day: "Mon", moodScore: 5, isToday: false },
+    { day: "Tue", moodScore: 4, isToday: false },
+    { day: "Wed", moodScore: 6, isToday: false },
+    { day: "Thu", moodScore: 7, isToday: false },
+    { day: "Fri", moodScore: 6, isToday: false },
+    { day: "Sat", moodScore: 8, isToday: false },
+    { day: "Today", moodScore: 8, isToday: true },
+  ],
+};

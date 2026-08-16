@@ -1,4 +1,5 @@
 import React from "react";
+import { useEffect } from "react";
 
 const DailyInteractionsCard = ({ interactions = [] }) => {
   const getTone = (score) => {
@@ -6,6 +7,10 @@ const DailyInteractionsCard = ({ interactions = [] }) => {
     if (score < 0) return "negative";
     return "neutral";
   };
+
+  useEffect(() => {
+    console.log(interactions);
+  }, [interactions]);
 
   return (
     <div className="summary-card">

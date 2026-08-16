@@ -13,6 +13,10 @@ export const useDashboard = (userId) => {
     setError,
   } = useDashboardStore();
 
+  useEffect(() => {
+    console.log(dashboardData);
+  }, [dashboardData]);
+
   const loadData = async () => {
     setIsLoading(true);
     setError(null);

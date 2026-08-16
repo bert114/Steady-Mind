@@ -1,0 +1,145 @@
+/* Container */
+.dashboard-card {
+  width: 100%;
+  max-width: 580px;
+  background-color: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  font-family:
+    system-ui,
+    -apple-system,
+    sans-serif;
+  color: #1e293b;
+}
+
+.dashboard-state {
+  padding: 24px;
+  text-align: center;
+  color: #94a3b8;
+  font-family:
+    system-ui,
+    -apple-system,
+    sans-serif;
+}
+
+/* Header */
+.dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.header-label {
+  font-size: 12px;
+  color: #94a3b8;
+  text-transform: uppercase;
+  font-weight: 600;
+  margin-bottom: 2px;
+}
+
+.header-value {
+  font-size: 18px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.header-right {
+  text-align: right;
+}
+
+/* 7-Day Grid */
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 8px;
+}
+
+/* Day Button Card */
+.day-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 8px 4px;
+  border-radius: 12px;
+  background: transparent;
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+
+.day-card:hover {
+  background-color: #f8fafc;
+}
+
+.day-card.selected {
+  background-color: #f1f5f9;
+  border-color: #6366f1;
+}
+
+/* Day Label */
+.day-label {
+  font-size: 11px;
+  font-weight: 600;
+  color: #94a3b8;
+  margin-bottom: 8px;
+}
+
+.day-label.today {
+  color: #6366f1;
+  font-weight: 700;
+}
+
+/* Mood Emoji */
+.mood-emoji {
+  font-size: 24px;
+  margin-bottom: 8px;
+}
+
+/* Battery Gauge */
+.battery-container {
+  width: 16px;
+  height: 40px;
+  border: 1px solid #cbd5e1;
+  border-radius: 4px;
+  padding: 2px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  background-color: #f8fafc;
+  margin-bottom: 4px;
+}
+
+.battery-fill {
+  width: 100%;
+  border-radius: 2px;
+  transition:
+    height 0.3s ease,
+    background-color 0.3s ease;
+}
+
+.battery-healthy {
+  background-color: #10b981;
+}
+
+.battery-neutral {
+  background-color: #f59e0b;
+}
+
+.battery-low {
+  background-color: #f43f5e;
+}
+
+/* Percentage Label */
+.battery-percent {
+  font-size: 10px;
+  font-weight: 500;
+  color: #64748b;
+}

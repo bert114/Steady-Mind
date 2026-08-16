@@ -1,5 +1,11 @@
 import throwError from "../../utils/throwError.js";
-import { getDashboardSummary } from "./dashboard.service.js";
+import {
+  fetchColumns,
+  getDashboardSummary,
+  getEnergyHistory,
+  getHistory,
+  getWeeklyInteraction,
+} from "./dashboard.service.js";
 
 export const getDashboardData = async (req, res, next) => {
   try {
@@ -11,9 +17,17 @@ export const getDashboardData = async (req, res, next) => {
 
     const dashboard = await getDashboardSummary(userId);
 
+    const moodAndBattery = await getHistory(userId);
+    const weeklyInteraction = await getWeeklyInteraction(userId);
+
     res.status(200).json({
       status: "success",
-      data: dashboard,
+      data: {
+        moodAndBattery,
+        weeklyInteraction,
+        burnoutRisk: dashboard.burnoutRisk,
+        batteryLevel: dashboard.metrics.batteryLevel,
+      },
     });
   } catch (error) {
     next(error);

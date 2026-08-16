@@ -9,6 +9,9 @@ import { useModalStore } from "../Logger/useModalStore.js";
 import { useDashboard } from "./useDashboard.jsx";
 import Burnout from "../burnout/Burnout.jsx";
 import RecoveryActivity from "../recovery/RecoveryActivity.jsx";
+import WeeklyMood from "./mood/WeeklyMood.jsx";
+import { useEffect } from "react";
+import WeeklyEnergy from "./energy/WeeklyEnergy.jsx";
 
 function Dashboard({ userId = "user_clerk_123" }) {
   const { openModal } = useModalStore();
@@ -18,7 +21,10 @@ function Dashboard({ userId = "user_clerk_123" }) {
   if (error) return <EmptyState message={error} />;
   if (!dashboardData) return <EmptyState />;
 
-  const { metrics, burnoutRisk, recentInteractions } = dashboardData;
+  const { metrics, recentInteractions, weeklyMood } = dashboardData;
+
+  const { moodAndBattery, weeklyInteraction, burnoutRisk, batteryLevel } =
+    dashboardData;
 
   return (
     <section className="dashboard-shell">
@@ -51,9 +57,7 @@ function Dashboard({ userId = "user_clerk_123" }) {
         <div className="energy-spotlight__copy">
           <p className="energy-spotlight__eyebrow">Current energy</p>
           <div className="energy-spotlight__value-wrap">
-            <span className="energy-spotlight__value">
-              {metrics?.batteryLevel ?? 0}
-            </span>
+            <span className="energy-spotlight__value">{batteryLevel}</span>
             <span className="energy-spotlight__scale">/100</span>
           </div>
           <p className="energy-spotlight__context">
@@ -62,7 +66,7 @@ function Dashboard({ userId = "user_clerk_123" }) {
         </div>
 
         <div className="energy-spotlight__visual">
-          <Battery level={metrics?.batteryLevel ?? 0} />
+          <Battery level={batteryLevel || 0} />
         </div>
       </article>
 
@@ -70,21 +74,23 @@ function Dashboard({ userId = "user_clerk_123" }) {
         <section className="editorial-section editorial-section--status">
           <Burnout burnoutRisk={burnoutRisk} />
         </section>
-
-        <section className="editorial-section editorial-section--mood">
-          <DailyMood score={metrics?.moodScore} />
-        </section>
       </div>
 
       <section className="editorial-section editorial-section--interaction">
-        <DailyInteractionsCard interactions={recentInteractions} />
+        <DailyInteractionsCard interactions={weeklyInteraction} />
       </section>
 
       <RecoveryActivity
         data={burnoutRisk}
-        riskLevel={burnoutRisk.riskLevel}
-        interactionCauseId={burnoutRisk.latestInteraction?.id}
+        riskLevel={burnoutRisk?.riskLevel}
+        interactionCauseId={burnoutRisk?.latestInteraction?.id}
       />
+
+      <section className="editorial-section editorial-section--mood">
+        {/* <DailyMood score={metrics?.moodScore} /> */}
+
+        <WeeklyEnergy weeklyEnergy={moodAndBattery} />
+      </section>
 
       <Modal />
     </section>
