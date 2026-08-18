@@ -1,6 +1,7 @@
 import "./App.css";
 import Burnout from "./features/burnout/Burnout.jsx";
 import Dashboard from "./features/Dashboard/Dashboard.jsx";
+import Recovery from "./features/recovery-f/Recovery.jsx";
 import Toast from "./features/toast/Toast.jsx";
 
 function App() {

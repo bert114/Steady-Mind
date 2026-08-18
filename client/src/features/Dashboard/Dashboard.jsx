@@ -12,6 +12,7 @@ import RecoveryActivity from "../recovery/RecoveryActivity.jsx";
 import WeeklyMood from "./mood/WeeklyMood.jsx";
 import { useEffect } from "react";
 import WeeklyEnergy from "./energy/WeeklyEnergy.jsx";
+import Recovery from "../recovery-f/Recovery.jsx";
 
 function Dashboard({ userId = "user_clerk_123" }) {
   const { openModal } = useModalStore();
@@ -23,11 +24,18 @@ function Dashboard({ userId = "user_clerk_123" }) {
 
   const { metrics, recentInteractions, weeklyMood } = dashboardData;
 
-  const { moodAndBattery, weeklyInteraction, burnoutRisk, batteryLevel } =
-    dashboardData;
+  const {
+    moodAndBattery,
+    weeklyInteraction,
+    burnoutRisk,
+    batteryLevel,
+    recoveryData,
+  } = dashboardData;
 
   return (
     <section className="dashboard-shell">
+      <Recovery option={recoveryData?.activities} />
+
       <header className="dashboard-topbar">
         <div className="dashboard-intro">
           <p className="dashboard-kicker">Today</p>

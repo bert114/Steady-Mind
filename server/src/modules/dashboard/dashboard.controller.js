@@ -1,4 +1,5 @@
 import throwError from "../../utils/throwError.js";
+import { getRecoveryRecommendations } from "../recovery/recovery.service.js";
 import {
   fetchColumns,
   getDashboardSummary,
@@ -20,9 +21,12 @@ export const getDashboardData = async (req, res, next) => {
     const moodAndBattery = await getHistory(userId);
     const weeklyInteraction = await getWeeklyInteraction(userId);
 
+    const recovery = await getRecoveryRecommendations(userId);
+
     res.status(200).json({
       status: "success",
       data: {
+        recoveryData: recovery || null,
         moodAndBattery,
         weeklyInteraction,
         burnoutRisk: dashboard.burnoutRisk,

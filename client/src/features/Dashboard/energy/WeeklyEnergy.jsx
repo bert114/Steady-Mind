@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./energy.css";
 import { useEffect } from "react";
 
-const MOODS = ["😭", "🙁", "😐", "🙂", "😄"];
+const MOODS = ["1", "2", "3", "4", "5"];
 
 export function WeeklyEnergy({
   weeklyEnergy = [],
