@@ -1,4 +1,5 @@
 import throwError from "../../utils/throwError.js";
+import { fetchCopingActivitiesNew } from "../recovery/recovery.query.js";
 import { getRecoveryRecommendations } from "../recovery/recovery.service.js";
 import {
   fetchColumns,

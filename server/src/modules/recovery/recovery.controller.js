@@ -1,8 +1,10 @@
 import { id } from "../../../../client/src/features/test/id.js";
 import {
+  calculateAvgRating,
   getRecoveryRecommendations,
   getUserDashboardState,
   logRecoveryAction,
+  logSession,
 } from "./recovery.service.js";
 
 export async function handleGetRecommendations(req, res, next) {
@@ -24,18 +26,24 @@ export async function handleGetRecommendations(req, res, next) {
 export async function handleExecuteRecovery(req, res, next) {
   try {
     const { clerkId } = req.params;
-    const { interactionId, activityId, rating } = req.body;
 
-    const session = await logRecoveryAction(
-      clerkId,
-      interactionId,
-      activityId,
+    const { interact_id, id, rating, is_complete } = req.body;
+
+    const session = await logSession({
+      completedAt: new Date().toISOString().split("T")[0],
+      interact_id,
+      id,
       rating,
-    );
+      is_complete,
+    });
+
+    const calculation = await calculateAvgRating(clerkId);
+
+    const bestPerformedActivites = calculation;
 
     res.status(201).json({
       status: "success",
-      data: session,
+      data: { calculation, session, bestPerformedActivites },
     });
   } catch (error) {
     next(error);

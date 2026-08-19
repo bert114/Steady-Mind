@@ -2,6 +2,8 @@ import { useEffect } from "react";
 import { useDashboardStore } from "./useDashboard.store.js";
 import { fetchDashboardData } from "./dashboard.service.js";
 import { id } from "../test/id.js";
+import { useRecoveryStore } from "../recovery-f/useRecoveryStore.js";
+import { useRecoveryHook } from "../recovery-f/useRecoveryHook.jsx";
 
 export const useDashboard = (userId) => {
   const {
@@ -12,6 +14,8 @@ export const useDashboard = (userId) => {
     setIsLoading,
     setError,
   } = useDashboardStore();
+
+  const { addObject } = useRecoveryHook();
 
   useEffect(() => {
     console.log(dashboardData);

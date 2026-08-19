@@ -34,7 +34,10 @@ function Dashboard({ userId = "user_clerk_123" }) {
 
   return (
     <section className="dashboard-shell">
-      <Recovery option={recoveryData?.activities} />
+      <Recovery
+        option={recoveryData?.test}
+        topPerformance={recoveryData?.performance}
+      />
 
       <header className="dashboard-topbar">
         <div className="dashboard-intro">
@@ -88,11 +91,11 @@ function Dashboard({ userId = "user_clerk_123" }) {
         <DailyInteractionsCard interactions={weeklyInteraction} />
       </section>
 
-      <RecoveryActivity
+      {/* <RecoveryActivity
         data={burnoutRisk}
         riskLevel={burnoutRisk?.riskLevel}
         interactionCauseId={burnoutRisk?.latestInteraction?.id}
-      />
+      /> */}
 
       <section className="editorial-section editorial-section--mood">
         {/* <DailyMood score={metrics?.moodScore} /> */}

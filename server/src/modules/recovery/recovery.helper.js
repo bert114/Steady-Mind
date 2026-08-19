@@ -1,4 +1,9 @@
-export function recommendRecoveryAction(riskLevel, availableActivities = []) {
+export function recommendRecoveryAction(
+  performance,
+  riskLevel,
+  availableActivities = [],
+  test,
+) {
   const normalizedRisk = String(riskLevel).toUpperCase();
 
   if (normalizedRisk.includes("GREEN") || normalizedRisk.includes("STABLE")) {
@@ -27,6 +32,8 @@ export function recommendRecoveryAction(riskLevel, availableActivities = []) {
   }));
 
   return {
+    performance,
+    test,
     recommended: true,
     riskLevel,
     message: isHighRisk

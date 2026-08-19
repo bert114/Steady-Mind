@@ -1,87 +1,45 @@
 import React, { useEffect, useState } from "react";
 import "./recovery.css";
+import "./recoveryActivity.css";
 import { useRecoveryHook } from "./useRecoveryHook";
+import ActivityPerformance from "./component/ActivityPerformance";
 
-export default function Recovery({ option = [] }) {
-  const { setRecovery, addObject, payload } = useRecoveryHook();
+export default function Recovery({ option = [], topPerformance }) {
+  const { setRecovery, addObject, payload, saveRecovery } = useRecoveryHook();
 
   useEffect(() => {
     if (!option) return;
-    setRecovery(option);
-  }, [option, setRecovery]);
 
-  const [sessions, setSessions] = useState([
-    { id: 1, activity_id: 101, completed: true, rating: 5, date: "2026-08-10" },
-    { id: 2, activity_id: 102, completed: true, rating: 4, date: "2026-08-11" },
-  ]);
+    console.log("performance", topPerformance);
+  }, [option, topPerformance]);
 
-  const [selectedId, setSelectedId] = useState("");
-  const [completed, setCompleted] = useState(false);
-  const [rating, setRating] = useState(3);
-
-  const getStats = (id) => {
-    const logs = sessions.filter((s) => s.activity_id === id && s.rating);
-    if (!logs.length) return { avg: 0, count: 0 };
-    const sum = logs.reduce((acc, curr) => acc + curr.rating, 0);
-    return { avg: (sum / logs.length).toFixed(1), count: logs.length };
-  };
-
-  const activityList = Array.isArray(option) ? option : [];
-
-  const sortedActivities = [...activityList].sort(
-    (a, b) => getStats(b.id).avg - getStats(a.id).avg,
-  );
-
-  const topPerformers = sortedActivities.filter(
-    (a) => getStats(a.id).avg >= 4.0,
-  );
-
-  const handleSave = (e) => {
-    e.preventDefault();
-
-    setSessions([payload, ...sessions]);
-
-    setSelectedId("");
-    setCompleted(false);
-    setRating(3);
-  };
+  if (!option) return;
 
   return (
     <div className="recovery">
       <h2>Recovery Tracker</h2>
 
-      {/* Top Performers Banner */}
-      <div className="box top">
-        <strong>Best-Performing Activities</strong>
-        {topPerformers.length === 0 ? (
-          <p>No top performers yet.</p>
-        ) : (
-          <ul>
-            {topPerformers.map((a) => (
-              <li key={a.id}>
-                {a.name} — Rating: {getStats(a.id).avg}/5 (
-                {getStats(a.id).count} completed)
-              </li>
-            ))}
-          </ul>
-        )}
-      </div>
-
-      {/* Log Form */}
-      <form className="box" onSubmit={handleSave}>
+      <ActivityPerformance performance={topPerformance} />
+      <form
+        className="box"
+        onSubmit={(e) => saveRecovery(e, { name: "idsjisjisji" })}
+      >
         <div className="field">
           <label>Activity (Recommended First)</label>
           <select
             value={payload.id}
-            onChange={(e) => addObject({ id: e.target.value })}
+            onChange={(e) =>
+              addObject({
+                id: e.target.value,
+              })
+            }
             required
           >
             <option value="">Select activity...</option>
-            {sortedActivities.map((a) => {
-              const { avg } = getStats(a.id);
+            {option.map((a, index) => {
               return (
-                <option key={a.id} value={a.id}>
-                  {a.name} {avg > 0 ? `(Avg: ${avg}/5)` : ""}
+                <option key={`${a.id}-${index}`} value={a.id}>
+                  {a.name}
                 </option>
               );
             })}
@@ -92,18 +50,18 @@ export default function Recovery({ option = [] }) {
           <label>
             <input
               type="checkbox"
-              checked={payload.isComplete}
-              onChange={(e) => addObject({ isComplete: e.target.checked })}
+              checked={payload?.is_complete ?? false}
+              onChange={(e) => addObject({ is_complete: e.target.checked })}
             />{" "}
             Mark as Completed
           </label>
         </div>
 
-        {payload.isComplete && (
+        {payload.is_complete && (
           <div className="field">
             <label>Effectiveness (1-5)</label>
             <select
-              value={payload.rating}
+              value={payload.rating || 1}
               onChange={(e) => addObject({ rating: e.target.value })}
             >
               {[1, 2, 3, 4, 5].map((num) => (
@@ -118,7 +76,7 @@ export default function Recovery({ option = [] }) {
         <button type="submit">Save Activity</button>
       </form>
 
-      <table>
+      {/* <table>
         <thead>
           <tr>
             <th>Activity</th>
@@ -140,7 +98,7 @@ export default function Recovery({ option = [] }) {
             );
           })}
         </tbody>
-      </table>
+      </table> */}
     </div>
   );
 }

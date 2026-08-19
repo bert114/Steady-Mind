@@ -1,15 +1,20 @@
 import { useEffect, useState } from "react";
+import { recoveryService } from "./recovery.service";
+import { useRecoveryStore } from "./useRecoveryStore";
 
-export function useRecoveryHook() {
+export function useRecoveryHook(option) {
   const [recoveries, setRecovery] = useState([]);
-  const [payload, setPayload] = useState({});
+
+  const { addObject, payload } = useRecoveryStore();
 
   useEffect(() => {
     console.log(payload);
   }, [payload]);
 
-  const addObject = (newObject) => {
-    setPayload((state) => ({ ...state, ...newObject }));
+  const saveRecovery = (e) => {
+    e.preventDefault();
+
+    recoveryService.saveRecoveryActivity(payload);
   };
 
   return {
@@ -18,5 +23,7 @@ export function useRecoveryHook() {
     payload,
 
     addObject,
+
+    saveRecovery,
   };
 }

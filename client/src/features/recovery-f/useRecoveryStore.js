@@ -1,29 +1,11 @@
 import { create } from "zustand";
-import { formatActivityList } from "./recovery.util";
 import { recoveryService } from "./recovery.service";
 export const useRecoveryStore = create((set, get) => ({
   recommendations: [],
   dashboardState: null,
   loading: false,
   error: null,
-
-  fetchRecommendations: async (clerkId) => {
-    if (!clerkId) return;
-    set({ loading: true, error: null });
-
-    try {
-      const res = await recoveryService.getRecommendations(clerkId);
-      if (res.status === "success") {
-        const formatted = formatActivityList(res.data.activities);
-        set({ recommendations: formatted, loading: false });
-      }
-    } catch (err) {
-      set({
-        error: err.message || "Failed to load recovery activities",
-        loading: false,
-      });
-    }
-  },
+  payload: { rating: null },
 
   completeActivity: async (
     clerkId,
@@ -57,5 +39,11 @@ export const useRecoveryStore = create((set, get) => ({
       });
       return false;
     }
+  },
+
+  addObject: (newObject) => {
+    set((state) => ({
+      payload: { ...state.payload, ...newObject },
+    }));
   },
 }));
