@@ -18,7 +18,30 @@ export const useDashboard = (userId) => {
   const { addObject } = useRecoveryHook();
 
   useEffect(() => {
-    console.log(dashboardData);
+    if (!dashboardData) return;
+    console.group("📊 Dashboard Data");
+
+    console.log("🔋 Battery Level:", dashboardData?.batteryLevel);
+
+    console.log("⚠️ Burnout Risk:", {
+      level: dashboardData?.burnoutRisk?.riskLevel,
+      title: dashboardData?.burnoutRisk?.title,
+    });
+
+    console.log("😊 Mood & Battery:", dashboardData?.moodAndBattery);
+
+    console.log("🤝 Weekly Interactions:", {
+      count: dashboardData?.weeklyInteraction?.length,
+      data: dashboardData?.weeklyInteraction,
+    });
+
+    console.log("🏃 Recovery:", {
+      riskLevel: dashboardData?.recoveryData?.riskLevel,
+      activities: dashboardData?.recoveryData?.activities?.length,
+      performance: dashboardData?.recoveryData?.performance,
+    });
+
+    console.groupEnd();
   }, [dashboardData]);
 
   const loadData = async () => {

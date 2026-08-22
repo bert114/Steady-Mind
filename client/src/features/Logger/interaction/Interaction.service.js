@@ -9,8 +9,6 @@ export const socialService = {
         interactionPayload,
       );
 
-      console.log("Interaction logged successfully:", response.data);
-
       return response.data;
     } catch (error) {
       console.error("Service Error: Failed to log interaction", error);
@@ -22,8 +20,6 @@ export const socialService = {
     const response = await apiClient.get(
       `/logs/interactions/userInteraction/${id}`,
     );
-
-    console.log(response.data.message);
 
     return response.data;
   },

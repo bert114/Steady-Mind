@@ -9,7 +9,7 @@ const DailyInteractionsCard = ({ interactions = [] }) => {
   };
 
   useEffect(() => {
-    console.log(interactions);
+    //console.log(interactions);
   }, [interactions]);
 
   return (

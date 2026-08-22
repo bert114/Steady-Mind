@@ -42,6 +42,7 @@ export async function handleExecuteRecovery(req, res, next) {
     const bestPerformedActivites = calculation;
 
     res.status(201).json({
+      message: `activity has been saved`,
       status: "success",
       data: { calculation, session, bestPerformedActivites },
     });

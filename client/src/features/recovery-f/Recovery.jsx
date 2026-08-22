@@ -3,14 +3,15 @@ import "./recovery.css";
 import "./recoveryActivity.css";
 import { useRecoveryHook } from "./useRecoveryHook";
 import ActivityPerformance from "./component/ActivityPerformance";
+import { useRecoveryStore } from "./useRecoveryStore";
 
 export default function Recovery({ option = [], topPerformance }) {
-  const { setRecovery, addObject, payload, saveRecovery } = useRecoveryHook();
-
+  const { setRecovery, addObject, payload, saveRecovery, error } =
+    useRecoveryHook();
   useEffect(() => {
     if (!option) return;
 
-    console.log("performance", topPerformance);
+    //console.log("performance", topPerformance);
   }, [option, topPerformance]);
 
   if (!option) return;
@@ -55,6 +56,7 @@ export default function Recovery({ option = [], topPerformance }) {
             />{" "}
             Mark as Completed
           </label>
+          <div className="err">{error?.is_complete || ""}</div>
         </div>
 
         {payload.is_complete && (
@@ -70,6 +72,7 @@ export default function Recovery({ option = [], topPerformance }) {
                 </option>
               ))}
             </select>
+            <div className="error">{error.rating}</div>
           </div>
         )}
 

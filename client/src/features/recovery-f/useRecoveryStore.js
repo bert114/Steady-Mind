@@ -24,8 +24,7 @@ export const useRecoveryStore = create((set, get) => ({
         set((state) => ({
           recommendations: state.recommendations.map((act) =>
             act.id === activityId
-              ? // Store the submitted rating as 'lastRating' for UI display
-                { ...act, isCompleted: true, lastRating: rating }
+              ? { ...act, isCompleted: true, lastRating: rating }
               : act,
           ),
           loading: false,
@@ -37,6 +36,7 @@ export const useRecoveryStore = create((set, get) => ({
         error: err.message || "Failed to submit recovery activity",
         loading: false,
       });
+
       return false;
     }
   },

@@ -34,10 +34,12 @@ function Dashboard({ userId = "user_clerk_123" }) {
 
   return (
     <section className="dashboard-shell">
-      <Recovery
-        option={recoveryData?.test}
-        topPerformance={recoveryData?.performance}
-      />
+      {recoveryData.isActionRequired ? (
+        <Recovery
+          option={recoveryData?.test}
+          topPerformance={recoveryData?.performance}
+        />
+      ) : null}
 
       <header className="dashboard-topbar">
         <div className="dashboard-intro">

@@ -7,7 +7,6 @@ export const recoveryService = {
 
     const response = await apiClient.post(`/recovery/action/${id}`, payload);
 
-    console.log(response);
-    return response.data;
+    return { success: true, message: response.data.message };
   },
 };

@@ -14,6 +14,7 @@ const errorHandler = (err, req, res, next) => {
     path: req ? req.originalUrl : undefined,
     method: req ? req.method : undefined,
     triggerFile: errorSource,
+    errors: err.errors,
   };
 
   if (process.env.NODE_ENV === "development") {
@@ -22,6 +23,7 @@ const errorHandler = (err, req, res, next) => {
     res.status(err.statusCode).json({
       status: err.status,
       error: err,
+      errors: err.errors,
       message: err.message,
       stack: err.stack,
     });

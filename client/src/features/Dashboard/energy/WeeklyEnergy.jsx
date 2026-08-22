@@ -11,8 +11,6 @@ export function WeeklyEnergy({
 }) {
   const [selectedDay, setSelectedDay] = useState(null);
 
-  useEffect(() => console.log(weeklyEnergy), weeklyEnergy);
-
   if (isLoading) {
     return <div className="dashboard-state">Loading weeklyEnergy...</div>;
   }
