@@ -15,6 +15,7 @@ apiClient.interceptors.request.use(
     try {
       if (getClerkToken) {
         const token = await getClerkToken();
+
         if (token) {
           config.headers.Authorization = `Bearer ${token}`;
         }

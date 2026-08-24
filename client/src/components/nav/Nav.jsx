@@ -6,6 +6,7 @@ import {
   NavLink,
 } from "react-router-dom";
 import "./nav.css";
+import { UserButton } from "@clerk/clerk-react";
 
 function Nav() {
   return (
@@ -23,6 +24,10 @@ function Nav() {
         </li>
         <li>
           <NavLink to="/recovery">Recovery</NavLink>
+        </li>
+
+        <li>
+          <UserButton />
         </li>
       </ul>
     </nav>

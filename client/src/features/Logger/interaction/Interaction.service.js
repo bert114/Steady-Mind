@@ -17,9 +17,7 @@ export const socialService = {
   },
 
   getUserInteractions: async (userId) => {
-    const response = await apiClient.get(
-      `/logs/interactions/userInteraction/${id}`,
-    );
+    const response = await apiClient.get(`/logs/interactions/userInteraction/`);
 
     return response.data;
   },

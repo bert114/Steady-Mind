@@ -48,7 +48,7 @@ export const useDashboard = (userId) => {
     setIsLoading(true);
     setError(null);
     try {
-      const data = await fetchDashboardData(id);
+      const data = await fetchDashboardData(userId);
 
       setDashboardData(data);
     } catch (err) {

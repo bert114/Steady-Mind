@@ -4,17 +4,19 @@ import {
   getAllUserSocialInteractions,
   saveInteractionRecord,
 } from "./interaction.service.js";
+import { getAuth } from "@clerk/express";
 
 export const createInteraction = async (req, res, next) => {
   try {
     const {
-      user_id,
       custom_name,
       relationship_type,
       duration_minutes,
       drain_score,
       timestamp,
     } = req.body;
+
+    const { userId: user_id } = getAuth(req);
 
     const relationship_type_id = relationship_type
       ? RELATIONSHIP_ID_MAP[relationship_type]
@@ -45,7 +47,7 @@ export const createInteraction = async (req, res, next) => {
 
 export const getUserSocialInteractions = async (req, res, next) => {
   try {
-    const { id } = req.params;
+    const { userId: id } = getAuth(req);
 
     if (!id) {
       throwError("User ID is required.", 400);

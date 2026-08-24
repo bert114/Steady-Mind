@@ -21,13 +21,13 @@ export const getUserData = async (clerkId) => {
   return result.rows;
 };
 
-export const createUserData = async (clerkId, content) => {
-  const id = randomUUID();
+export const createUserData = async (clerkId, email) => {
   const query = `
-    INSERT INTO aura_data (id, user_id, content) 
-    VALUES ($1, $2, $3) 
+    INSERT INTO users (clerk_id, email) 
+    VALUES ($1, $2)
     RETURNING *
   `;
-  const result = await db.query(query, [id, clerkId, content]);
+
+  const result = await db.query(query, [clerkId, email]);
   return result.rows[0];
 };

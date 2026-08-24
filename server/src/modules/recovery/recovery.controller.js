@@ -9,8 +9,9 @@ import {
 
 export async function handleGetRecommendations(req, res, next) {
   try {
-    const { clerkId } = req.params;
-    const recommendations = await getRecoveryRecommendations(id);
+    const { userId: clerkId } = getAuth(req);
+
+    const recommendations = await getRecoveryRecommendations(clerkId);
 
     //console.log(recommendations);
 
@@ -25,7 +26,7 @@ export async function handleGetRecommendations(req, res, next) {
 
 export async function handleExecuteRecovery(req, res, next) {
   try {
-    const { clerkId } = req.params;
+    const { userId: clerkId } = getAuth(req);
 
     const { interact_id, id, rating, is_complete } = req.body;
 
@@ -53,7 +54,8 @@ export async function handleExecuteRecovery(req, res, next) {
 
 export async function handleGetDashboard(req, res, next) {
   try {
-    const { clerkId } = req.params;
+    const { userId: clerkId } = getAuth(req);
+
     const dashboard = await getUserDashboardState(clerkId);
 
     res.status(200).json({

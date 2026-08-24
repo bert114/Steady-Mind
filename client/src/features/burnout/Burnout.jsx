@@ -9,6 +9,7 @@ const DEFAULT_STATUS_TEXT = {
 };
 
 const Burnout = ({
+  userId,
   burnoutRisk,
   cardTitle = "Current state",
   showSignalsBreakdown = true,
@@ -27,7 +28,7 @@ const Burnout = ({
       return;
     }
 
-    addObject({ interact_id: burnoutRisk.latestInteraction.id });
+    addObject({ interact_id: burnoutRisk?.latestInteraction?.id });
   }, [burnoutRisk]);
 
   const { riskLevel, title, reasons, signals } = burnoutRisk;

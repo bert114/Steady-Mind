@@ -85,7 +85,7 @@ function Dashboard({ userId = "user_clerk_123" }) {
 
       <div className="editorial-layout">
         <section className="editorial-section editorial-section--status">
-          <Burnout burnoutRisk={burnoutRisk} />
+          <Burnout burnoutRisk={burnoutRisk} userId={userId} />
         </section>
       </div>
 

@@ -11,7 +11,9 @@ import {
 
 export const getDashboardData = async (req, res, next) => {
   try {
-    const { userId } = req.params;
+    //const { userId } = req.params;
+
+    const { userId } = req;
 
     if (!userId) {
       throwError("User ID parameter is required.", 400);
@@ -23,6 +25,14 @@ export const getDashboardData = async (req, res, next) => {
     const weeklyInteraction = await getWeeklyInteraction(userId);
 
     const recovery = await getRecoveryRecommendations(userId);
+
+    const test = {
+      recoveryData: recovery,
+      moodAndBattery,
+      weeklyInteraction,
+      burnoutRisk: dashboard.burnoutRisk,
+      batteryLevel: dashboard.metrics.batteryLevel || 0,
+    };
 
     res.status(200).json({
       status: "success",
