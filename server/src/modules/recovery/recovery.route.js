@@ -1,11 +1,11 @@
 import express from "express";
-import {
-  handleGetRecommendations,
-  handleExecuteRecovery,
-  handleGetDashboard,
-} from "./recovery.controller.js";
 import Joi from "joi";
 import validate from "../../middleware/validate.js";
+import {
+  handleExecuteRecovery,
+  handleGetDashboard,
+  handleGetRecommendations,
+} from "./recovery.controller.js";
 
 const router = express.Router();
 
@@ -22,7 +22,7 @@ const logRecoverySessionSchema = Joi.object({
 router.get("/dashboard/:clerkId", handleGetDashboard);
 router.get("/recommendations/:clerkId", handleGetRecommendations);
 router.post(
-  "/action/:clerkId",
+  "/action",
   validate(logRecoverySessionSchema),
   handleExecuteRecovery,
 );

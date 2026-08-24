@@ -1,18 +1,14 @@
-import "../../components/scss/Main.scss";
 import DailyInteractionsCard from "../../components/DailyInteractionsCard";
-import DailyMood from "../../components/DailyMood";
+import "../../components/scss/Main.scss";
 import EmptyState from "../../components/states/EmptySate";
 import LoadingState from "../../components/states/LoadingState";
-import Modal from "../Logger/Modal";
 import Battery from "../battery/Battery.jsx";
-import { useModalStore } from "../Logger/useModalStore.js";
-import { useDashboard } from "./useDashboard.jsx";
 import Burnout from "../burnout/Burnout.jsx";
-import RecoveryActivity from "../recovery/RecoveryActivity.jsx";
-import WeeklyMood from "./mood/WeeklyMood.jsx";
-import { useEffect } from "react";
-import WeeklyEnergy from "./energy/WeeklyEnergy.jsx";
+import Modal from "../Logger/Modal";
+import { useModalStore } from "../Logger/useModalStore.js";
 import Recovery from "../recovery-f/Recovery.jsx";
+import WeeklyEnergy from "./energy/WeeklyEnergy.jsx";
+import { useDashboard } from "./useDashboard.jsx";
 
 function Dashboard({ userId = "user_clerk_123" }) {
   const { openModal } = useModalStore();
@@ -34,13 +30,6 @@ function Dashboard({ userId = "user_clerk_123" }) {
 
   return (
     <section className="dashboard-shell">
-      {recoveryData.isActionRequired ? (
-        <Recovery
-          option={recoveryData?.test}
-          topPerformance={recoveryData?.performance}
-        />
-      ) : null}
-
       <header className="dashboard-topbar">
         <div className="dashboard-intro">
           <p className="dashboard-kicker">Today</p>
@@ -106,6 +95,13 @@ function Dashboard({ userId = "user_clerk_123" }) {
       </section>
 
       <Modal />
+
+      {recoveryData.isActionRequired ? (
+        <Recovery
+          option={recoveryData?.test}
+          topPerformance={recoveryData?.performance}
+        />
+      ) : null}
     </section>
   );
 }

@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from "react";
+import { useEffect } from "react";
+import ActivityPerformance from "./component/ActivityPerformance";
 import "./recovery.css";
 import "./recoveryActivity.css";
 import { useRecoveryHook } from "./useRecoveryHook";
-import ActivityPerformance from "./component/ActivityPerformance";
-import { useRecoveryStore } from "./useRecoveryStore";
 
 export default function Recovery({ option = [], topPerformance }) {
   const { setRecovery, addObject, payload, saveRecovery, error } =
@@ -72,7 +71,7 @@ export default function Recovery({ option = [], topPerformance }) {
                 </option>
               ))}
             </select>
-            <div className="error">{error.rating}</div>
+            {/* <div className="error">{error.rating}</div> */}
           </div>
         )}
 

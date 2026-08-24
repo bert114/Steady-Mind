@@ -1,5 +1,5 @@
 import { getAuth } from "@clerk/express";
-import { recordEnergyLog, fetchEnergyLog } from "./energy.service.js";
+import { fetchEnergyLog, recordEnergyLog } from "./energy.service.js";
 
 export async function handleCreateEnergyLog(req, res, next) {
   try {
@@ -28,6 +28,7 @@ export async function handleCreateEnergyLog(req, res, next) {
 
 export async function handleGetEnergyLog(req, res) {
   const { date } = req.query;
+
   const { userId: clerkId } = getAuth(req);
 
   const log = await fetchEnergyLog(clerkId, date);

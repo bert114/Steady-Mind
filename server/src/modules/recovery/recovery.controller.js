@@ -1,9 +1,8 @@
-import { id } from "../../../../client/src/features/test/id.js";
+import { getAuth } from "@clerk/express";
 import {
   calculateAvgRating,
   getRecoveryRecommendations,
   getUserDashboardState,
-  logRecoveryAction,
   logSession,
 } from "./recovery.service.js";
 
