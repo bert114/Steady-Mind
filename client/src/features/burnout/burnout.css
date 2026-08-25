@@ -1,11 +1,11 @@
 .card {
-  border-radius: 0;
-  padding: 0 0 18px;
-  background: transparent;
-  border: none;
-  border-bottom: 1px solid rgba(45, 74, 43, 0.18);
-  box-shadow: none;
-  font-family: "Segoe UI", sans-serif;
+  min-height: 250px;
+  border: 1px solid #d8e0db;
+  border-radius: 8px;
+  padding: 1.5rem;
+  background: #ffffff;
+  box-shadow: 0 10px 30px rgba(23, 35, 31, 0.04);
+  font-family: "Avenir Next", "Segoe UI", sans-serif;
   width: 100%;
   box-sizing: border-box;
 }
@@ -23,17 +23,17 @@
 .header {
   display: flex;
   justify-content: space-between;
-  align-items: flex-end;
+  align-items: flex-start;
   gap: 12px;
   margin-bottom: 16px;
 }
 
 .burnout-kicker {
-  margin: 0 0 6px;
-  font-size: 0.72rem;
-  letter-spacing: 0.08em;
+  margin: 0 0 8px;
+  color: #21675e;
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--secondary);
   font-weight: 700;
 }
 
@@ -41,15 +41,15 @@
   margin: 0;
   font-size: clamp(1.3rem, 1.8vw, 1.7rem);
   font-weight: 700;
-  color: #201915;
-  font-family: Georgia, "Times New Roman", serif;
+  color: #17231f;
+  font-family: "Avenir Next", "Segoe UI", sans-serif;
 }
 
 .badge {
   display: inline-flex;
   align-items: center;
-  padding: 0;
-  border-radius: 0;
+  padding: 0.35rem 0.55rem;
+  border-radius: 4px;
   font-size: 0.72rem;
   font-weight: 700;
   text-transform: none;
@@ -57,13 +57,16 @@
 }
 
 .badge-green {
-  color: #2d4a2b;
+  color: #21675e;
+  background: #e5f0ed;
 }
 .badge-yellow {
-  color: #7d8471;
+  color: #9a671c;
+  background: #fbf1dc;
 }
 .badge-red {
-  color: #2d4a2b;
+  color: #a64236;
+  background: #f9e5e2;
 }
 
 .signals-grid {
@@ -77,20 +80,20 @@
   display: flex;
   flex-direction: column;
   gap: 6px;
-  padding-top: 8px;
-  border-top: 1px solid var(--border);
+  padding-top: 10px;
+  border-top: 1px solid #d8e0db;
 }
 
 .metric-value {
   font-size: 1.3rem;
   font-weight: 700;
-  color: var(--ink);
-  font-family: var(--display-font);
+  color: #17231f;
+  font-family: "Avenir Next", "Segoe UI", sans-serif;
 }
 
 .metric-label {
   font-size: 0.72rem;
-  color: var(--muted);
+  color: #66736d;
 }
 
 .reasons-section {
@@ -100,7 +103,7 @@
 .reasons-list {
   margin: 0;
   padding-left: 18px;
-  color: #2a241f;
+  color: #42514a;
   font-size: 0.95rem;
   line-height: 1.6;
 }

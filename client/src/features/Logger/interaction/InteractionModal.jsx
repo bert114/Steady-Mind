@@ -1,17 +1,19 @@
-import React, { useState } from "react";
-import "./InteractionModal.css";
-import { useSocialModalStore } from "./useInteractionStore";
-import { useToastStore } from "../../toast/useToastStore";
-import { handleToast } from "../../toast/toast.util";
 import { useModalStore } from "../useModalStore";
 import { DURATIONS, RELATIONSHIPS } from "./Interaction.constant";
+import "./InteractionModal.css";
 import { useInteractionHook } from "./useInteractionHook";
 
 const InteractionModal = ({ currentUserId }) => {
   const { isOpen, closeModal } = useModalStore();
 
-  const { formData, error, handleChange, handleSubmit, handleDismiss } =
-    useInteractionHook(currentUserId, closeModal);
+  const {
+    formData,
+    error,
+    isSubmitting,
+    handleChange,
+    handleSubmit,
+    handleDismiss,
+  } = useInteractionHook(currentUserId, closeModal);
 
   if (!isOpen) return null;
 
@@ -123,8 +125,16 @@ const InteractionModal = ({ currentUserId }) => {
             >
               Dismiss
             </button>
-            <button type="submit" className="action-solid">
-              Commit entry
+            <button
+              type="submit"
+              className="action-solid"
+              disabled={isSubmitting}
+              aria-busy={isSubmitting}
+            >
+              {isSubmitting && (
+                <span className="loading-spinner" aria-hidden="true" />
+              )}
+              {isSubmitting ? "Saving..." : "Commit entry"}
             </button>
           </footer>
         </form>

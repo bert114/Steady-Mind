@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import { useHook } from "../Logger/energy-mood/useHook";
 import { useModalStore } from "../Logger/useModalStore";
 
@@ -98,8 +97,16 @@ const EnergyMoodModal = ({ currentUserId }) => {
               >
                 Dismiss
               </button>
-              <button type="submit" className="action-solid">
-                Commit entry
+              <button
+                type="submit"
+                className="action-solid"
+                disabled={isSubmitting}
+                aria-busy={isSubmitting}
+              >
+                {isSubmitting && (
+                  <span className="loading-spinner" aria-hidden="true" />
+                )}
+                {isSubmitting ? "Saving..." : "Commit entry"}
               </button>
             </footer>
           </form>

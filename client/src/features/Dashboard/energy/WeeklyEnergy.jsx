@@ -1,6 +1,5 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import "./energy.css";
-import { useEffect } from "react";
 
 const MOODS = ["1", "2", "3", "4", "5"];
 
@@ -16,7 +15,12 @@ export function WeeklyEnergy({
   }
 
   if (!weeklyEnergy.length) {
-    return <div className="dashboard-state">No data available.</div>;
+    return (
+      <div className="dashboard-state">
+        <strong>Your weekly view is waiting for data.</strong>
+        <span>Log your energy on more days to see patterns here.</span>
+      </div>
+    );
   }
 
   const active =

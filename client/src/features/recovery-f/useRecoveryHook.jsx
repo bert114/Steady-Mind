@@ -1,12 +1,13 @@
-import { useCallback, useEffect, useState } from "react";
-import { recoveryService } from "./recovery.service";
-import { useRecoveryStore } from "./useRecoveryStore";
+import { useEffect, useState } from "react";
 import { refreshDashboard } from "../Dashboard/dashboard.service";
 import { handleToast } from "../toast/toast.util";
+import { recoveryService } from "./recovery.service";
+import { useRecoveryStore } from "./useRecoveryStore";
 
 export function useRecoveryHook(option) {
   const [recoveries, setRecovery] = useState([]);
   const [error, setError] = useState();
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const { addObject, payload } = useRecoveryStore();
 
   useEffect(() => {
@@ -17,19 +18,23 @@ export function useRecoveryHook(option) {
   const saveRecovery = async (e) => {
     try {
       e.preventDefault();
+      setIsSubmitting(true);
+      setError(undefined);
 
       const res = await recoveryService.saveRecoveryActivity(payload);
 
       console.log(res);
 
       if (res.success) {
-        refreshDashboard();
+        await refreshDashboard();
 
         handleToast(res.message);
       }
     } catch (error) {
       console.log(error.response.data.errors);
       setError(error.response.data.errors);
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -38,6 +43,7 @@ export function useRecoveryHook(option) {
     recoveries,
     payload,
     error,
+    isSubmitting,
     addObject,
 
     saveRecovery,

@@ -5,7 +5,7 @@ import "./recoveryActivity.css";
 import { useRecoveryHook } from "./useRecoveryHook";
 
 export default function Recovery({ option = [], topPerformance }) {
-  const { setRecovery, addObject, payload, saveRecovery, error } =
+  const { setRecovery, addObject, payload, saveRecovery, error, isSubmitting } =
     useRecoveryHook();
   useEffect(() => {
     if (!option) return;
@@ -13,13 +13,25 @@ export default function Recovery({ option = [], topPerformance }) {
     //console.log("performance", topPerformance);
   }, [option, topPerformance]);
 
-  if (!option) return;
+  if (!option || option.length === 0) {
+    return (
+      <section className="recovery recovery-empty-state" role="status">
+        <h2>Recovery activities unavailable</h2>
+        <p>There are no recovery activities to choose from right now.</p>
+      </section>
+    );
+  }
 
   return (
     <div className="recovery">
       <h2>Recovery Tracker</h2>
 
       <ActivityPerformance performance={topPerformance} />
+      {error && (
+        <p className="recovery-error" role="alert">
+          We could not save this recovery activity. Please try again.
+        </p>
+      )}
       <form
         className="box"
         onSubmit={(e) => saveRecovery(e, { name: "idsjisjisji" })}
@@ -75,7 +87,12 @@ export default function Recovery({ option = [], topPerformance }) {
           </div>
         )}
 
-        <button type="submit">Save Activity</button>
+        <button type="submit" disabled={isSubmitting} aria-busy={isSubmitting}>
+          {isSubmitting && (
+            <span className="loading-spinner" aria-hidden="true" />
+          )}
+          {isSubmitting ? "Saving..." : "Save Activity"}
+        </button>
       </form>
 
       {/* <table>

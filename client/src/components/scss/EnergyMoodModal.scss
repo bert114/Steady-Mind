@@ -50,6 +50,12 @@
   position: absolute;
   top: 0;
   right: 0;
+  width: 32px;
+  height: 32px;
+  min-width: 32px;
+  flex: 0 0 32px;
+  display: grid;
+  place-items: center;
   background: transparent;
   border: none;
   font-size: 1.6rem;
@@ -57,6 +63,7 @@
   cursor: pointer;
   padding: 0;
   line-height: 1;
+  text-transform: none;
 }
 
 .close-trigger:hover {
@@ -197,6 +204,30 @@
 .action-subtle:hover {
   background: rgba(125, 132, 113, 0.16);
   color: #2d4a2b;
+}
+
+.action-solid:disabled,
+.action-subtle:disabled {
+  cursor: wait;
+  opacity: 0.7;
+}
+
+.loading-spinner {
+  display: inline-block;
+  width: 0.85em;
+  height: 0.85em;
+  margin-right: 0.45em;
+  border: 2px solid currentColor;
+  border-right-color: transparent;
+  border-radius: 50%;
+  vertical-align: -0.12em;
+  animation: button-spin 0.7s linear infinite;
+}
+
+@keyframes button-spin {
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 .confirmation-state {

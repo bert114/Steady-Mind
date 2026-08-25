@@ -1,5 +1,9 @@
 .summary-card {
-  background: transparent;
+  background: #ffffff;
+  border: 1px solid #d8e0db;
+  border-radius: 8px;
+  padding: 1.25rem;
+  box-shadow: 0 10px 30px rgba(23, 35, 31, 0.04);
   width: 100%;
   box-sizing: border-box;
 }
@@ -10,14 +14,14 @@
   justify-content: space-between;
   margin-bottom: 14px;
   padding-bottom: 10px;
-  border-bottom: 1px solid var(--border);
+  border-bottom: 1px solid #e7ece9;
 }
 
 .summary-title {
   font-size: clamp(1.06rem, 1.4vw, 1.22rem);
   font-weight: 700;
-  color: var(--ink);
-  font-family: var(--display-font);
+  color: #17231f;
+  font-family: "Avenir Next", "Segoe UI", sans-serif;
   flex: 1;
 }
 
@@ -32,7 +36,7 @@
   justify-content: space-between;
   gap: 12px;
   padding: 12px 0;
-  border-bottom: 1px solid var(--border);
+  border-bottom: 1px solid #e7ece9;
 }
 
 .summary-item:last-child {
@@ -49,13 +53,13 @@
 
 .item-name {
   font-size: 1rem;
-  color: var(--ink);
+  color: #17231f;
   font-weight: 600;
 }
 
 .item-duration {
   font-size: 0.8rem;
-  color: var(--muted);
+  color: #66736d;
   letter-spacing: 0.02em;
 }
 
@@ -67,15 +71,15 @@
 }
 
 .item-score--negative {
-  color: #9a5d42;
+  color: #a64236;
 }
 
 .item-score--positive {
-  color: #46644d;
+  color: #21675e;
 }
 
 .item-score--neutral {
-  color: var(--muted);
+  color: #66736d;
 }
 
 .widget-card {

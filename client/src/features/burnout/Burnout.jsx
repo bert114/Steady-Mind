@@ -1,6 +1,6 @@
-import React, { useEffect } from "react";
-import "./burnout.css";
+import { useEffect } from "react";
 import { useRecoveryHook } from "../recovery-f/useRecoveryHook";
+import "./burnout.css";
 
 const DEFAULT_STATUS_TEXT = {
   GREEN: "Steady",
@@ -15,13 +15,6 @@ const Burnout = ({
   showSignalsBreakdown = true,
 }) => {
   const { addObject } = useRecoveryHook();
-  if (!burnoutRisk) {
-    return (
-      <div className="error-card" role="alert">
-        <p style={{ margin: 0, fontWeight: 600 }}>No data yet.</p>
-      </div>
-    );
-  }
 
   useEffect(() => {
     if (!burnoutRisk) {
@@ -29,7 +22,15 @@ const Burnout = ({
     }
 
     addObject({ interact_id: burnoutRisk?.latestInteraction?.id });
-  }, [burnoutRisk]);
+  }, [addObject, burnoutRisk]);
+
+  if (!burnoutRisk) {
+    return (
+      <div className="error-card" role="alert">
+        <p style={{ margin: 0, fontWeight: 600 }}>No data yet.</p>
+      </div>
+    );
+  }
 
   const { riskLevel, title, reasons, signals } = burnoutRisk;
   const statusBadgeText = title || DEFAULT_STATUS_TEXT[riskLevel];

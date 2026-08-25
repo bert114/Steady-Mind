@@ -1,23 +1,22 @@
-import { useState } from "react";
+import { useCallback, useEffect, useState } from "react";
+import { changeStatus } from "../../burnout/burnoutUtils.js";
+import { refreshDashboard } from "../../Dashboard/dashboard.service.js";
+import { id } from "../../test/id.js";
 import { handleToast } from "../../toast/toast.util.js";
 import { useModalStore } from "../useModalStore.js";
-import { id } from "../../test/id.js";
 import { socialService } from "./Interaction.service.js";
 import {
   buildInteractionPayload,
   INITIAL_FORM_STATE,
   validateInteractionForm,
 } from "./Interaction.utils.js";
-import { useCallback } from "react";
-import { useEffect } from "react";
-import { changeStatus } from "../../burnout/burnoutUtils.js";
-import { refreshDashboard } from "../../Dashboard/dashboard.service.js";
 
 export const useInteractionHook = (currentUserId) => {
   const { closeModal } = useModalStore();
 
   const [formData, setFormData] = useState(INITIAL_FORM_STATE);
   const [error, setError] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleChange = useCallback((field, value) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
@@ -47,6 +46,8 @@ export const useInteractionHook = (currentUserId) => {
     const payload = buildInteractionPayload(formData, currentUserId);
 
     try {
+      setIsSubmitting(true);
+      setError("");
       const res = await socialService.logInteraction(payload);
 
       changeStatus(res.data.burnoutRisk);
@@ -61,6 +62,8 @@ export const useInteractionHook = (currentUserId) => {
 
       setError(errorMsg);
       handleToast(errorMsg, "error", 3000);
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -89,6 +92,7 @@ export const useInteractionHook = (currentUserId) => {
   return {
     formData,
     error,
+    isSubmitting,
     handleChange,
     handleSubmit,
     handleDismiss,

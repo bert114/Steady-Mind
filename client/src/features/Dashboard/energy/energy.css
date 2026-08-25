@@ -1,7 +1,6 @@
 /* Container */
 .dashboard-card {
   width: 100%;
-  max-width: 580px;
   background-color: #ffffff;
   border: 1px solid #e2e8f0;
   border-radius: 16px;
@@ -110,8 +109,25 @@
   border-radius: 4px;
   padding: 2px;
   position: relative;
-  display: flex;
+  color: #66736d;
   flex-direction: column;
+
+  .dashboard-state {
+    display: grid;
+    gap: 6px;
+    justify-items: center;
+    line-height: 1.5;
+  }
+
+  .dashboard-state strong {
+    color: #17231f;
+    font-size: 0.95rem;
+  }
+
+  .dashboard-state span {
+    max-width: 34ch;
+    font-size: 0.84rem;
+  }
   justify-content: flex-end;
   background-color: #f8fafc;
   margin-bottom: 4px;
@@ -142,4 +158,61 @@
   font-size: 10px;
   font-weight: 500;
   color: #64748b;
+}
+
+.dashboard-card {
+  border-color: #d8e0db;
+  border-radius: 8px;
+  box-shadow: 0 10px 30px rgba(23, 35, 31, 0.04);
+  font-family: "Avenir Next", "Segoe UI", sans-serif;
+  color: #17231f;
+}
+
+.dashboard-header {
+  border-bottom-color: #e7ece9;
+}
+
+.header-label,
+.day-label,
+.battery-percent {
+  color: #66736d;
+}
+
+.day-card {
+  border-radius: 5px;
+}
+
+.day-card:hover {
+  background-color: #f1f6f4;
+}
+
+.day-card.selected {
+  background-color: #e5f0ed;
+  border-color: #21675e;
+}
+
+.day-label.today {
+  color: #21675e;
+}
+
+.battery-healthy {
+  background-color: #21675e;
+}
+
+.battery-neutral {
+  background-color: #c28a2c;
+}
+
+.battery-low {
+  background-color: #a64236;
+}
+
+@media (max-width: 480px) {
+  .dashboard-card {
+    overflow-x: auto;
+  }
+
+  .grid-container {
+    min-width: 390px;
+  }
 }
