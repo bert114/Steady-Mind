@@ -28,6 +28,41 @@
   margin-bottom: 16px;
 }
 
+.burnout-guidance {
+  margin: 0 0 18px;
+  padding: 14px 16px;
+  border-left: 3px solid #d49a3a;
+  background: #fbf6e9;
+  color: #42514a;
+}
+
+.theme-red .burnout-guidance {
+  border-left-color: #b95749;
+  background: #fbefed;
+}
+
+.theme-green .burnout-guidance {
+  border-left-color: #5c9587;
+  background: #eef6f3;
+}
+
+.burnout-guidance strong {
+  display: block;
+  color: #17231f;
+  font-size: 0.92rem;
+}
+
+.burnout-guidance p {
+  margin: 5px 0 8px;
+  font-size: 0.88rem;
+  line-height: 1.5;
+}
+
+.burnout-guidance small {
+  color: #66736d;
+  font-size: 0.72rem;
+}
+
 .burnout-kicker {
   margin: 0 0 8px;
   color: #21675e;
@@ -98,6 +133,14 @@
 
 .reasons-section {
   margin-top: 12px;
+}
+
+.reasons-section h3 {
+  margin: 0 0 8px;
+  color: #66736d;
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
 }
 
 .reasons-list {

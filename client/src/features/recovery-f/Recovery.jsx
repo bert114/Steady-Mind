@@ -4,7 +4,12 @@ import "./recovery.css";
 import "./recoveryActivity.css";
 import { useRecoveryHook } from "./useRecoveryHook";
 
-export default function Recovery({ option = [], topPerformance }) {
+export default function Recovery({
+  option = [],
+  topPerformance,
+  guidance,
+  riskLevel = "YELLOW",
+}) {
   const { setRecovery, addObject, payload, saveRecovery, error, isSubmitting } =
     useRecoveryHook();
   useEffect(() => {
@@ -24,7 +29,21 @@ export default function Recovery({ option = [], topPerformance }) {
 
   return (
     <div className="recovery">
-      <h2>Recovery Tracker</h2>
+      <div className="recovery-heading">
+        <div>
+          <p className="recovery-kicker">Your next useful step</p>
+          <h2>Recovery choices</h2>
+        </div>
+        <span className="recovery-effort">
+          {riskLevel === "RED" ? "Low effort first" : "Medium effort options"}
+        </span>
+      </div>
+      <p className="recovery-guidance">
+        {guidance ||
+          (riskLevel === "RED"
+            ? "Your current state calls for something restorative and easy to begin."
+            : "Choose something manageable that gives your energy room to return.")}
+      </p>
 
       <ActivityPerformance performance={topPerformance} />
       {error && (
@@ -37,51 +56,68 @@ export default function Recovery({ option = [], topPerformance }) {
         onSubmit={(e) => saveRecovery(e, { name: "idsjisjisji" })}
       >
         <div className="field">
-          <label>Activity (Recommended First)</label>
-          <select
-            value={payload.id}
-            onChange={(e) =>
-              addObject({
-                id: e.target.value,
-              })
-            }
-            required
+          <span className="field-label">Pick one to try</span>
+          <div
+            className="recovery-options"
+            role="radiogroup"
+            aria-label="Recovery activities"
           >
-            <option value="">Select activity...</option>
-            {option.map((a, index) => {
-              return (
-                <option key={`${a.id}-${index}`} value={a.id}>
-                  {a.name}
-                </option>
-              );
-            })}
-          </select>
+            {option.map((a, index) => (
+              <label
+                className={`recovery-option ${payload.id === a.id ? "selected" : ""}`}
+                key={`${a.id}-${index}`}
+              >
+                <input
+                  type="radio"
+                  name="recovery-activity"
+                  value={a.id}
+                  checked={payload.id === a.id}
+                  onChange={() => addObject({ id: a.id })}
+                  required
+                />
+                <span>
+                  <strong>{a.name}</strong>
+                  <small>
+                    {a.effort_level
+                      ? `${a.effort_level.toLowerCase()} effort`
+                      : "A manageable reset"}
+                    {a.duration ? ` · ${a.duration}` : ""}
+                  </small>
+                </span>
+              </label>
+            ))}
+          </div>
         </div>
 
         <div className="field">
-          <label>
+          <label className="completion-toggle">
             <input
               type="checkbox"
               checked={payload?.is_complete ?? false}
               onChange={(e) => addObject({ is_complete: e.target.checked })}
-            />{" "}
-            Mark as Completed
+            />
+            I tried this activity
           </label>
           <div className="err">{error?.is_complete || ""}</div>
         </div>
 
         {payload.is_complete && (
           <div className="field">
-            <label>Effectiveness (1-5)</label>
+            <label htmlFor="recovery-rating">How did it help?</label>
             <select
-              value={payload.rating || 1}
+              id="recovery-rating"
+              value={payload.rating || ""}
               onChange={(e) => addObject({ rating: e.target.value })}
+              required
             >
-              {[1, 2, 3, 4, 5].map((num) => (
-                <option key={num} value={num}>
-                  {num}
-                </option>
-              ))}
+              <option value="" disabled>
+                Select how it helped...
+              </option>
+              <option value="1">Did not help (1/5)</option>
+              <option value="2">Helped a little (2/5)</option>
+              <option value="3">Helped somewhat (3/5)</option>
+              <option value="4">Helped a lot (4/5)</option>
+              <option value="5">Helped a great deal (5/5)</option>
             </select>
             {/* <div className="error">{error.rating}</div> */}
           </div>

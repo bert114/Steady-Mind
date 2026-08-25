@@ -26,6 +26,46 @@
   line-height: 1.5;
 }
 
+.recovery-heading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 0.35rem;
+}
+
+.recovery-kicker {
+  margin: 0 0 0.35rem;
+  color: #21675e;
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.recovery-heading h2 {
+  margin: 0;
+  font-size: 1.35rem;
+}
+
+.recovery-effort {
+  padding: 0.4rem 0.55rem;
+  border: 1px solid #d8e0db;
+  border-radius: 4px;
+  color: #21675e;
+  font-size: 0.72rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.recovery-guidance {
+  max-width: 48rem;
+  margin: 0 0 1rem;
+  color: #66736d;
+  font-size: 0.92rem;
+  line-height: 1.5;
+}
+
 .recovery-error {
   margin-bottom: 1rem;
   padding: 0.7rem 0.8rem;
@@ -50,6 +90,59 @@
 
 .field {
   margin-bottom: 0.75rem;
+}
+
+.field-label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+}
+
+.recovery-options {
+  display: grid;
+  gap: 0.55rem;
+}
+
+.recovery-option {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.7rem;
+  padding: 0.8rem;
+  border: 1px solid #c8d4ce;
+  border-radius: 6px;
+  background: #fff;
+  cursor: pointer;
+}
+
+.recovery-option.selected {
+  border-color: #21675e;
+  background: #edf4f1;
+}
+
+.recovery-option input {
+  margin-top: 0.2rem;
+  accent-color: #21675e;
+}
+
+.recovery-option strong,
+.recovery-option small {
+  display: block;
+}
+
+.recovery-option small {
+  margin-top: 0.2rem;
+  color: #66736d;
+  font-size: 0.78rem;
+}
+
+.completion-toggle {
+  display: flex !important;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.completion-toggle input {
+  accent-color: #21675e;
 }
 
 .field label {

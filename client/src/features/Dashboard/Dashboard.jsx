@@ -163,6 +163,8 @@ function Dashboard({ userId = "user_clerk_123" }) {
             <Recovery
               option={recoveryData?.test}
               topPerformance={recoveryData?.performance}
+              guidance={recoveryData?.guidance}
+              riskLevel={recoveryData?.riskLevel}
             />
           ) : null}
         </section>
