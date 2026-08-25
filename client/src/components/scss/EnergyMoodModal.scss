@@ -74,6 +74,20 @@
   margin-bottom: 24px;
 }
 
+.control-section {
+  min-width: 0;
+  border: 0;
+  padding: 0;
+}
+
+.control-section:focus-within {
+  outline: none;
+}
+
+.section-label {
+  padding: 0;
+}
+
 .metric-row {
   display: flex;
   justify-content: space-between;
