@@ -6,11 +6,11 @@ import {
   handleGetEnergyLog,
 } from "./energy.controller.js";
 import { cleanData } from "./energy.middleware.js";
+import { injectUser } from "../../dashboard/dashboard.middleware.js";
 
 const router = express.Router();
 
 const energySchema = Joi.object({
-  clerkId: Joi.string().required(),
   batteryLevel: Joi.number().integer().min(0).max(100).required(),
   moodScore: Joi.string().required(),
   logDate: Joi.string().isoDate().optional(),

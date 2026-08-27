@@ -11,9 +11,9 @@ export async function fetchRecentDailyLogs(clerkId, limit = 30) {
   );
 }
 
-export async function fetchRecentInteractions(clerkId, limit = 10) {
+export async function fetchRecentInteractions(clerkId, limit = 5) {
   return await db.query(
-    `SELECT si.drain_score, si.duration_minutes, si.interaction_time 
+    `SELECT si.id, si.drain_score, si.duration_minutes, si.interaction_time 
      FROM social_interactions si
      JOIN daily_logs dl ON si.daily_log_id = dl.id
      WHERE dl.user_id = $1 

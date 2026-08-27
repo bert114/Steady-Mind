@@ -1,155 +1,165 @@
 .card {
-  border-radius: 12px;
-  padding: 20px;
-  background-color: #ffffff;
-  border: 1px solid #e2e8f0;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-  font-family:
-    system-ui,
-    -apple-system,
-    BlinkMacSystemFont,
-    "Segoe UI",
-    Roboto,
-    sans-serif;
-  max-width: 440px;
+  min-height: 250px;
+  border: 1px solid #d8e0db;
+  border-radius: 8px;
+  padding: 1.5rem;
+  background: #ffffff;
+  box-shadow: 0 10px 30px rgba(23, 35, 31, 0.04);
+  font-family: "Avenir Next", "Segoe UI", sans-serif;
   width: 100%;
   box-sizing: border-box;
 }
 
-/* Status Themes */
-.card.themeGREEN {
-  border-left: 6px solid #16a34a;
+.card.theme-green {
+  border-left: 0;
 }
-.card.themeYELLOW {
-  border-left: 6px solid #d97706;
+.card.theme-yellow {
+  border-left: 0;
 }
-.card.themeRED {
-  border-left: 6px solid #dc2626;
+.card.theme-red {
+  border-left: 0;
 }
 
 .header {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
+  gap: 12px;
   margin-bottom: 16px;
+}
+
+.burnout-guidance {
+  margin: 0 0 18px;
+  padding: 14px 16px;
+  border-left: 3px solid #d49a3a;
+  background: #fbf6e9;
+  color: #42514a;
+}
+
+.theme-red .burnout-guidance {
+  border-left-color: #b95749;
+  background: #fbefed;
+}
+
+.theme-green .burnout-guidance {
+  border-left-color: #5c9587;
+  background: #eef6f3;
+}
+
+.burnout-guidance strong {
+  display: block;
+  color: #17231f;
+  font-size: 0.92rem;
+}
+
+.burnout-guidance p {
+  margin: 5px 0 8px;
+  font-size: 0.88rem;
+  line-height: 1.5;
+}
+
+.burnout-guidance small {
+  color: #66736d;
+  font-size: 0.72rem;
+}
+
+.burnout-kicker {
+  margin: 0 0 8px;
+  color: #21675e;
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-weight: 700;
 }
 
 .title {
   margin: 0;
-  font-size: 1.125rem;
-  font-weight: 600;
-  color: #1e293b;
+  font-size: clamp(1.3rem, 1.8vw, 1.7rem);
+  font-weight: 700;
+  color: #17231f;
+  font-family: "Avenir Next", "Segoe UI", sans-serif;
 }
 
 .badge {
   display: inline-flex;
   align-items: center;
-  padding: 4px 12px;
-  border-radius: 9999px;
-  font-size: 0.875rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.025em;
+  padding: 0.35rem 0.55rem;
+  border-radius: 4px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: none;
+  letter-spacing: 0.02em;
 }
 
-.badgeGREEN {
-  background-color: #dcfce7;
-  color: #15803d;
+.badge-green {
+  color: #21675e;
+  background: #e5f0ed;
 }
-.badgeYELLOW {
-  background-color: #fef3c7;
-  color: #b45309;
+.badge-yellow {
+  color: #9a671c;
+  background: #fbf1dc;
 }
-.badgeRED {
-  background-color: #fee2e2;
-  color: #b91c1c;
+.badge-red {
+  color: #a64236;
+  background: #f9e5e2;
 }
 
-/* Signals Grid */
-.signalsGrid {
+.signals-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 8px;
-  background-color: #f8fafc;
-  padding: 12px;
-  border-radius: 8px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
   margin-bottom: 16px;
 }
 
-.metricBox {
+.metric-box {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  text-align: center;
+  gap: 6px;
+  padding-top: 10px;
+  border-top: 1px solid #d8e0db;
 }
 
-.metricValue {
-  font-size: 1.25rem;
+.metric-value {
+  font-size: 1.3rem;
   font-weight: 700;
-  color: #0f172a;
+  color: #17231f;
+  font-family: "Avenir Next", "Segoe UI", sans-serif;
 }
 
-.metricLabel {
-  font-size: 0.75rem;
-  color: #64748b;
-  margin-top: 2px;
+.metric-label {
+  font-size: 0.72rem;
+  color: #66736d;
 }
 
-/* Reasons List */
-.reasonsSection {
+.reasons-section {
   margin-top: 12px;
 }
 
-.reasonsHeader {
-  font-size: 0.875rem;
-  font-weight: 600;
-  color: #475569;
-  margin: 0 0 8px 0;
+.reasons-section h3 {
+  margin: 0 0 8px;
+  color: #66736d;
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
 }
 
-.reasonsList {
+.reasons-list {
   margin: 0;
-  padding-left: 20px;
-  color: #334155;
-  font-size: 0.875rem;
+  padding-left: 18px;
+  color: #42514a;
+  font-size: 0.95rem;
+  line-height: 1.6;
 }
 
-.reasonsList li {
-  margin-bottom: 6px;
-  line-height: 1.4;
+.reasons-list li + li {
+  margin-top: 6px;
 }
 
-/* Skeleton Loading State */
-.skeletonCard {
-  border-radius: 12px;
-  padding: 20px;
-  background-color: #ffffff;
-  border: 1px solid #e2e8f0;
-  max-width: 440px;
-  width: 100%;
-}
-
-.skeletonBox {
-  background: linear-gradient(90deg, #f1f5f9 25%, #e2e8f0 50%, #f1f5f9 75%);
-  background-size: 200% 100%;
-  animation: pulse 1.5s infinite;
-  border-radius: 4px;
-}
-
-@keyframes pulse {
-  0% {
-    background-position: 200% 0;
-  }
-  100% {
-    background-position: -200% 0;
-  }
-}
-
-.errorCard {
-  border-radius: 12px;
+.error-card {
+  border-radius: 16px;
   padding: 16px;
-  background-color: #fef2f2;
-  border: 1px solid #fecaca;
-  color: #991b1b;
-  font-size: 0.875rem;
+  background-color: #f8e3e1;
+  border: 1px solid #e8b8b3;
+  color: #7d2a28;
+  font-size: 0.88rem;
 }

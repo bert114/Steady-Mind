@@ -14,14 +14,16 @@ const errorHandler = (err, req, res, next) => {
     path: req ? req.originalUrl : undefined,
     method: req ? req.method : undefined,
     triggerFile: errorSource,
+    errors: err.errors,
   };
 
   if (process.env.NODE_ENV === "development") {
     // logger.error(`${err.statusCode} - ${err.message}`);
     logger.error(JSON.stringify(errorResponse, null, 2));
-    res.status(err.statusCode).json({
+    return res.status(err.statusCode).json({
       status: err.status,
       error: err,
+      errors: err.errors,
       message: err.message,
       stack: err.stack,
     });

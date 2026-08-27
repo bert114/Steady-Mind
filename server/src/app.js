@@ -12,7 +12,9 @@ import burnOutRoute from "./modules/burnout/burnout.route.js";
 
 import energyRoute from "./modules/logs/energy/energy.route.js";
 import requestLogger from "./middleware/reqLogger.js";
-
+import recoveryRouter from "./modules/recovery/recovery.route.js";
+import { boundaryRoutes } from "./modules/boundary_support/boundary.route.js";
+import clerk from "./modules/clerk-auth/clerk.route.js";
 const app = express();
 
 //app.use(requestLogger);
@@ -29,6 +31,11 @@ app.use("/api/v1/dashboard", dashboardRoutes);
 app.use("/api/v1/logs/energy", energyRoute);
 app.use("/api/v1/logs/interactions", interactionRoutes);
 app.use("/api/v1/burnout", burnOutRoute);
+app.use("/api/v1/recovery", recoveryRouter);
+
+app.use("/api/v1", clerk);
+
+app.use("/api/v1/boundary", boundaryRoutes);
 
 app.all("*", (req, res, next) => {
   next(new AppError(`Can't find ${req.originalUrl} on this server!`, 404));

@@ -21,6 +21,6 @@ const interactionSchema = Joi.object({
 
 router.post("/", validate(interactionSchema), createInteraction);
 
-router.get("/userInteraction/:id", getUserSocialInteractions);
+router.get("/userInteraction", getUserSocialInteractions);
 
 export default router;

@@ -41,7 +41,6 @@ export const useHook = (currentUserId) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    1;
     const validationError = validateInput(energy, selectedMood);
     if (validationError) {
       setError(validationError);
@@ -49,7 +48,7 @@ export const useHook = (currentUserId) => {
     }
 
     // need to change pa
-    const payload = buildPayload(id, energy, selectedMood);
+    const payload = buildPayload(energy, selectedMood);
     console.log(payload);
 
     try {

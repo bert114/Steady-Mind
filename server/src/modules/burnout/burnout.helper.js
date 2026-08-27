@@ -7,6 +7,11 @@ export function evaluateBurnoutRisk(dailyLogs, interactions) {
   const currentBattery =
     dailyLogs.length > 0 ? dailyLogs[0].battery_level : null;
 
+  const latestDrainingInteraction =
+    interactions.find(
+      (interaction) => interaction.drain_score <= HIGH_DRAIN_THRESHOLD,
+    ) || null;
+
   const redReasons = [];
   const yellowReasons = [];
 
@@ -19,24 +24,29 @@ export function evaluateBurnoutRisk(dailyLogs, interactions) {
     redReasons.push(`${lowBatteryStreak} consecutive low-battery days logged.`);
   }
 
-  if (redReasons.length > 0) {
-    return {
-      riskLevel: "RED",
-      reasons: redReasons,
-      signals: { currentBattery, lowBatteryStreak, highDrainStreak },
-    };
-  }
-
-  if (currentBattery !== null && currentBattery <= LOW_BATTERY_THRESHOLD) {
-    yellowReasons.push(
-      `Current battery level (${currentBattery}) is at or below ${LOW_BATTERY_THRESHOLD}.`,
-    );
-  }
   if (highDrainStreak === 2) {
     yellowReasons.push("2 consecutive high-drain interactions logged.");
   }
   if (lowBatteryStreak === 2) {
     yellowReasons.push("2 consecutive low-battery days logged.");
+  }
+  if (currentBattery !== null && currentBattery <= LOW_BATTERY_THRESHOLD) {
+    yellowReasons.push(`Current battery level is low (${currentBattery}%).`);
+  }
+
+  if (latestDrainingInteraction) {
+    yellowReasons.push(
+      `Recent heavy drain detected (Score: ${latestDrainingInteraction.drain_score}).`,
+    );
+  }
+
+  if (redReasons.length > 0) {
+    return {
+      riskLevel: "RED",
+      reasons: redReasons,
+      signals: { currentBattery, lowBatteryStreak, highDrainStreak },
+      latestDrainingInteraction,
+    };
   }
 
   if (yellowReasons.length > 0) {
@@ -44,6 +54,7 @@ export function evaluateBurnoutRisk(dailyLogs, interactions) {
       riskLevel: "YELLOW",
       reasons: yellowReasons,
       signals: { currentBattery, lowBatteryStreak, highDrainStreak },
+      latestDrainingInteraction,
     };
   }
 
@@ -53,6 +64,7 @@ export function evaluateBurnoutRisk(dailyLogs, interactions) {
       "Your energy and interaction patterns show normal recovery levels.",
     ],
     signals: { currentBattery, lowBatteryStreak, highDrainStreak },
+    latestDrainingInteraction,
   };
 }
 

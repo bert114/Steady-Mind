@@ -1,60 +1,41 @@
-import React, { useEffect } from "react";
-import { useBurnoutStore } from "./useBurnoutStore.js";
+import { useEffect } from "react";
+import { useRecoveryHook } from "../recovery-f/useRecoveryHook";
 import "./burnout.css";
 
 const DEFAULT_STATUS_TEXT = {
-  GREEN: "Stable",
-  YELLOW: "Strained / Warning",
-  RED: "High Burnout Risk",
+  GREEN: "Steady",
+  YELLOW: "Needs attention",
+  RED: "High burnout risk",
 };
 
-export const BurnoutRiskSkeleton = () => (
-  <div
-    className="skeleton-card"
-    aria-busy="true"
-    aria-label="Loading burnout status"
-  >
-    <div
-      style={{
-        display: "flex",
-        justifyContent: "space-between",
-        marginBottom: "16px",
-      }}
-    >
-      <div
-        className="skeleton-box"
-        style={{ width: "140px", height: "24px" }}
-      />
-      <div
-        className="skeleton-box"
-        style={{ width: "100px", height: "24px", borderRadius: "12px" }}
-      />
-    </div>
-    <div
-      className="skeleton-box"
-      style={{ width: "100%", height: "60px", marginBottom: "16px" }}
-    />
-    <div className="skeleton-box" style={{ width: "80%", height: "16px" }} />
-  </div>
-);
 const Burnout = ({
-  burnoutRisk, // Received directly as a prop from Dashboard
-  cardTitle = "Burnout Status",
+  userId,
+  burnoutRisk,
+  cardTitle = "Current state",
   showSignalsBreakdown = true,
 }) => {
+  const { addObject } = useRecoveryHook();
+
+  useEffect(() => {
+    if (!burnoutRisk) {
+      return;
+    }
+
+    addObject({ interact_id: burnoutRisk?.latestInteraction?.id });
+  }, [addObject, burnoutRisk]);
+
   if (!burnoutRisk) {
     return (
       <div className="error-card" role="alert">
-        <p style={{ margin: 0, fontWeight: 600 }}>No status data available.</p>
+        <p style={{ margin: 0, fontWeight: 600 }}>No data yet.</p>
       </div>
     );
   }
 
-  const { riskLevel, title, reasons, signals, evaluatedAt } = burnoutRisk;
+  const { riskLevel, title, reasons, signals } = burnoutRisk;
   const statusBadgeText = title || DEFAULT_STATUS_TEXT[riskLevel];
-  const formattedDate = evaluatedAt
-    ? new Date(evaluatedAt).toLocaleTimeString()
-    : null;
+  const isHighRisk = riskLevel === "RED";
+  const isWatchRisk = riskLevel === "YELLOW";
 
   return (
     <section
@@ -62,9 +43,12 @@ const Burnout = ({
       aria-labelledby="burnout-card-heading"
     >
       <header className="header">
-        <h2 id="burnout-card-heading" className="title">
-          {cardTitle}
-        </h2>
+        <div>
+          <p className="burnout-kicker">Burnout status</p>
+          <h2 id="burnout-card-heading" className="title">
+            {cardTitle}
+          </h2>
+        </div>
         <span
           className={`badge badge-${riskLevel?.toLowerCase()}`}
           role="status"
@@ -74,40 +58,50 @@ const Burnout = ({
         </span>
       </header>
 
+      <div className="burnout-guidance">
+        <strong>
+          {isHighRisk
+            ? "Your recent pattern suggests your capacity needs a pause."
+            : isWatchRisk
+              ? "Your recent pattern suggests it may help to slow down."
+              : "Your recent pattern looks steady right now."}
+        </strong>
+        <p>
+          {isHighRisk
+            ? "Choose one low-effort recovery activity before taking on more."
+            : isWatchRisk
+              ? "Consider a medium-effort recovery activity and check in again later."
+              : "Keep noticing which interactions support or use your energy."}
+        </p>
+        <small>This is a reflection aid, not a medical diagnosis.</small>
+      </div>
+
       {showSignalsBreakdown && signals && (
         <div className="signals-grid" aria-label="Key signals breakdown">
           <div className="metric-box">
             <span className="metric-value">{signals.currentBattery}%</span>
-            <span className="metric-label">Battery Level</span>
+            <span className="metric-label">Energy</span>
           </div>
           <div className="metric-box">
             <span className="metric-value">{signals.lowBatteryStreak}d</span>
-            <span className="metric-label">Low Battery Streak</span>
+            <span className="metric-label">Low streak</span>
           </div>
           <div className="metric-box">
             <span className="metric-value">{signals.highDrainStreak}</span>
-            <span className="metric-label">High Drain Hits</span>
+            <span className="metric-label">Drain hits</span>
           </div>
         </div>
       )}
 
       {reasons && reasons.length > 0 && (
         <div className="reasons-section">
-          <h3 className="reasons-header">Triggers & Insights</h3>
+          <h3>What shaped this status</h3>
           <ul className="reasons-list">
             {reasons.map((reason, index) => (
               <li key={index}>{reason}</li>
             ))}
           </ul>
         </div>
-      )}
-
-      {formattedDate && (
-        <footer
-          style={{ marginTop: "12px", fontSize: "0.75rem", color: "#94a3b8" }}
-        >
-          Evaluated at: {formattedDate}
-        </footer>
       )}
     </section>
   );

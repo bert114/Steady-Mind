@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import { useHook } from "../Logger/energy-mood/useHook";
 import { useModalStore } from "../Logger/useModalStore";
 
@@ -17,7 +16,12 @@ const EnergyMoodModal = ({ currentUserId }) => {
     resetForm,
   } = useHook();
 
-  const { isOpen, modalType, openModal, closeModal } = useModalStore();
+  const { isOpen, closeModal } = useModalStore();
+
+  const handleDismiss = () => {
+    resetForm();
+    closeModal();
+  };
 
   if (!isOpen) return null;
 
@@ -32,14 +36,17 @@ const EnergyMoodModal = ({ currentUserId }) => {
               <button
                 type="button"
                 className="close-trigger"
-                onClick={closeModal}
+                onClick={handleDismiss}
                 aria-label="Dismiss window"
               >
                 &times;
               </button>
             </header>
 
-            <div className="control-section">
+            <fieldset
+              className="control-section"
+              aria-describedby={error ? "energy-mood-error" : undefined}
+            >
               <div className="metric-row">
                 <label htmlFor="energy-range">Energy reserve</label>
                 <span className="metric-readout">
@@ -63,11 +70,15 @@ const EnergyMoodModal = ({ currentUserId }) => {
                 value={energy}
                 onChange={handleEnergyChange}
                 className="native-slider"
+                aria-valuetext={`${energy} out of 100`}
               />
-            </div>
+            </fieldset>
 
-            <div className="control-section">
-              <span className="section-label">Primary disposition</span>
+            <fieldset
+              className="control-section"
+              aria-describedby={error ? "energy-mood-error" : undefined}
+            >
+              <legend className="section-label">How are you feeling?</legend>
               <div className="disposition-matrix">
                 {MOODS.map((mood) => (
                   <button
@@ -82,10 +93,10 @@ const EnergyMoodModal = ({ currentUserId }) => {
                   </button>
                 ))}
               </div>
-            </div>
+            </fieldset>
 
             {error && (
-              <p className="error-notice" role="alert">
+              <p id="energy-mood-error" className="error-notice" role="alert">
                 {error}
               </p>
             )}
@@ -94,12 +105,20 @@ const EnergyMoodModal = ({ currentUserId }) => {
               <button
                 type="button"
                 className="action-subtle"
-                onClick={closeModal}
+                onClick={handleDismiss}
               >
                 Dismiss
               </button>
-              <button type="submit" className="action-solid">
-                Commit entry
+              <button
+                type="submit"
+                className="action-solid"
+                disabled={isSubmitting}
+                aria-busy={isSubmitting}
+              >
+                {isSubmitting && (
+                  <span className="loading-spinner" aria-hidden="true" />
+                )}
+                {isSubmitting ? "Saving..." : "Commit entry"}
               </button>
             </footer>
           </form>

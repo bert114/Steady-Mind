@@ -1,17 +1,19 @@
-import React, { useState } from "react";
-import "./InteractionModal.css";
-import { useSocialModalStore } from "./useInteractionStore";
-import { useToastStore } from "../../toast/useToastStore";
-import { handleToast } from "../../toast/toast.util";
 import { useModalStore } from "../useModalStore";
 import { DURATIONS, RELATIONSHIPS } from "./Interaction.constant";
+import "./InteractionModal.css";
 import { useInteractionHook } from "./useInteractionHook";
 
 const InteractionModal = ({ currentUserId }) => {
   const { isOpen, closeModal } = useModalStore();
 
-  const { formData, error, handleChange, handleSubmit, handleDismiss } =
-    useInteractionHook(currentUserId, closeModal);
+  const {
+    formData,
+    error,
+    isSubmitting,
+    handleChange,
+    handleSubmit,
+    handleDismiss,
+  } = useInteractionHook(currentUserId, closeModal);
 
   if (!isOpen) return null;
 
@@ -20,8 +22,8 @@ const InteractionModal = ({ currentUserId }) => {
       <div className="modal-panel">
         <form onSubmit={handleSubmit}>
           <header className="panel-header">
-            <span className="panel-kicker">Social telemetry</span>
-            <h2>Log interaction</h2>
+            <span className="panel-kicker">A quick energy note</span>
+            <h2>Log an interaction</h2>
             <button
               type="button"
               className="close-trigger"
@@ -66,7 +68,7 @@ const InteractionModal = ({ currentUserId }) => {
           </div>
 
           <div className="control-section">
-            <label>Duration</label>
+            <label>How long were you together?</label>
             <div className="chip-grid">
               {DURATIONS.map((d) => (
                 <button
@@ -83,11 +85,18 @@ const InteractionModal = ({ currentUserId }) => {
 
           <div className="control-section">
             <div className="metric-row">
-              <label htmlFor="drain-slider">Drain score</label>
+              <label htmlFor="drain-slider">
+                How did it affect your energy?
+              </label>
               <span className="metric-readout">
                 {formData.drainScore}
-                <small> (-5 to 5)</small>
+                <small> {getEnergyEffectLabel(formData.drainScore)}</small>
               </span>
+            </div>
+            <div className="slider-labels" aria-hidden="true">
+              <span>Very draining</span>
+              <span>Neutral</span>
+              <span>Very energizing</span>
             </div>
             <div className="gauge-track" aria-hidden="true">
               <div
@@ -123,8 +132,16 @@ const InteractionModal = ({ currentUserId }) => {
             >
               Dismiss
             </button>
-            <button type="submit" className="action-solid">
-              Commit entry
+            <button
+              type="submit"
+              className="action-solid"
+              disabled={isSubmitting}
+              aria-busy={isSubmitting}
+            >
+              {isSubmitting && (
+                <span className="loading-spinner" aria-hidden="true" />
+              )}
+              {isSubmitting ? "Saving..." : "Save interaction"}
             </button>
           </footer>
         </form>
@@ -132,5 +149,14 @@ const InteractionModal = ({ currentUserId }) => {
     </div>
   );
 };
+
+function getEnergyEffectLabel(value) {
+  const score = Number(value);
+  if (score <= -4) return "Very draining";
+  if (score <= -1) return "Somewhat draining";
+  if (score === 0) return "Neutral";
+  if (score <= 3) return "Somewhat energizing";
+  return "Very energizing";
+}
 
 export default InteractionModal;

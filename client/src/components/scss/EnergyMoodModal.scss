@@ -1,69 +1,91 @@
 .modal-scrim {
   position: fixed;
   inset: 0;
-  background-color: rgba(28, 25, 23, 0.45);
+  background: rgba(45, 74, 43, 0.38);
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 1000;
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-family: "Segoe UI", sans-serif;
+  backdrop-filter: blur(2px);
 }
 
 .modal-panel {
-  background-color: #fafaf9;
-  border: 1px solid #d6d3d1;
-  border-radius: 4px;
-  padding: 32px;
-  width: 400px;
+  background: linear-gradient(180deg, #faf9f6 0%, #f3f5ee 100%);
+  border: 1px solid rgba(45, 74, 43, 0.18);
+  border-radius: 22px;
+  padding: 28px 24px 22px;
+  width: min(420px, calc(100vw - 24px));
   box-sizing: border-box;
-  box-shadow:
-    0 20px 25px -5px rgba(0, 0, 0, 0.08),
-    0 8px 10px -6px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 22px 45px rgba(45, 74, 43, 0.14);
 }
 
 .panel-header {
   position: relative;
-  margin-bottom: 28px;
-  border-bottom: 1px solid #e7e5e4;
-  padding-bottom: 16px;
+  margin-bottom: 24px;
+  border-bottom: 1px solid rgba(45, 74, 43, 0.18);
+  padding-bottom: 14px;
 }
 
 .panel-kicker {
   display: block;
-  font-size: 0.65rem;
-  letter-spacing: 0.1em;
+  font-size: 0.68rem;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: #78716c;
-  margin-bottom: 4px;
+  color: #2d4a2b;
+  margin-bottom: 6px;
+  font-weight: 800;
 }
 
 .panel-header h2 {
   margin: 0;
-  font-size: 1.15rem;
-  font-weight: 500;
-  color: #1c1917;
-  letter-spacing: -0.01em;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #2d4a2b;
+  letter-spacing: -0.03em;
+  font-family: Georgia, "Times New Roman", serif;
 }
 
 .close-trigger {
   position: absolute;
   top: 0;
   right: 0;
-  background: none;
+  width: 32px;
+  height: 32px;
+  min-width: 32px;
+  flex: 0 0 32px;
+  display: grid;
+  place-items: center;
+  background: transparent;
   border: none;
-  font-size: 1.25rem;
-  color: #78716c;
+  font-size: 1.6rem;
+  color: #7d8471;
   cursor: pointer;
   padding: 0;
   line-height: 1;
+  text-transform: none;
 }
 
 .close-trigger:hover {
-  color: #1c1917;
+  color: #2d4a2b;
 }
 
 .control-section {
   margin-bottom: 24px;
+}
+
+.control-section {
+  min-width: 0;
+  border: 0;
+  padding: 0;
+}
+
+.control-section:focus-within {
+  outline: none;
+}
+
+.section-label {
+  padding: 0;
 }
 
 .metric-row {
@@ -75,146 +97,172 @@
 
 .metric-row label,
 .section-label {
-  font-size: 0.75rem;
-  font-weight: 500;
-  color: #57534e;
+  font-size: 0.72rem;
+  font-weight: 800;
+  color: #7d8471;
   text-transform: uppercase;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.08em;
   display: block;
   margin-bottom: 8px;
 }
 
 .metric-readout {
   font-size: 1rem;
-  font-weight: 600;
-  color: #1c1917;
+  font-weight: 800;
+  color: #2d4a2b;
 }
 
 .metric-readout small {
   font-size: 0.7rem;
-  color: #a8a29e;
-  font-weight: 400;
+  color: #7d8471;
+  font-weight: 500;
 }
 
 .gauge-track {
   width: 100%;
-  height: 6px;
-  background-color: #e7e5e4;
-  border-radius: 2px;
+  height: 8px;
+  background: rgba(45, 74, 43, 0.12);
+  border-radius: 999px;
   overflow: hidden;
   margin-bottom: 12px;
 }
 
 .gauge-indicator {
   height: 100%;
-  background-color: #1c1917;
-  transition: width 0.08s linear;
+  background: linear-gradient(90deg, #a4ac86 0%, #2d4a2b 100%);
+  transition: width 0.15s ease;
 }
 
 .native-slider {
   width: 100%;
-  accent-color: #1c1917;
+  accent-color: #2d4a2b;
   cursor: pointer;
 }
 
 .disposition-matrix {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 6px;
 }
 
 .matrix-node {
-  background-color: #ffffff;
-  border: 1px solid #d6d3d1;
-  border-radius: 2px;
+  background: rgba(255, 255, 255, 0.66);
+  border: 1px solid rgba(45, 74, 43, 0.18);
+  border-radius: 12px;
   padding: 10px 4px;
-  font-size: 0.75rem;
+  font-size: 0.72rem;
   font-family: inherit;
-  font-weight: 500;
-  color: #44403c;
+  font-weight: 700;
+  color: #2d4a2b;
   cursor: pointer;
   text-align: center;
-  transition: all 0.1s ease;
+  transition: all 0.15s ease;
 }
 
 .matrix-node:hover {
-  border-color: #78716c;
-  color: #1c1917;
+  border-color: rgba(45, 74, 43, 0.5);
+  transform: translateY(-1px);
 }
 
 .matrix-node.active {
-  background-color: #1c1917;
-  color: #ffffff;
-  border-color: #1c1917;
+  background: #2d4a2b;
+  color: #faf9f6;
+  border-color: #2d4a2b;
 }
 
 .error-notice {
-  color: #b91c1c;
-  font-size: 0.7rem;
-  margin: -12px 0 16px 0;
-  font-weight: 500;
+  color: #2d4a2b;
+  font-size: 0.72rem;
+  margin: -12px 0 16px;
+  font-weight: 700;
 }
 
 .panel-actions {
   display: flex;
-  gap: 8px;
-  margin-top: 32px;
-  border-top: 1px solid #e7e5e4;
+  gap: 10px;
+  margin-top: 28px;
+  border-top: 1px solid rgba(45, 74, 43, 0.18);
   padding-top: 16px;
 }
 
 .action-solid,
 .action-subtle {
   flex: 1;
-  padding: 10px 14px;
-  border-radius: 2px;
-  font-size: 0.8rem;
+  padding: 11px 14px;
+  border-radius: 999px;
+  font-size: 0.78rem;
   font-family: inherit;
-  font-weight: 500;
+  font-weight: 800;
+  letter-spacing: 0.04em;
   cursor: pointer;
   text-align: center;
+  text-transform: uppercase;
 }
 
 .action-solid {
-  background-color: #1c1917;
-  color: #ffffff;
-  border: 1px solid #1c1917;
+  background: #2d4a2b;
+  color: #faf9f6;
+  border: 1px solid #2d4a2b;
 }
 
 .action-solid:hover {
-  background-color: #292524;
+  background: #233f2a;
 }
 
 .action-subtle {
-  background-color: transparent;
-  color: #57534e;
-  border: 1px solid #d6d3d1;
+  background: rgba(125, 132, 113, 0.12);
+  color: #2d4a2b;
+  border: 1px solid rgba(45, 74, 43, 0.2);
 }
 
 .action-subtle:hover {
-  background-color: #f5f5f4;
-  color: #1c1917;
+  background: rgba(125, 132, 113, 0.16);
+  color: #2d4a2b;
+}
+
+.action-solid:disabled,
+.action-subtle:disabled {
+  cursor: wait;
+  opacity: 0.7;
+}
+
+.loading-spinner {
+  display: inline-block;
+  width: 0.85em;
+  height: 0.85em;
+  margin-right: 0.45em;
+  border: 2px solid currentColor;
+  border-right-color: transparent;
+  border-radius: 50%;
+  vertical-align: -0.12em;
+  animation: button-spin 0.7s linear infinite;
+}
+
+@keyframes button-spin {
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 .confirmation-state {
   text-align: center;
-  padding: 24px 0 8px 0;
+  padding: 24px 0 8px;
 }
 
 .status-indicator-dot {
   display: inline-block;
   width: 8px;
   height: 8px;
-  background-color: #15803d;
+  background: #2f8f5b;
   border-radius: 50%;
   margin-bottom: 12px;
 }
 
 .confirmation-state h3 {
-  margin: 0 0 6px 0;
-  color: #1c1917;
-  font-size: 1rem;
-  font-weight: 500;
+  margin: 0 0 6px;
+  color: #1f1a17;
+  font-size: 1.1rem;
+  font-weight: 700;
 }
 
 .confirmation-state p {
