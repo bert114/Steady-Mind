@@ -15,6 +15,7 @@ import requestLogger from "./middleware/reqLogger.js";
 import recoveryRouter from "./modules/recovery/recovery.route.js";
 import { boundaryRoutes } from "./modules/boundary_support/boundary.route.js";
 import clerk from "./modules/clerk-auth/clerk.route.js";
+import analyticsRoutes from "./modules/analytics/analytics.route.js";
 const app = express();
 
 //app.use(requestLogger);
@@ -32,6 +33,7 @@ app.use("/api/v1/logs/energy", energyRoute);
 app.use("/api/v1/logs/interactions", interactionRoutes);
 app.use("/api/v1/burnout", burnOutRoute);
 app.use("/api/v1/recovery", recoveryRouter);
+app.use("/api/v1/analytics", analyticsRoutes);
 
 app.use("/api/v1", clerk);
 

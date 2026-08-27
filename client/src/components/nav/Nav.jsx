@@ -1,12 +1,6 @@
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  Link,
-  NavLink,
-} from "react-router-dom";
-import "./nav.css";
 import { UserButton } from "@clerk/clerk-react";
+import { NavLink } from "react-router-dom";
+import "./nav.css";
 
 function Nav() {
   return (
@@ -24,6 +18,9 @@ function Nav() {
         </li>
         <li>
           <NavLink to="/recovery">Recovery</NavLink>
+        </li>
+        <li>
+          <NavLink to="/analytics">Analytics</NavLink>
         </li>
 
         <li>
