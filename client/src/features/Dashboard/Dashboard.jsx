@@ -162,7 +162,6 @@ function Dashboard({ userId = "user_clerk_123" }) {
           {recoveryData.isActionRequired ? (
             <Recovery
               option={recoveryData?.activities}
-              topPerformance={recoveryData?.performance}
               guidance={recoveryData?.guidance}
               riskLevel={recoveryData?.riskLevel}
             />

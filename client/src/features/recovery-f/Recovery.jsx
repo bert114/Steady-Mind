@@ -1,22 +1,14 @@
-import { useEffect } from "react";
-import ActivityPerformance from "./component/ActivityPerformance";
 import "./recovery.css";
 import "./recoveryActivity.css";
 import { useRecoveryHook } from "./useRecoveryHook";
 
 export default function Recovery({
   option = [],
-  topPerformance,
   guidance,
   riskLevel = "YELLOW",
 }) {
-  const { setRecovery, addObject, payload, saveRecovery, error, isSubmitting } =
+  const { addObject, payload, saveRecovery, error, isSubmitting } =
     useRecoveryHook();
-  useEffect(() => {
-    if (!option) return;
-
-    //console.log("performance", topPerformance);
-  }, [option, topPerformance]);
 
   if (!option || option.length === 0) {
     return (
@@ -45,7 +37,6 @@ export default function Recovery({
             : "Choose something manageable that gives your energy room to return.")}
       </p>
 
-      <ActivityPerformance performance={topPerformance} />
       {error && (
         <p className="recovery-error" role="alert">
           We could not save this recovery activity. Please try again.
@@ -62,10 +53,14 @@ export default function Recovery({
             role="radiogroup"
             aria-label="Recovery activities"
           >
-            {option.map((a, index) => (
+            {Array.from(
+              new Map(
+                option.map((activity) => [activity.id, activity]),
+              ).values(),
+            ).map((a) => (
               <label
                 className={`recovery-option ${payload.id === a.id ? "selected" : ""}`}
-                key={`${a.id}-${index}`}
+                key={a.id}
               >
                 <input
                   type="radio"
