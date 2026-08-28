@@ -5,7 +5,7 @@ node_modules/
 
 
 .agents/
-.agent/
+.agent/skills/*
 .agent/*
 
 .agents/*
