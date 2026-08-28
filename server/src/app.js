@@ -34,6 +34,13 @@ if (process.env.CLERK_ENABLED === "true") {
   app.use(clerkMiddleware());
 }
 
+app.get("/", (req, res) => {
+  res.status(200).json({
+    status: "success",
+    message: "API is working",
+  });
+});
+
 app.use("/api/v1/dashboard", dashboardRoutes);
 app.use("/api/v1/logs/energy", energyRoute);
 app.use("/api/v1/logs/interactions", interactionRoutes);
