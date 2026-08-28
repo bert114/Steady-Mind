@@ -7,7 +7,7 @@ export const fetchDashboardData = async (userId) => {
   return response.data.data;
 };
 
-export const refreshDashboard = async (userId) => {
+export const refreshDashboard = async (userId = id) => {
   const refresh = useDashboardStore.getState().setDashboardData;
   const response = await apiClient.get(`/dashboard/${userId}`);
 

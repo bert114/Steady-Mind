@@ -1,12 +1,6 @@
 const API_BASE =
   import.meta.env.VITE_API_BASE || "http://localhost:5000/api/v1";
 
-export async function getAnalytics() {
-  const res = await fetch(`${API_BASE}/dashboard/analytics`);
-  if (!res.ok) throw new Error("Failed to load analytics");
-  return res.json();
-}
-
 export async function postEnergyLog(payload) {
   const res = await fetch(`${API_BASE}/logs/energy`, {
     method: "POST",

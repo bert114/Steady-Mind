@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import "./App.css";
 import Nav from "./components/nav/Nav.jsx";
+import Analytics from "./features/analytics/Analytics.jsx";
 import injectAuthTokenProvider from "./features/api/axiosClient.js";
 import BoundaryGenerator from "./features/boundary_support/Boundary.jsx";
 import Burnout from "./features/burnout/Burnout.jsx";
@@ -12,12 +13,11 @@ import {
   SignedIn,
   SignedOut,
   SignInButton,
-  UserButton,
   useAuth,
   useUser,
 } from "@clerk/clerk-react";
 
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 
 function App() {
   const { getToken } = useAuth();
@@ -53,6 +53,7 @@ function App() {
               <Route path="/boundary" element={<BoundaryGenerator />} />
               <Route path="/burnout" element={<Burnout />} />
               <Route path="/recovery" element={<Recovery />} />
+              <Route path="/analytics" element={<Analytics />} />
               <Route path="*" element={<h2>Page Not Found</h2>} />
             </Routes>
           </main>
