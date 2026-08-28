@@ -5,6 +5,9 @@ node_modules/
 
 
 .agents/
+.agent/
+.agent/*
+
 .agents/*
 .github/
 .github/*
