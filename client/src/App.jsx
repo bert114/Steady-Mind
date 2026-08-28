@@ -41,7 +41,11 @@ function App() {
           <p className="auth-gate__description">
             Sign in to read today&apos;s energy, mood, and recovery trace.
           </p>
-          <SignInButton mode="modal">
+          <SignInButton
+            mode="modal"
+            forceRedirectUrl="/Steady-Mind/"
+            fallbackRedirectUrl="/Steady-Mind/"
+          >
             <button type="button" className="auth-gate__button">
               Open your field notes
             </button>
