@@ -8,5 +8,5 @@ node_modules/
 .agents/*
 .github/
 .github/*
-.secret/
-.secret/*
+secret/
+secret/*
