@@ -16,18 +16,28 @@ import energyRoute from "./modules/logs/energy/energy.route.js";
 import recoveryRouter from "./modules/recovery/recovery.route.js";
 const app = express();
 
-//app.use(requestLogger);
+const allowedOrigins = [
+  "http://localhost:5173/Steady-Mind",
+  "http://localhost:3000",
+  "https://bert114.github.io",
+];
 
-app.use(helmet());
 app.use(
   cors({
-    origin: [
-      "https://bert114.github.io/Steady-Mind/",
-      "https://your-frontend.vercel.app",
-    ],
+    origin: function (origin, callback) {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
     credentials: true,
+    methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"],
   }),
 );
+app.use(helmet());
+
 app.use(express.json());
 
 if (process.env.CLERK_ENABLED === "true") {
