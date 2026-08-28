@@ -1,27 +1,33 @@
-import express from "express";
-import cors from "cors";
-import helmet from "helmet";
 import { clerkMiddleware } from "@clerk/express";
+import cors from "cors";
+import express from "express";
+import helmet from "helmet";
 
-import dashboardRoutes from "./modules/dashboard/dashboard.route.js";
-import logsRoutes from "./modules/logs/routes.js";
 import errorHandler from "./middleware/errorHandler.js";
+import burnOutRoute from "./modules/burnout/burnout.route.js";
+import dashboardRoutes from "./modules/dashboard/dashboard.route.js";
 import interactionRoutes from "./modules/logs/interactions/interaction.route.js";
 import AppError from "./utils/AppError.js";
-import burnOutRoute from "./modules/burnout/burnout.route.js";
 
-import energyRoute from "./modules/logs/energy/energy.route.js";
-import requestLogger from "./middleware/reqLogger.js";
-import recoveryRouter from "./modules/recovery/recovery.route.js";
+import analyticsRoutes from "./modules/analytics/analytics.route.js";
 import { boundaryRoutes } from "./modules/boundary_support/boundary.route.js";
 import clerk from "./modules/clerk-auth/clerk.route.js";
-import analyticsRoutes from "./modules/analytics/analytics.route.js";
+import energyRoute from "./modules/logs/energy/energy.route.js";
+import recoveryRouter from "./modules/recovery/recovery.route.js";
 const app = express();
 
 //app.use(requestLogger);
 
 app.use(helmet());
-app.use(cors());
+app.use(
+  cors({
+    origin: [
+      "https://bert114.github.io/Steady-Mind/",
+      "https://your-frontend.vercel.app",
+    ],
+    credentials: true,
+  }),
+);
 app.use(express.json());
 
 if (process.env.CLERK_ENABLED === "true") {
