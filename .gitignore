@@ -1,0 +1,15 @@
+node_modules/
+.env
+.env.*
+!.env.example
+
+
+.agents/
+.agent/skills/*
+.agent/*
+
+.agents/*
+.github/
+.github/*
+secret/
+secret/*
