@@ -3,7 +3,7 @@ import { calculateUserBurnoutRisk } from "../burnout/burnout.service.js";
 import { formatLogDate } from "../burnout/burnout.utils.js";
 import { getEnergyLogByDate } from "../logs/energy/energy.query.js";
 import { getAllUserSocialInteractions } from "../logs/interactions/interaction.service.js";
-import { FETCH_HISTORY, fetchDynamicColumns } from "./dashboard.query.js";
+import { FETCH_HISTORY } from "./dashboard.query.js";
 import {
   buildCustomQuery,
   buildQuerySelect,

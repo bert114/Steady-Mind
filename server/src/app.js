@@ -17,7 +17,7 @@ import recoveryRouter from "./modules/recovery/recovery.route.js";
 const app = express();
 
 const allowedOrigins = [
-  "http://localhost:5173/Steady-Mind",
+  "http://localhost:5173/Steady-Mind/",
   "http://localhost:3000",
   "https://bert114.github.io",
 ];
