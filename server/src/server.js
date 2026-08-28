@@ -1,9 +1,15 @@
 import "dotenv/config";
 import app from "./app.js";
 import logger from "./utils/logger.js";
-import { checkDatabaseConnection } from "./config/db.js";
 
 const PORT = process.env.PORT || 5000;
+
+app.get("/", (req, res) => {
+  res.status(200).json({
+    status: "success",
+    message: "Backend server is up and running!",
+  });
+});
 
 //await checkDatabaseConnection();
 
