@@ -161,6 +161,249 @@
   padding: 60px 0;
   color: var(--muted);
 }
+
+/* Measured Vitality analytics treatment */
+.analytics-shell {
+  max-width: 1180px;
+  padding: 12px 0 56px;
+  color: #172522;
+  font-family: "DM Mono", monospace;
+}
+
+.analytics-header {
+  align-items: end;
+  margin-bottom: 30px;
+  padding-bottom: 28px;
+  border-bottom: 1px solid rgba(23, 37, 34, 0.2);
+}
+
+.analytics-kicker {
+  color: #ba4d32;
+  font-family: "DM Mono", monospace;
+  font-size: 0.68rem;
+  font-weight: 400;
+  letter-spacing: 0.16em;
+}
+
+.analytics-header h1 {
+  max-width: 11ch;
+  color: #172522;
+  font-family: "Instrument Serif", Georgia, serif;
+  font-size: clamp(3rem, 6vw, 5.2rem);
+  font-weight: 400;
+  letter-spacing: -0.045em;
+  line-height: 0.9;
+}
+
+.analytics-header p:not(.analytics-kicker) {
+  max-width: 44ch;
+  color: #66736d;
+  font-size: 0.8rem;
+  line-height: 1.7;
+}
+
+.analytics-refresh {
+  min-height: 44px;
+  padding: 10px 14px;
+  border: 1px solid #172522;
+  border-radius: 2px;
+  background: #172522;
+  color: #f3f0e8;
+  font-family: "DM Mono", monospace;
+  font-size: 0.68rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  transition:
+    background-color 160ms ease,
+    border-color 160ms ease;
+}
+
+.analytics-refresh:hover:not(:disabled) {
+  border-color: #ba4d32;
+  background: #ba4d32;
+}
+
+.analytics-refresh:focus-visible,
+.analytics-panel:focus-within {
+  outline: 2px solid #ba4d32;
+  outline-offset: 4px;
+}
+
+.analytics-note {
+  padding: 16px 0;
+  border-top: 1px solid rgba(23, 37, 34, 0.2);
+  border-bottom: 1px solid rgba(23, 37, 34, 0.2);
+}
+
+.analytics-metrics {
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  margin-bottom: 30px;
+  border-color: rgba(23, 37, 34, 0.2);
+}
+
+.analytics-metric {
+  min-height: 112px;
+  padding: 16px 18px 15px 0;
+  border-right-color: rgba(23, 37, 34, 0.2);
+}
+
+.analytics-metric + .analytics-metric {
+  padding-left: 18px;
+}
+
+.analytics-metric span,
+.analytics-metric small {
+  color: #66736d;
+  font-family: "DM Mono", monospace;
+  font-size: 0.62rem;
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.analytics-metric strong {
+  color: #172522;
+  font-family: "Instrument Serif", Georgia, serif;
+  font-size: 1.75rem;
+  font-weight: 400;
+}
+
+.analytics-metric small {
+  font-size: 0.6rem;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+.analytics-grid {
+  gap: 18px;
+}
+
+.analytics-panel {
+  min-height: 245px;
+  padding: 22px;
+  border: 1px solid rgba(23, 37, 34, 0.2);
+  border-radius: 2px;
+  background: rgba(243, 240, 232, 0.58);
+}
+
+.analytics-panel header {
+  margin-bottom: 20px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid rgba(23, 37, 34, 0.14);
+}
+
+.analytics-panel h2 {
+  color: #172522;
+  font-family: "Instrument Serif", Georgia, serif;
+  font-size: 1.55rem;
+  font-weight: 400;
+}
+
+.analytics-panel header p,
+.analytics-muted,
+.analytics-chart-labels {
+  color: #66736d;
+  font-family: "DM Mono", monospace;
+  font-size: 0.68rem;
+  line-height: 1.6;
+}
+
+.analytics-chart svg {
+  height: 190px;
+}
+
+.chart-axis {
+  stroke: rgba(23, 37, 34, 0.2);
+}
+
+.analytics-chart-labels {
+  font-size: 0.6rem;
+}
+
+.pattern-list,
+.recovery-list {
+  gap: 0;
+}
+
+.pattern-list li {
+  padding: 12px 0 12px 14px;
+  border-bottom: 1px solid rgba(23, 37, 34, 0.14);
+  border-left: 2px solid #ba4d32;
+  color: #172522;
+  font-size: 0.72rem;
+  line-height: 1.6;
+}
+
+.relationship-list + .relationship-list {
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px solid rgba(23, 37, 34, 0.14);
+}
+
+.relationship-list h3 {
+  color: #ba4d32;
+  font-family: "DM Mono", monospace;
+  font-size: 0.64rem;
+  font-weight: 400;
+  letter-spacing: 0.12em;
+}
+
+.relationship-row,
+.recovery-list li {
+  padding: 10px 0;
+  border-bottom-color: rgba(23, 37, 34, 0.14);
+}
+
+.relationship-row span,
+.recovery-list span {
+  color: #172522;
+  font-size: 0.72rem;
+}
+
+.relationship-row strong,
+.recovery-list strong,
+.impact-value {
+  color: #172522;
+  font-family: "Instrument Serif", Georgia, serif;
+  font-weight: 400;
+}
+
+.relationship-row small,
+.recovery-list small {
+  color: #66736d;
+  font-family: "DM Mono", monospace;
+  font-size: 0.6rem;
+}
+
+.impact-value {
+  margin: 24px 0 10px;
+  font-size: 3.2rem;
+}
+
+@media (max-width: 800px) {
+  .analytics-shell {
+    padding-top: 0;
+  }
+
+  .analytics-metric,
+  .analytics-metric + .analytics-metric {
+    padding: 14px 12px 14px 0;
+  }
+
+  .analytics-metric:nth-child(even) {
+    padding-left: 12px;
+  }
+}
+
+@media (max-width: 460px) {
+  .analytics-header h1 {
+    font-size: 3.5rem;
+  }
+
+  .analytics-panel {
+    padding: 18px;
+  }
+}
 @media (max-width: 800px) {
   .analytics-shell {
     padding: 20px 0 40px;

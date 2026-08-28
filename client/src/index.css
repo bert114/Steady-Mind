@@ -1,27 +1,38 @@
 :root {
-  font-family: Inter, "Segoe UI", Roboto, sans-serif;
+  font-family: "DM Mono", monospace;
   line-height: 1.5;
   font-weight: 400;
-  color: #2d4a2b;
-  background: #faf9f6;
+  color: #172522;
+  background: #e9e5da;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  --forest-green: #2d4a2b;
-  --sage: #7d8471;
-  --olive: #a4ac86;
-  --ivory: #faf9f6;
-  --text-h: #2d4a2b;
-  --text-muted: #7d8471;
-  --accent: #a4ac86;
-  --accent-soft: rgba(164, 172, 134, 0.18);
-  --accent-deep: #7d8471;
-  --secondary: #7d8471;
-  --surface: #faf9f6;
-  --border: rgba(45, 74, 43, 0.18);
-  --display-font:
-    "Iowan Old Style", "Palatino Linotype", "Book Antiqua", Georgia, serif;
+  --forest-green: #172522;
+  --sage: #66736d;
+  --olive: #c7c0ae;
+  --ivory: #e9e5da;
+  --text-h: #172522;
+  --text-muted: #66736d;
+  --accent: #ba4d32;
+  --accent-soft: rgba(186, 77, 50, 0.12);
+  --accent-deep: #ba4d32;
+  --secondary: #66736d;
+  --surface: #f3f0e8;
+  --border: rgba(23, 37, 34, 0.2);
+  --display-font: "Instrument Serif", Georgia, serif;
+}
+
+@font-face {
+  font-family: "DM Mono";
+  src: url("/fonts/DMMono-Regular.ttf") format("truetype");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Instrument Serif";
+  src: url("/fonts/InstrumentSerif-Regular.ttf") format("truetype");
+  font-display: swap;
 }
 
 * {
@@ -32,7 +43,7 @@ body {
   margin: 0;
   min-width: 320px;
   min-height: 100vh;
-  background: #faf9f6;
+  background: var(--ivory);
 }
 
 #root {

@@ -119,7 +119,7 @@ function Analytics() {
             data={mood["30d"]}
             valueKey="mood"
             label="Thirty-day mood"
-            color="#a76a53"
+            color="#ba4d32"
             formatValue={(value) => `${value}/5`}
           />
         </AnalyticsPanel>

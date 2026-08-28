@@ -161,6 +161,109 @@
 }
 
 .dashboard-card {
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  color: #172522;
+  font-family: "DM Mono", monospace;
+}
+
+.dashboard-header {
+  margin-bottom: 18px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid rgba(23, 37, 34, 0.2);
+}
+
+.header-label,
+.day-label {
+  color: #66736d;
+  font-family: "DM Mono", monospace;
+  font-size: 0.62rem;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.header-value {
+  color: #172522;
+  font-family: "Instrument Serif", Georgia, serif;
+  font-size: 1.3rem;
+  font-weight: 400;
+}
+
+.grid-container {
+  gap: 4px;
+}
+
+.day-card {
+  min-height: 148px;
+  padding: 8px 5px;
+  border: 1px solid transparent;
+  border-radius: 2px;
+  transition:
+    background-color 160ms ease,
+    border-color 160ms ease;
+}
+
+.day-card:hover,
+.day-card.selected {
+  background-color: rgba(186, 77, 50, 0.07);
+  border-color: rgba(186, 77, 50, 0.45);
+}
+
+.day-label.today {
+  color: #ba4d32;
+}
+
+.mood-emoji {
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  margin-bottom: 8px;
+  border: 1px solid rgba(23, 37, 34, 0.22);
+  border-radius: 50%;
+  font-family: "Instrument Serif", Georgia, serif;
+  font-size: 0.9rem;
+}
+
+.battery-container {
+  width: 12px;
+  height: 58px;
+  border: 1px solid rgba(23, 37, 34, 0.5);
+  border-radius: 0;
+  padding: 2px;
+}
+
+.battery-fill {
+  border-radius: 0;
+  background: #172522;
+}
+
+.battery-fill.battery-neutral,
+.battery-fill.battery-low {
+  background: #ba4d32;
+}
+
+.battery-percent {
+  color: #66736d;
+  font-family: "DM Mono", monospace;
+  font-size: 0.62rem;
+  font-weight: 400;
+}
+
+.dashboard-state {
+  padding: 28px 8px;
+  border-top: 1px solid rgba(23, 37, 34, 0.2);
+  border-bottom: 1px solid rgba(23, 37, 34, 0.2);
+  color: #66736d;
+  font-family: "DM Mono", monospace;
+  font-size: 0.75rem;
+}
+
+.dashboard-card {
   border-color: #d8e0db;
   border-radius: 8px;
   box-shadow: 0 10px 30px rgba(23, 35, 31, 0.04);
@@ -193,6 +296,69 @@
 
 .day-label.today {
   color: #21675e;
+}
+
+/* Keep the register on the same paper-and-ink system as the dashboard. */
+.dashboard-card {
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  color: #172522;
+  font-family: "DM Mono", monospace;
+}
+
+.dashboard-header {
+  border-bottom-color: rgba(23, 37, 34, 0.2);
+}
+
+.header-label,
+.day-label,
+.battery-percent {
+  color: #66736d;
+  font-family: "DM Mono", monospace;
+}
+
+.header-value {
+  color: #172522;
+  font-family: "Instrument Serif", Georgia, serif;
+  font-weight: 400;
+}
+
+.day-card {
+  border-radius: 2px;
+  border-width: 1px;
+}
+
+.day-card:hover,
+.day-card.selected {
+  background-color: rgba(186, 77, 50, 0.07);
+  border-color: rgba(186, 77, 50, 0.45);
+}
+
+.day-label.today {
+  color: #ba4d32;
+}
+
+.mood-emoji {
+  border-color: rgba(23, 37, 34, 0.22);
+  border-radius: 50%;
+  font-family: "Instrument Serif", Georgia, serif;
+}
+
+.battery-container {
+  border-color: rgba(23, 37, 34, 0.5);
+  border-radius: 0;
+}
+
+.battery-fill {
+  border-radius: 0;
+  background-color: #172522;
+}
+
+.battery-neutral,
+.battery-low {
+  background-color: #ba4d32;
 }
 
 .battery-healthy {

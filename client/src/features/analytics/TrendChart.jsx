@@ -2,7 +2,7 @@ function TrendChart({
   data = [],
   valueKey,
   label,
-  color = "#2d4a2b",
+  color = "#172522",
   formatValue,
 }) {
   const points = data.filter(

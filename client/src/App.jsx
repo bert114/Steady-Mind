@@ -33,10 +33,21 @@ function App() {
 
   if (!user)
     return (
-      <SignedOut>
-        <p>Please sign in to access your dashboard.</p>
-        <SignInButton mode="modal" />
-      </SignedOut>
+      <main className="auth-gate">
+        <SignedOut>
+          <div className="auth-gate__rule" aria-hidden="true" />
+          <p className="auth-gate__kicker">FIELD NOTE / AURA</p>
+          <h1>Return to your capacity.</h1>
+          <p className="auth-gate__description">
+            Sign in to read today&apos;s energy, mood, and recovery trace.
+          </p>
+          <SignInButton mode="modal">
+            <button type="button" className="auth-gate__button">
+              Open your field notes
+            </button>
+          </SignInButton>
+        </SignedOut>
+      </main>
     );
 
   return (
