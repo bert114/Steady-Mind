@@ -3,5 +3,5 @@ import { defineConfig } from "vite";
 
 export default defineConfig({
   plugins: [react()],
-  base: "/Steady-Mind/",
+  base: "/https://github.com/bert114/Steady-Mind/",
 });
