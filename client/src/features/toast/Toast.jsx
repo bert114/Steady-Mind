@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useToastStore } from "./useToastStore.js";
-import "./Toast.scss";
+import "./toast.scss";
 
 const Toast = () => {
   const { isOpen, message, type, duration, hideToast } = useToastStore();
