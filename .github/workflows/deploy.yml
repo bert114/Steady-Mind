@@ -46,7 +46,7 @@ jobs:
           VITE_API_URL: ${{ secrets.VITE_API_URL || 'https://steady-mindq.onrender.com/api/v1' }}
 
       - name: Support SPA routes
-          run: cp dist/index.html dist/404.html
+        run: cp dist/index.html dist/404.html
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
