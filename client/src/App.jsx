@@ -51,7 +51,7 @@ function App() {
     );
 
   return (
-    <Router>
+    <Router basename="/Steady-Mind">
       <div className="app-shell">
         <Toast />
 

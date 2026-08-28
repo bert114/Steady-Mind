@@ -4,6 +4,7 @@ import { useDashboardStore } from "./useDashboard.store";
 
 export const fetchDashboardData = async (userId) => {
   const response = await apiClient.get(`/dashboard/${userId}`);
+
   return response.data.data;
 };
 
