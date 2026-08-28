@@ -6,3 +6,7 @@ node_modules/
 
 .agents/
 .agents/*
+.github/
+.github/*
+.secret/
+.secret/*
