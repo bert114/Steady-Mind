@@ -10,7 +10,7 @@ export async function fetchAnalyticsRows(userId) {
        FROM daily_logs
        WHERE user_id = $1
          AND log_date >= CURRENT_DATE - INTERVAL '29 days'
-         AND log_date <= CURRENT_DATE
+         AND log_date <= NOW()
        ORDER BY log_date ASC`,
       [userId],
     ),

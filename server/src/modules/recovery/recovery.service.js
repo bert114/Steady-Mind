@@ -1,16 +1,15 @@
-import {
-  fetchCopingActivities,
-  createRecoverySession,
-  fetchDashboardState,
-  fetchCopingActivitiesNew,
-  CALCULATE_AVG_RATING,
-} from "./recovery.query.js";
+import db from "../../config/db.js";
+import throwError from "../../utils/throwError.js";
+import { checkUserExists } from "../burnout/burnout.query.js";
 import { getUserBurnoutStatus } from "../burnout/burnout.service.js";
 import { recommendRecoveryAction } from "./recovery.helper.js";
+import {
+  CALCULATE_AVG_RATING,
+  createRecoverySession,
+  fetchCopingActivities,
+  fetchDashboardState,
+} from "./recovery.query.js";
 import { formatRecoveryResponse } from "./recovery.utils.js";
-import { checkUserExists } from "../burnout/burnout.query.js";
-import throwError from "../../utils/throwError.js";
-import db from "../../config/db.js";
 
 export async function getRecoveryRecommendations(clerkId) {
   const exists = await checkUserExists(clerkId);
@@ -21,14 +20,13 @@ export async function getRecoveryRecommendations(clerkId) {
   const burnoutStatus = await getUserBurnoutStatus(clerkId);
   const activities = await fetchCopingActivities(clerkId);
 
-  const test = await fetchCopingActivitiesNew(clerkId);
   const bestPerformance = await calculateAvgRating(clerkId);
 
   const rawRecommendation = recommendRecoveryAction(
     bestPerformance,
     burnoutStatus.riskLevel,
     activities,
-    test,
+    activities,
   );
 
   return formatRecoveryResponse(rawRecommendation);

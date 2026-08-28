@@ -83,6 +83,11 @@ export default function Recovery({
                       : "A manageable reset"}
                     {a.duration ? ` · ${a.duration}` : ""}
                   </small>
+                  {a.recommendation_reason && (
+                    <small className="recovery-reason">
+                      {a.recommendation_reason}
+                    </small>
+                  )}
                 </span>
               </label>
             ))}

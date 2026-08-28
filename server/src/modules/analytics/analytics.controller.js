@@ -6,7 +6,6 @@ export async function handleGetAnalytics(req, res, next) {
     const { userId } = getAuth(req);
     const data = await getAnalytics(userId);
 
-    console.log(data);
     res.status(200).json({ status: "success", data });
   } catch (error) {
     next(error);

@@ -135,6 +135,11 @@
   font-size: 0.78rem;
 }
 
+.recovery-option .recovery-reason {
+  color: #21675e;
+  font-weight: 600;
+}
+
 .completion-toggle {
   display: flex !important;
   align-items: center;
