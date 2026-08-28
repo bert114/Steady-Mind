@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useLayoutEffect } from "react";
 import "./App.css";
 import Nav from "./components/nav/Nav.jsx";
 import Analytics from "./features/analytics/Analytics.jsx";
@@ -23,7 +23,7 @@ function App() {
   const { getToken } = useAuth();
   const { user } = useUser();
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     injectAuthTokenProvider(getToken);
   }, [getToken]);
 
