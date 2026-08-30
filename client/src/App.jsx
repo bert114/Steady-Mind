@@ -44,8 +44,8 @@ function App() {
           </p>
           <SignInButton
             mode="modal"
-            forceRedirectUrl="/Steady-Mind/"
-            fallbackRedirectUrl="/Steady-Mind/"
+            forceRedirectUrl="/Steady-Mind"
+            fallbackRedirectUrl="/Steady-Mind"
           >
             <button type="button" className="auth-gate__button">
               Open your field notes
