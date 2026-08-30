@@ -35,7 +35,7 @@ const EnergyMoodModal = ({ currentUserId }) => {
               <h2>State capture</h2>
               <button
                 type="button"
-                className="close-trigger"
+                className="close-trigger btn btn-subtle"
                 onClick={handleDismiss}
                 aria-label="Dismiss window"
               >
@@ -84,7 +84,7 @@ const EnergyMoodModal = ({ currentUserId }) => {
                   <button
                     type="button"
                     key={mood}
-                    className={`matrix-node ${selectedMood === mood ? "active" : ""}`}
+                    className={`btn btn-chip ${selectedMood === mood ? "active" : ""}`}
                     onClick={() => {
                       handleSelectMood(mood);
                     }}
@@ -104,14 +104,14 @@ const EnergyMoodModal = ({ currentUserId }) => {
             <footer className="panel-actions">
               <button
                 type="button"
-                className="action-subtle"
+                className="btn btn-subtle"
                 onClick={handleDismiss}
               >
                 Dismiss
               </button>
               <button
                 type="submit"
-                className="action-solid"
+                className="btn btn-primary"
                 disabled={isSubmitting}
                 aria-busy={isSubmitting}
               >
@@ -129,7 +129,7 @@ const EnergyMoodModal = ({ currentUserId }) => {
             <p>Data successfully bound to the current timeline.</p>
             <button
               type="button"
-              className="action-solid"
+              className="btn btn-primary"
               onClick={() => {
                 resetForm();
                 closeModal(); // Hides the modal after acknowledgment

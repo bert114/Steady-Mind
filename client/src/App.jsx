@@ -8,6 +8,7 @@ import Burnout from "./features/burnout/Burnout.jsx";
 import Dashboard from "./features/Dashboard/Dashboard.jsx";
 import Recovery from "./features/recovery-f/Recovery.jsx";
 import Toast from "./features/toast/Toast.jsx";
+import "./scss/main.scss";
 
 import {
   SignedIn,

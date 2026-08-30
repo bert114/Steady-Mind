@@ -1,0 +1,65 @@
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  letter-spacing: var(--tracking);
+  text-transform: uppercase;
+  padding: 12px 24px;
+  background-color: transparent;
+  color: var(--text);
+  border: var(--border-thin) solid var(--text);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-primary {
+  background-color: var(--text);
+  color: var(--bg);
+}
+
+.btn-primary:hover {
+  background-color: var(--accent);
+  border-color: var(--accent);
+  color: var(--bg);
+}
+
+.btn-outline:hover {
+  background-color: var(--text);
+  color: var(--bg);
+}
+
+.btn-subtle {
+  border-color: var(--muted);
+  color: var(--muted);
+}
+
+.btn-subtle:hover {
+  border-color: var(--text);
+  color: var(--text);
+}
+
+.close-trigger {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: none;
+  border: var(--border-thin) solid var(--muted);
+  font-family: var(--font-mono);
+  font-size: 1rem;
+  color: var(--text);
+  cursor: pointer;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.15s ease;
+}
+
+.close-trigger:hover {
+  border-color: var(--text);
+  background-color: var(--text);
+  color: var(--bg);
+}

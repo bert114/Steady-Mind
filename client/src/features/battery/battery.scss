@@ -21,12 +21,22 @@
 }
 
 .progress-ring-background {
-  stroke: rgba(45, 74, 43, 0.14);
+  stroke: rgba(23, 37, 34, 0.14);
+  stroke-width: 1.5;
 }
 
 .progress-ring-circle {
-  stroke: #2d4a2b;
+  stroke: #172522;
+  stroke-width: 3;
   transition: stroke-dashoffset 0.5s ease-in-out;
+}
+
+.progress-ring-circle.is-steady {
+  stroke: #172522;
+}
+
+.progress-ring-circle.is-low {
+  stroke: #ba4d32;
 }
 
 .progress-content {
@@ -35,38 +45,40 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 2px;
+  gap: 3px;
   text-align: center;
 }
 
 .progress-label {
-  font-size: 0.68rem;
-  font-weight: 700;
-  letter-spacing: 0.12em;
+  font-size: 0.6rem;
+  font-weight: 400;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: var(--muted);
+  color: var(--ink-soft, #66736d);
+  font-family: "DM Mono", monospace;
 }
 
 .progress-percentage {
-  font-size: clamp(3.4rem, 5vw, 5.3rem);
-  font-weight: 700;
+  font-size: clamp(3.2rem, 5vw, 5rem);
+  font-weight: 400;
   line-height: 0.9;
-  color: var(--ink);
-  letter-spacing: -0.06em;
-  font-family: var(--display-font);
+  color: var(--ink, #172522);
+  letter-spacing: -0.04em;
+  font-family: "Instrument Serif", Georgia, serif;
 }
 
 .progress-scale {
-  font-size: 0.9rem;
-  letter-spacing: 0.08em;
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--muted);
-  font-weight: 700;
+  color: var(--ink-soft, #66736d);
+  font-weight: 400;
+  font-family: "DM Mono", monospace;
 }
 
 .progress-caption {
   margin-top: 10px;
-  font-size: 0.82rem;
-  color: var(--secondary-deep);
-  font-weight: 600;
+  font-size: 0.72rem;
+  color: var(--ink-soft, #66736d);
+  font-weight: 400;
 }

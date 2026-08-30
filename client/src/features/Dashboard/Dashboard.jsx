@@ -66,7 +66,7 @@ function Dashboard({ userId = "user_clerk_123" }) {
         <div className="dashboard-actions-bar">
           <button
             type="button"
-            className="action-solid"
+            className="btn btn-primary"
             onClick={() => openModal("energy")}
           >
             Log energy
@@ -74,7 +74,7 @@ function Dashboard({ userId = "user_clerk_123" }) {
 
           <button
             type="button"
-            className="action-solid"
+            className="btn btn-primary"
             onClick={() => openModal("interaction")}
           >
             Log interaction
@@ -83,25 +83,33 @@ function Dashboard({ userId = "user_clerk_123" }) {
       </header>
 
       <section className="dashboard-glance" aria-label="Today's summary">
-        <article className="glance-item glance-item--energy">
+        <article className="glance-item glance-item--energy card-highlight">
           <span className="glance-label">Energy</span>
           <strong className="glance-value">{batteryLevel ?? "--"}</strong>
           <span className="glance-context">out of 100</span>
         </article>
 
-        <article className="glance-item glance-item--mood">
+        <article className="glance-item glance-item--mood card-highlight">
           <span className="glance-label">Mood</span>
           <strong className="glance-value">{moodSummary}</strong>
           <span className="glance-context">today</span>
         </article>
 
-        <article className="glance-item glance-item--burnout">
+        <article
+          className={`glance-item glance-item--burnout card-highlight ${
+            burnoutRisk?.riskLevel === "RED" ? "is-urgent" : ""
+          } ${burnoutRisk?.riskLevel === "YELLOW" ? "is-warning" : ""}`}
+        >
           <span className="glance-label">Burnout risk</span>
           <strong className="glance-value">{burnoutSummary}</strong>
           <span className="glance-context">current state</span>
         </article>
 
-        <article className="glance-item glance-item--recovery">
+        <article
+          className={`glance-item glance-item--recovery card-highlight ${
+            recoveryData?.isActionRequired ? "is-warning" : ""
+          }`}
+        >
           <span className="glance-label">Recovery</span>
           <strong className="glance-value">{recoverySummary}</strong>
           <span className="glance-context">next step</span>
@@ -113,9 +121,15 @@ function Dashboard({ userId = "user_clerk_123" }) {
           className="dashboard-primary-region"
           aria-label="Current status"
         >
-          <Burnout burnoutRisk={burnoutRisk} userId={userId} />
+          <div
+            className={`${
+              burnoutRisk?.riskLevel === "RED" ? "is-urgent" : ""
+            } ${burnoutRisk?.riskLevel === "YELLOW" ? "is-warning" : ""}`}
+          >
+            <Burnout burnoutRisk={burnoutRisk} userId={userId} />
+          </div>
 
-          <article className="energy-spotlight">
+          <article className="highlight-panel">
             <div className="energy-spotlight__copy">
               <p className="energy-spotlight__eyebrow">Current energy</p>
               <div className="energy-spotlight__value-wrap">
@@ -132,12 +146,11 @@ function Dashboard({ userId = "user_clerk_123" }) {
             </div>
           </article>
         </section>
-
         <section
           className="dashboard-trend-region"
           aria-label="Weekly trends and daily influences"
         >
-          <div className="dashboard-section dashboard-section--trend">
+          <div className="dashboard-section dashboard-section--trend card-highlight">
             <div className="dashboard-section__heading">
               <div>
                 <p className="dashboard-section__label">Pattern over time</p>
@@ -148,7 +161,7 @@ function Dashboard({ userId = "user_clerk_123" }) {
           </div>
 
           <div
-            className="dashboard-secondary-region"
+            className="dashboard-secondary-region card-highlight"
             aria-label="Daily influences"
           >
             <DailyInteractionsCard interactions={weeklyInteraction} />
@@ -156,7 +169,9 @@ function Dashboard({ userId = "user_clerk_123" }) {
         </section>
 
         <section
-          className="dashboard-section dashboard-section--recovery"
+          className={`dashboard-section dashboard-section--recovery ${
+            recoveryData?.isActionRequired ? "is-warning" : ""
+          }`}
           aria-label="Recovery action"
         >
           {recoveryData.isActionRequired ? (

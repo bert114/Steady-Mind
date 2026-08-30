@@ -2,23 +2,35 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 18px 0 16px;
+  padding: 20px 0 18px;
   background-color: transparent;
-  border-bottom: 1px solid rgba(23, 37, 34, 0.2);
+  border-bottom: 1px solid var(--line);
   box-shadow: none;
 }
 
 .nav-logo {
   font-family: "Instrument Serif", Georgia, serif;
-  font-size: 1.45rem;
+  font-size: 1.6rem;
   font-weight: 400;
   letter-spacing: -0.03em;
-  color: #172522;
+  color: var(--ink);
+}
+
+.nav-logo::before {
+  content: "";
+  display: inline-block;
+  width: 5px;
+  height: 5px;
+  margin-right: 10px;
+  border-radius: 50%;
+  background: var(--accent);
+  vertical-align: middle;
 }
 
 .nav-links {
   display: flex;
-  gap: 1.25rem;
+  align-items: center;
+  gap: 1.5rem;
   list-style: none;
   margin: 0;
   padding: 0;
@@ -26,11 +38,13 @@
 
 .nav-links a {
   text-decoration: none;
-  color: #66736d;
-  font-size: 0.72rem;
+  color: var(--ink-soft);
+  font-family: "DM Mono", monospace;
+  font-size: 0.66rem;
   font-weight: 400;
-  letter-spacing: 0.08em;
-  padding: 8px 2px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 8px 0;
   border-bottom: 1px solid transparent;
   transition:
     color 160ms ease,
@@ -38,27 +52,29 @@
 }
 
 .nav-links a:hover {
-  background-color: transparent;
-  color: #172522;
-  border-bottom-color: #ba4d32;
+  color: var(--ink);
+  border-bottom-color: var(--accent);
 }
 
 .nav-links a.active {
-  background-color: transparent;
-  color: #172522;
-  border-bottom-color: #ba4d32;
-  font-weight: 400;
+  color: var(--ink);
+  border-bottom-color: var(--accent);
+}
+
+.nav-links .cl-userButton-root {
+  margin-left: 6px;
 }
 
 @media (max-width: 680px) {
   .top-nav {
     align-items: flex-start;
+    flex-direction: column;
     gap: 14px;
   }
 
   .nav-links {
     flex-wrap: wrap;
-    justify-content: flex-end;
-    gap: 8px 14px;
+    justify-content: flex-start;
+    gap: 8px 18px;
   }
 }

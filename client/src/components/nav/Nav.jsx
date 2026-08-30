@@ -5,7 +5,7 @@ import "./nav.css";
 function Nav() {
   return (
     <nav className="top-nav">
-      <div className="nav-logo">WellnessApp</div>
+      <div className="nav-logo">Aura</div>
       <ul className="nav-links">
         <li>
           <NavLink to="/">Dashboard</NavLink>

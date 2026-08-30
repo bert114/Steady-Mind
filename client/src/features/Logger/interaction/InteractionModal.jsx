@@ -34,116 +34,137 @@ const InteractionModal = ({ currentUserId }) => {
             </button>
           </header>
 
-          <div className="control-section">
-            <label htmlFor="relationship-select">Relationship</label>
-            <select
-              id="relationship-select"
-              className="native-select"
-              value={formData.relationship}
-              onChange={(e) => handleChange("relationship", e.target.value)}
-            >
-              <option value="" disabled>
-                Select category...
-              </option>
-              {RELATIONSHIPS.map((rel) => (
-                <option key={rel} value={rel}>
-                  {rel}
-                </option>
-              ))}
-            </select>
-          </div>
-
-          <div className="control-section">
-            <label htmlFor="person-name">
-              Person name <small>(optional)</small>
-            </label>
-            <input
-              id="person-name"
-              type="text"
-              className="native-input"
-              placeholder="e.g., Alex"
-              value={formData.personName}
-              onChange={(e) => handleChange("personName", e.target.value)}
-            />
-          </div>
-
-          <div className="control-section">
-            <label>How long were you together?</label>
-            <div className="chip-grid">
-              {DURATIONS.map((d) => (
-                <button
-                  type="button"
-                  key={d.value}
-                  className={`matrix-node ${formData.duration === d.value ? "active" : ""}`}
-                  onClick={() => handleChange("duration", d.value)}
-                >
-                  {d.label}
-                </button>
-              ))}
-            </div>
-          </div>
-
-          <div className="control-section">
-            <div className="metric-row">
-              <label htmlFor="drain-slider">
-                How did it affect your energy?
+          <div className="modal-form-grid">
+            {/* 1. Relationship */}
+            <div className="control-section">
+              <label htmlFor="relationship-select" className="section-label">
+                Relationship
               </label>
-              <span className="metric-readout">
-                {formData.drainScore}
-                <small> {getEnergyEffectLabel(formData.drainScore)}</small>
-              </span>
+              <select
+                id="relationship-select"
+                className="native-select"
+                value={formData.relationship}
+                onChange={(e) => handleChange("relationship", e.target.value)}
+              >
+                <option value="" disabled>
+                  Select category...
+                </option>
+                {RELATIONSHIPS.map((rel) => (
+                  <option key={rel} value={rel}>
+                    {rel}
+                  </option>
+                ))}
+              </select>
             </div>
-            <div className="slider-labels" aria-hidden="true">
-              <span>Very draining</span>
-              <span>Neutral</span>
-              <span>Very energizing</span>
-            </div>
-            <div className="gauge-track" aria-hidden="true">
-              <div
-                className="gauge-indicator"
-                style={{
-                  width: `${((Number(formData.drainScore) + 5) / 10) * 100}%`,
-                }}
+
+            {/* 2. Person Name */}
+            <div className="control-section">
+              <label htmlFor="person-name" className="section-label">
+                Person name <small>(optional)</small>
+              </label>
+              <input
+                id="person-name"
+                type="text"
+                className="native-input"
+                placeholder="e.g., Alex"
+                value={formData.personName}
+                onChange={(e) => handleChange("personName", e.target.value)}
               />
             </div>
-            <input
-              id="drain-slider"
-              type="range"
-              min="-5"
-              max="5"
-              step="1"
-              value={formData.drainScore}
-              onChange={(e) => handleChange("drainScore", e.target.value)}
-              className="native-slider"
-            />
+
+            {/* 3. Duration */}
+            <div className="control-section">
+              <label className="section-label">Duration</label>
+              <div className="disposition-matrix">
+                {DURATIONS.map((d) => (
+                  <button
+                    type="button"
+                    key={d.value}
+                    className={`btn-chip ${formData.duration === d.value ? "active" : ""}`}
+                    onClick={() => handleChange("duration", d.value)}
+                  >
+                    {d.label}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* 4. Energy Impact */}
+            <div className="control-section">
+              <div className="metric-row">
+                <label
+                  htmlFor="drain-slider"
+                  className="section-label"
+                  style={{ marginBottom: 0 }}
+                >
+                  Energy Effect
+                </label>
+                <span className="metric-readout">
+                  {formData.drainScore}
+                  <small> {getEnergyEffectLabel(formData.drainScore)}</small>
+                </span>
+              </div>
+              <div
+                className="slider-labels"
+                aria-hidden="true"
+                style={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  fontFamily: "var(--font-mono)",
+                  fontSize: "0.65rem",
+                  color: "var(--text-muted)",
+                  textTransform: "uppercase",
+                  letterSpacing: "var(--tracking)",
+                  margin: "12px 0 6px 0",
+                }}
+              >
+                <span>Draining</span>
+                <span>Neutral</span>
+                <span>Energizing</span>
+              </div>
+              <div className="gauge-track" aria-hidden="true">
+                <div
+                  className="gauge-indicator"
+                  style={{
+                    width: `${((Number(formData.drainScore) + 5) / 10) * 100}%`,
+                  }}
+                />
+              </div>
+              <input
+                id="drain-slider"
+                type="range"
+                min="-5"
+                max="5"
+                step="1"
+                value={formData.drainScore}
+                onChange={(e) => handleChange("drainScore", e.target.value)}
+                className="native-slider"
+              />
+            </div>
+
+            {error && (
+              <p className="error-notice" role="alert">
+                {error}
+              </p>
+            )}
+
+            <footer className="panel-actions">
+              <button type="button" className="btn" onClick={handleDismiss}>
+                Dismiss
+              </button>
+              <button
+                type="submit"
+                className="btn btn-primary action-solid"
+                disabled={isSubmitting}
+                aria-busy={isSubmitting}
+              >
+                {isSubmitting && (
+                  <span className="loading-spinner" aria-hidden="true" />
+                )}
+                {isSubmitting ? "Saving..." : "Save interaction"}
+              </button>
+            </footer>
           </div>
-
-          {error && (
-            <p className="error-notice" role="alert">
-              {error}
-            </p>
-          )}
-
-          <footer className="panel-actions">
-            <button
-              type="button"
-              className="action-subtle"
-              onClick={handleDismiss}
-            >
-              Dismiss
-            </button>
-            <button
-              type="submit"
-              className="action-solid"
-              disabled={isSubmitting}
-              aria-busy={isSubmitting}
-            >
-              {isSubmitting && (
-                <span className="loading-spinner" aria-hidden="true" />
-              )}
-              {isSubmitting ? "Saving..." : "Save interaction"}
-            </button>
-          </footer>
         </form>
       </div>
     </div>

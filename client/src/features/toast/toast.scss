@@ -2,20 +2,19 @@
   position: fixed;
   bottom: 24px;
   right: 24px;
-  background-color: #1c1917;
-  color: #ffffff;
+  background-color: #172522;
+  color: #f2eee6;
   padding: 12px 16px;
-  border-radius: 4px;
-  border: 1px solid #292524;
+  border-radius: 1px;
+  border: 1px solid #172522;
   display: flex;
   align-items: center;
   gap: 10px;
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-  font-size: 0.75rem;
+  font-family: "DM Mono", monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.02em;
   z-index: 1100;
-  box-shadow:
-    0 10px 15px -3px rgba(0, 0, 0, 0.1),
-    0 4px 6px -4px rgba(0, 0, 0, 0.1);
+  box-shadow: none;
   animation: toastSlideUp 0.15s ease-out;
 
   /* Fixes container width */
@@ -37,14 +36,13 @@
 .toast-dot {
   width: 6px;
   height: 6px;
-  background-color: #15803d;
+  background-color: #ba4d32;
   border-radius: 50%;
   flex-shrink: 0;
-  //dishshjuhsus
 }
 
 .toast-container.error .toast-dot {
-  background-color: #b91c1c;
+  background-color: #a64236;
 }
 
 .toast-message {

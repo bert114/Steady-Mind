@@ -1,23 +1,14 @@
 .card {
   min-height: 250px;
-  border: 1px solid #d8e0db;
-  border-radius: 8px;
-  padding: 1.5rem;
-  background: #ffffff;
-  box-shadow: 0 10px 30px rgba(23, 35, 31, 0.04);
-  font-family: "Avenir Next", "Segoe UI", sans-serif;
+  border: 1px solid rgba(23, 37, 34, 0.22);
+  border-radius: 1px;
+  padding: 20px;
+  background: var(--paper-bright, #f6f3ec);
+  box-shadow: none;
+  font-family: "DM Mono", monospace;
   width: 100%;
   box-sizing: border-box;
-}
-
-.card.theme-green {
-  border-left: 0;
-}
-.card.theme-yellow {
-  border-left: 0;
-}
-.card.theme-red {
-  border-left: 0;
+  color: #172522;
 }
 
 .header {
@@ -25,141 +16,163 @@
   justify-content: space-between;
   align-items: flex-start;
   gap: 12px;
-  margin-bottom: 16px;
-}
-
-.burnout-guidance {
-  margin: 0 0 18px;
-  padding: 14px 16px;
-  border-left: 3px solid #d49a3a;
-  background: #fbf6e9;
-  color: #42514a;
-}
-
-.theme-red .burnout-guidance {
-  border-left-color: #b95749;
-  background: #fbefed;
-}
-
-.theme-green .burnout-guidance {
-  border-left-color: #5c9587;
-  background: #eef6f3;
-}
-
-.burnout-guidance strong {
-  display: block;
-  color: #17231f;
-  font-size: 0.92rem;
-}
-
-.burnout-guidance p {
-  margin: 5px 0 8px;
-  font-size: 0.88rem;
-  line-height: 1.5;
-}
-
-.burnout-guidance small {
-  color: #66736d;
-  font-size: 0.72rem;
+  margin-bottom: 20px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid rgba(23, 37, 34, 0.2);
 }
 
 .burnout-kicker {
   margin: 0 0 8px;
-  color: #21675e;
-  font-size: 0.7rem;
-  letter-spacing: 0.12em;
+  color: #ba4d32;
+  font-family: "DM Mono", monospace;
+  font-size: 0.62rem;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
-  font-weight: 700;
+  font-weight: 400;
 }
 
 .title {
   margin: 0;
-  font-size: clamp(1.3rem, 1.8vw, 1.7rem);
-  font-weight: 700;
-  color: #17231f;
-  font-family: "Avenir Next", "Segoe UI", sans-serif;
+  color: #172522;
+  font-family: "Instrument Serif", Georgia, serif;
+  font-size: 1.5rem;
+  font-weight: 400;
+  letter-spacing: -0.02em;
 }
 
 .badge {
   display: inline-flex;
   align-items: center;
-  padding: 0.35rem 0.55rem;
-  border-radius: 4px;
-  font-size: 0.72rem;
-  font-weight: 700;
-  text-transform: none;
-  letter-spacing: 0.02em;
+  padding: 4px 0;
+  font-family: "DM Mono", monospace;
+  font-size: 0.62rem;
+  font-weight: 400;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  border-top: 1px solid currentColor;
+  border-bottom: 1px solid currentColor;
 }
 
 .badge-green {
-  color: #21675e;
-  background: #e5f0ed;
+  color: #172522;
 }
+
 .badge-yellow {
-  color: #9a671c;
-  background: #fbf1dc;
+  color: #a5772f;
 }
+
 .badge-red {
   color: #a64236;
-  background: #f9e5e2;
+}
+
+.burnout-guidance {
+  margin: 0 0 20px;
+  padding: 14px 16px;
+  border-left: 3px solid #a5772f;
+  background: transparent;
+  color: #42514a;
+}
+
+.theme-red .burnout-guidance {
+  border-left-color: #a64236;
+}
+
+.theme-green .burnout-guidance {
+  border-left-color: #172522;
+}
+
+.burnout-guidance strong {
+  display: block;
+  color: #172522;
+  font-size: 0.82rem;
+  line-height: 1.5;
+}
+
+.burnout-guidance p {
+  margin: 6px 0 8px;
+  font-size: 0.76rem;
+  line-height: 1.6;
+  color: #66736d;
+}
+
+.burnout-guidance small {
+  color: #8b928c;
+  font-size: 0.64rem;
 }
 
 .signals-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 12px;
-  margin-bottom: 16px;
+  gap: 0;
+  margin-bottom: 0;
+  border-top: 1px solid rgba(23, 37, 34, 0.2);
+  border-bottom: 1px solid rgba(23, 37, 34, 0.2);
 }
 
 .metric-box {
   display: flex;
   flex-direction: column;
   gap: 6px;
-  padding-top: 10px;
-  border-top: 1px solid #d8e0db;
+  padding: 16px 14px 16px 0;
+  border-right: 1px solid rgba(23, 37, 34, 0.14);
+}
+
+.metric-box + .metric-box {
+  padding-left: 14px;
+}
+
+.metric-box:last-child {
+  border-right: 0;
 }
 
 .metric-value {
-  font-size: 1.3rem;
-  font-weight: 700;
-  color: #17231f;
-  font-family: "Avenir Next", "Segoe UI", sans-serif;
+  color: #172522;
+  font-family: "Instrument Serif", Georgia, serif;
+  font-size: 1.6rem;
+  font-weight: 400;
 }
 
 .metric-label {
-  font-size: 0.72rem;
+  font-size: 0.6rem;
+  letter-spacing: 0.12em;
   color: #66736d;
+  text-transform: uppercase;
 }
 
 .reasons-section {
-  margin-top: 12px;
+  margin-top: 20px;
 }
 
 .reasons-section h3 {
-  margin: 0 0 8px;
+  margin: 0 0 10px;
   color: #66736d;
-  font-size: 0.72rem;
-  letter-spacing: 0.08em;
+  font-family: "DM Mono", monospace;
+  font-size: 0.62rem;
+  font-weight: 400;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
 }
 
 .reasons-list {
   margin: 0;
-  padding-left: 18px;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 8px;
+}
+
+.reasons-list li {
+  padding: 10px 0 10px 12px;
+  border-left: 2px solid #ba4d32;
   color: #42514a;
-  font-size: 0.95rem;
+  font-size: 0.74rem;
   line-height: 1.6;
 }
 
-.reasons-list li + li {
-  margin-top: 6px;
-}
-
 .error-card {
-  border-radius: 16px;
+  border: 1px solid rgba(166, 66, 54, 0.4);
+  border-radius: 1px;
   padding: 16px;
-  background-color: #f8e3e1;
-  border: 1px solid #e8b8b3;
-  color: #7d2a28;
-  font-size: 0.88rem;
+  color: #a64236;
+  font-size: 0.8rem;
 }

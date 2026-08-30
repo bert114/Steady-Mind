@@ -1,26 +1,71 @@
 :root {
-  font-family: "DM Mono", monospace;
+  font-family: var(--font-ui, "Avenir Next", "Segoe UI", sans-serif);
   line-height: 1.5;
   font-weight: 400;
-  color: #172522;
-  background: #e9e5da;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  --forest-green: #172522;
-  --sage: #66736d;
-  --olive: #c7c0ae;
-  --ivory: #e9e5da;
-  --text-h: #172522;
-  --text-muted: #66736d;
+
+  /* Measured Vitality — mineral ground, near-black notation, one living accent */
+  --paper: #e9e5da;
+  --paper-strong: #dfdacd;
+  --paper-soft: #f2eee6;
+  --paper-bright: #f6f3ec;
+
+  --ink: #172522;
+  --ink-soft: #59635d;
+  --ink-faint: #8b928c;
+
+  --line: rgba(23, 37, 34, 0.22);
+  --line-strong: rgba(23, 37, 34, 0.4);
+
   --accent: #ba4d32;
-  --accent-soft: rgba(186, 77, 50, 0.12);
-  --accent-deep: #ba4d32;
-  --secondary: #66736d;
-  --surface: #f3f0e8;
-  --border: rgba(23, 37, 34, 0.2);
-  --display-font: "Instrument Serif", Georgia, serif;
+  --accent-strong: #9f3f2a;
+  --accent-soft: rgba(186, 77, 50, 0.09);
+
+  --sage: #66736d;
+  --amber: #a5772f;
+  --danger: #a64236;
+  --warning: #a5772f;
+  --success: #51705f;
+
+  --surface: var(--paper-soft);
+  --surface-strong: var(--paper-bright);
+  --bg-dark: var(--paper);
+  --bg: var(--paper-soft);
+  --bg-light: var(--paper-bright);
+
+  --text: var(--ink);
+  --text-muted: var(--ink-soft);
+  --highlight: var(--paper-bright);
+  --muted: var(--ink-soft);
+  --muted-strong: var(--ink-faint);
+
+  --border: var(--line);
+  --border-muted: rgba(23, 37, 34, 0.16);
+  --primary: var(--accent);
+  --accent-deep: var(--accent-strong);
+  --secondary: var(--sage);
+  --secondary-deep: var(--ink);
+  --info: var(--sage);
+
+  --surface-priority: var(--paper-bright);
+  --surface-secondary: var(--paper-soft);
+  --surface-base: var(--paper);
+
+  --display-font: "Instrument Serif", "Iowan Old Style", Georgia, serif;
+  --font-serif: "Instrument Serif", "Iowan Old Style", Georgia, serif;
+  --font-ui: "Avenir Next", "Segoe UI", Arial, sans-serif;
+  --font-mono: "DM Mono", "SFMono-Regular", Consolas, monospace;
+  --tracking: 0.12em;
+  --margin: 48px;
+  --border-thin: 1px;
+  --border-thick: 2px;
+
+  --shadow-sm: 0 1px 0 0 rgba(23, 37, 34, 0.06);
+  --shadow-md: 0 1px 0 0 rgba(23, 37, 34, 0.06);
+  --shadow-lg: 0 1px 0 0 rgba(23, 37, 34, 0.06);
 }
 
 @font-face {
@@ -43,7 +88,8 @@ body {
   margin: 0;
   min-width: 320px;
   min-height: 100vh;
-  background: var(--ivory);
+  background: var(--paper);
+  color: var(--ink);
 }
 
 #root {

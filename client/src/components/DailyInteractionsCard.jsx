@@ -1,4 +1,3 @@
-import React from "react";
 import { useEffect } from "react";
 
 const DailyInteractionsCard = ({ interactions = [] }) => {
@@ -13,7 +12,7 @@ const DailyInteractionsCard = ({ interactions = [] }) => {
   }, [interactions]);
 
   return (
-    <div className="summary-card">
+    <div className="summary-card ">
       <div className="summary-header">
         <h3 className="summary-title">What’s pulling my energy down</h3>
       </div>

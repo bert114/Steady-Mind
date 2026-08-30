@@ -26,18 +26,20 @@ export default function Battery({ level }) {
         >
           <circle
             className="progress-ring-background"
-            strokeWidth="12"
+            strokeWidth="1.5"
             fill="transparent"
             r={radius}
             cx="130"
             cy="130"
           />
           <circle
-            className="progress-ring-circle"
-            strokeWidth="12"
+            className={`progress-ring-circle ${
+              percentage < 30 ? "is-low" : "is-steady"
+            }`}
+            strokeWidth="3"
             strokeDasharray={circumference}
             strokeDashoffset={strokeDashoffset}
-            strokeLinecap="round"
+            strokeLinecap="butt"
             fill="transparent"
             r={radius}
             cx="130"

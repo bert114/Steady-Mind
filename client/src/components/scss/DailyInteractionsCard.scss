@@ -1,11 +1,13 @@
 .summary-card {
-  background: #ffffff;
-  border: 1px solid #d8e0db;
-  border-radius: 8px;
-  padding: 1.25rem;
-  box-shadow: 0 10px 30px rgba(23, 35, 31, 0.04);
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  padding: 0;
+  box-shadow: none;
   width: 100%;
   box-sizing: border-box;
+  color: #172522;
+  font-family: "DM Mono", monospace;
 }
 
 .summary-header {
@@ -13,21 +15,21 @@
   align-items: center;
   justify-content: space-between;
   margin-bottom: 14px;
-  padding-bottom: 10px;
-  border-bottom: 1px solid #e7ece9;
+  padding-bottom: 12px;
+  border-bottom: 1px solid rgba(23, 37, 34, 0.2);
 }
 
 .summary-title {
-  font-size: clamp(1.06rem, 1.4vw, 1.22rem);
-  font-weight: 700;
-  color: #17231f;
-  font-family: "Avenir Next", "Segoe UI", sans-serif;
+  font-size: 1.2rem;
+  font-weight: 400;
+  color: #172522;
+  font-family: "Instrument Serif", Georgia, serif;
   flex: 1;
 }
 
 .summary-list {
   display: grid;
-  gap: 10px;
+  gap: 0;
 }
 
 .summary-item {
@@ -35,8 +37,8 @@
   align-items: center;
   justify-content: space-between;
   gap: 12px;
-  padding: 12px 0;
-  border-bottom: 1px solid #e7ece9;
+  padding: 13px 0;
+  border-bottom: 1px solid rgba(23, 37, 34, 0.14);
 }
 
 .summary-item:last-child {
@@ -52,112 +54,39 @@
 }
 
 .item-name {
-  font-size: 1rem;
-  color: #17231f;
-  font-weight: 600;
+  font-size: 0.78rem;
+  color: #172522;
+  font-weight: 400;
 }
 
 .item-duration {
-  font-size: 0.8rem;
+  font-size: 0.62rem;
   color: #66736d;
-  letter-spacing: 0.02em;
+  letter-spacing: 0;
 }
 
 .item-score {
-  font-size: 1.05rem;
-  font-weight: 700;
-  min-width: 52px;
+  font-family: "Instrument Serif", Georgia, serif;
+  font-size: 1.15rem;
+  font-weight: 400;
+  min-width: 40px;
   text-align: right;
 }
 
 .item-score--negative {
-  color: #a64236;
+  color: #ba4d32;
 }
 
 .item-score--positive {
-  color: #21675e;
+  color: #172522;
 }
 
 .item-score--neutral {
   color: #66736d;
 }
 
-.widget-card {
-  background: transparent;
-  width: 100%;
-  box-sizing: border-box;
-}
-
-.widget-header {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin-bottom: 12px;
-  padding-bottom: 10px;
-  border-bottom: 1px solid var(--border);
-}
-
-.widget-title {
-  font-size: 1rem;
-  font-weight: 700;
-  color: var(--ink);
-}
-
-.widget-data-row {
-  display: flex;
-  align-items: baseline;
-  gap: 8px;
-  margin-bottom: 12px;
-}
-
-.widget-main-value {
-  font-size: clamp(2.6rem, 3vw, 3.1rem);
-  font-weight: 700;
-  line-height: 1;
-  color: var(--ink);
-  letter-spacing: -0.05em;
-  font-family: var(--display-font);
-}
-
-.widget-unit {
-  font-size: 0.9rem;
-  color: var(--muted);
-  font-weight: 700;
-}
-
-.chart-container {
-  width: 100%;
-  margin: 8px 0 14px;
-  position: relative;
-  padding-top: 10px;
-}
-
-.chart-container svg {
-  overflow: visible;
-  display: block;
-}
-
-.chart-node {
-  fill: #efe5da;
-  stroke: #7d8f76;
-  stroke-width: 2;
-  cursor: pointer;
-}
-
-.chart-days {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 6px;
-  color: var(--muted);
-}
-
-.day-label {
-  font-size: 0.68rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
-
-.day-label.is-today {
-  color: var(--secondary-deep);
+.empty-text {
+  color: #66736d;
+  font-size: 0.78rem;
+  line-height: 1.6;
 }

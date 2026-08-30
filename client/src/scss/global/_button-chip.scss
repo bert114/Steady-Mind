@@ -1,0 +1,29 @@
+.btn-chip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: var(--tracking);
+  text-transform: uppercase;
+  background-color: var(--bg-light);
+  border: var(--border-thin) solid var(--border);
+  color: var(--text);
+  padding: 10px 12px;
+  cursor: pointer;
+  box-shadow: none;
+  transition: all 0.15s ease;
+  white-space: nowrap;
+}
+
+.btn-chip:hover {
+  border-color: var(--text);
+  background-color: var(--highlight);
+}
+
+.btn-chip.active {
+  background-color: var(--paper-bright);
+  color: var(--accent-deep);
+  border-color: var(--accent);
+  box-shadow: none;
+}
