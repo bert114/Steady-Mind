@@ -18,7 +18,7 @@ const errorHandler = (err, req, res, next) => {
   };
 
   if (process.env.NODE_ENV === "development") {
-    // logger.error(`${err.statusCode} - ${err.message}`);
+    logger.error(`${err.statusCode} - ${err.message}`);
     logger.error(JSON.stringify(errorResponse, null, 2));
     return res.status(err.statusCode).json({
       status: err.status,
