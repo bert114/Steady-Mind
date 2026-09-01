@@ -14,7 +14,7 @@ createRoot(document.getElementById("root")).render(
   <StrictMode>
     <ClerkProvider
       publishableKey={PUBLISHABLE_KEY}
-      afterSignOutUrl="/Steady-Mind"
+      afterSignOutUrl="/Steady-Mind/"
     >
       <App />
     </ClerkProvider>

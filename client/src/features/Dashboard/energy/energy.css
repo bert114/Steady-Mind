@@ -154,12 +154,13 @@
   font-weight: 400;
 }
 
-@media (max-width: 480px) {
+@media (max-width: 760px) {
   .dashboard-card {
     overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
   }
 
   .grid-container {
-    min-width: 390px;
+    min-width: 448px;
   }
 }

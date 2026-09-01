@@ -42,6 +42,7 @@ export const getDashboardData = async (req, res, next) => {
         weeklyInteraction,
         burnoutRisk: dashboard.burnoutRisk,
         batteryLevel: dashboard.metrics.batteryLevel,
+        weeklyInsight: dashboard.weeklyInsight || null,
       },
     });
   } catch (error) {

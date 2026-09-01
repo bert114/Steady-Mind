@@ -38,7 +38,7 @@ function TrendChart({
           <svg
             viewBox={`0 0 ${width} ${height}`}
             aria-hidden="true"
-            preserveAspectRatio="none"
+            preserveAspectRatio="xMidYMid meet"
           >
             <line
               x1={padding}

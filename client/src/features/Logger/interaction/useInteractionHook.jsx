@@ -8,7 +8,6 @@ import { socialService } from "./Interaction.service.js";
 import {
   buildInteractionPayload,
   INITIAL_FORM_STATE,
-  validateInteractionForm,
 } from "./Interaction.utils.js";
 
 export const useInteractionHook = (currentUserId) => {
@@ -33,15 +32,21 @@ export const useInteractionHook = (currentUserId) => {
     closeModal();
   }, [resetForm, closeModal]);
 
+  useEffect(() => {
+    console.log(error);
+  }, [error]);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const validationError = validateInteractionForm(formData);
-    if (validationError) {
-      setError(validationError);
-      handleToast(validationError, "warning", 3000);
-      return;
-    }
+    //const validationError = validateInteractionForm(formData);
+    // if (validationError) {
+    //   setError(validationError);
+    //   handleToast(validationError, "warning", 3000);
+    //   return;
+    // }
+
+    if (error) return;
 
     const payload = buildInteractionPayload(formData, currentUserId);
 
@@ -60,8 +65,10 @@ export const useInteractionHook = (currentUserId) => {
       const errorMsg =
         err?.response?.data?.message || "Failed to record interaction.";
 
-      setError(errorMsg);
-      handleToast(errorMsg, "error", 3000);
+      console.log(err?.response.data.errors);
+
+      setError(err.response?.data?.errors);
+      //handleToast(errorMsg, "error", 3000);
     } finally {
       setIsSubmitting(false);
     }

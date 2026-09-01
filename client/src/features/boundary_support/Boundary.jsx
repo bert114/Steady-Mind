@@ -36,7 +36,7 @@ export default function BoundaryGenerator() {
         <h1 className="boundary-title">Draw the line.</h1>
         <p className="boundary-intro">
           Describe what keeps asking too much of you. Choose how straight you
-          want to say it, and Aura drafts the exact words.
+          want to say it, and Steady Mind drafts the exact words.
         </p>
       </header>
 

@@ -1,12 +1,10 @@
 import { useEffect, useState } from "react";
-import { validateInput } from "./helpers";
-import { buildPayload } from "./utils";
-import { submit } from "./service";
-import { id } from "../../test/id";
-import { handleToast } from "../../toast/toast.util";
 import { setBatteryData } from "../../battery/utils";
 import { changeStatus } from "../../burnout/burnoutUtils";
 import { refreshDashboard } from "../../Dashboard/dashboard.service";
+import { handleToast } from "../../toast/toast.util";
+import { submit } from "./service";
+import { buildPayload } from "./utils";
 
 export const useHook = (currentUserId) => {
   const [energy, setEnergy] = useState(65);
@@ -41,13 +39,9 @@ export const useHook = (currentUserId) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const validationError = validateInput(energy, selectedMood);
-    if (validationError) {
-      setError(validationError);
-      return;
-    }
 
-    // need to change pa
+    if (error) return;
+
     const payload = buildPayload(energy, selectedMood);
     console.log(payload);
 
@@ -59,9 +53,8 @@ export const useHook = (currentUserId) => {
       await refreshDashboard();
       setResponse(res);
     } catch (err) {
-      console.log(err);
       setError(
-        err.response?.data?.message ||
+        err.response?.data?.errors ||
           "Failed to log telemetry. Please try again.",
       );
     } finally {

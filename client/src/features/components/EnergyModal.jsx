@@ -97,7 +97,7 @@ const EnergyMoodModal = ({ currentUserId }) => {
 
             {error && (
               <p id="energy-mood-error" className="error-notice" role="alert">
-                {error}
+                {error?.moodScore}
               </p>
             )}
 

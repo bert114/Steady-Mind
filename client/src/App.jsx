@@ -8,6 +8,7 @@ import Burnout from "./features/burnout/Burnout.jsx";
 import Dashboard from "./features/Dashboard/Dashboard.jsx";
 import Recovery from "./features/recovery-f/Recovery.jsx";
 import Toast from "./features/toast/Toast.jsx";
+import Weekly from "./features/weekly/Weekly.jsx";
 import "./scss/main.scss";
 
 import {
@@ -37,15 +38,15 @@ function App() {
       <main className="auth-gate">
         <SignedOut>
           <div className="auth-gate__rule" aria-hidden="true" />
-          <p className="auth-gate__kicker">FIELD NOTE / AURA</p>
+          <p className="auth-gate__kicker">FIELD NOTE / STEADY MIND</p>
           <h1>Return to your capacity.</h1>
           <p className="auth-gate__description">
             Sign in to read today&apos;s energy, mood, and recovery trace.
           </p>
           <SignInButton
             mode="modal"
-            forceRedirectUrl="/Steady-Mind"
-            fallbackRedirectUrl="/Steady-Mind"
+            forceRedirectUrl="/Steady-Mind/"
+            fallbackRedirectUrl="/Steady-Mind/"
           >
             <button type="button" className="auth-gate__button">
               Open your field notes
@@ -56,7 +57,7 @@ function App() {
     );
 
   return (
-    <Router basename="/Steady-Mind">
+    <Router basename="/Steady-Mind/">
       <div className="app-shell">
         <Toast />
 
@@ -69,6 +70,7 @@ function App() {
               <Route path="/boundary" element={<BoundaryGenerator />} />
               <Route path="/burnout" element={<Burnout />} />
               <Route path="/recovery" element={<Recovery />} />
+              <Route path="/weekly" element={<Weekly />} />
               <Route path="/analytics" element={<Analytics />} />
               <Route path="*" element={<h2>Page Not Found</h2>} />
             </Routes>

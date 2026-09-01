@@ -537,6 +537,11 @@
     font-size: 3.4rem;
   }
 
+  .dashboard-section,
+  .dashboard-secondary-region {
+    padding: 16px;
+  }
+
   .dashboard-loading-body {
     grid-template-columns: 1fr;
   }

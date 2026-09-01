@@ -54,8 +54,8 @@ export function recommendRecoveryAction(
     recommendation_reason: hasStoredRating(act.average_rating)
       ? `You rated this ${act.average_rating}/5 across ${act.completed_count} completed ${Number(act.completed_count) === 1 ? "try" : "tries"}.`
       : hasPersonalHistory
-        ? "A new option while Aura learns what helps you most."
-        : "A starting option while Aura learns what helps you most.",
+        ? "A new option while Steady Mind learns what helps you most."
+        : "A starting option while Steady Mind learns what helps you most.",
     is_personalized: hasStoredRating(act.average_rating),
     recommendation_rank: index + 1,
   }));
@@ -72,8 +72,8 @@ export function recommendRecoveryAction(
     message: bestPersonalActivity
       ? `You usually feel better after ${bestPersonalActivity.name}. It is first because your past ratings are strongest for it.`
       : isHighRisk
-        ? "High burnout risk detected. Start with a low-effort recovery activity while Aura learns what helps you."
-        : "Warning level detected. Choose a manageable recovery activity while Aura learns what helps you.",
+        ? "High burnout risk detected. Start with a low-effort recovery activity while Steady Mind learns what helps you."
+        : "Warning level detected. Choose a manageable recovery activity while Steady Mind learns what helps you.",
     suggestedActivities: sanitizedActivities,
   };
 }

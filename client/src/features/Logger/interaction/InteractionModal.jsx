@@ -36,10 +36,13 @@ const InteractionModal = ({ currentUserId }) => {
 
           <div className="modal-form-grid">
             {/* 1. Relationship */}
-            <div className="control-section">
+            <div
+              className={`control-section ${error?.relationship_type ? "error" : ""}`}
+            >
               <label htmlFor="relationship-select" className="section-label">
                 Relationship
               </label>
+
               <select
                 id="relationship-select"
                 className="native-select"
@@ -58,7 +61,9 @@ const InteractionModal = ({ currentUserId }) => {
             </div>
 
             {/* 2. Person Name */}
-            <div className="control-section">
+            <div
+              className={`control-section ${error?.custom_name ? "error" : ""}`}
+            >
               <label htmlFor="person-name" className="section-label">
                 Person name <small>(optional)</small>
               </label>
@@ -73,7 +78,9 @@ const InteractionModal = ({ currentUserId }) => {
             </div>
 
             {/* 3. Duration */}
-            <div className="control-section">
+            <div
+              className={`control-section ${error?.duration_minutes ? "error" : ""}`}
+            >
               <label className="section-label">Duration</label>
               <div className="disposition-matrix">
                 {DURATIONS.map((d) => (
@@ -144,7 +151,10 @@ const InteractionModal = ({ currentUserId }) => {
 
             {error && (
               <p className="error-notice" role="alert">
-                {error}
+                {error.relationship_type ||
+                  error.custom_name ||
+                  error.duration_minutes ||
+                  "invalid log entry"}
               </p>
             )}
 

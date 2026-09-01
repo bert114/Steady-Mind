@@ -7,6 +7,7 @@ import Burnout from "../burnout/Burnout.jsx";
 import Modal from "../Logger/Modal";
 import { useModalStore } from "../Logger/useModalStore.js";
 import Recovery from "../recovery-f/Recovery.jsx";
+import WeeklyInsightCard from "../weekly/WeeklyInsightCard.jsx";
 import WeeklyEnergy from "./energy/WeeklyEnergy.jsx";
 import { useDashboard } from "./useDashboard.jsx";
 
@@ -32,6 +33,7 @@ function Dashboard({ userId = "user_clerk_123" }) {
     burnoutRisk,
     batteryLevel,
     recoveryData,
+    weeklyInsight,
   } = dashboardData;
 
   const todayMood =
@@ -114,6 +116,13 @@ function Dashboard({ userId = "user_clerk_123" }) {
           <strong className="glance-value">{recoverySummary}</strong>
           <span className="glance-context">next step</span>
         </article>
+      </section>
+
+      <section
+        className="dashboard-section--week"
+        aria-label="Weekly insight"
+      >
+        <WeeklyInsightCard insight={weeklyInsight} />
       </section>
 
       <div className="dashboard-content">

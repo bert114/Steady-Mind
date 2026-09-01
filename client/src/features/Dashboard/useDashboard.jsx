@@ -39,6 +39,11 @@ export const useDashboard = (userId) => {
       performance: dashboardData?.recoveryData?.performance,
     });
 
+    console.log("🗓️ Weekly Insight:", {
+      week: dashboardData?.weeklyInsight?.week_start,
+      observations: dashboardData?.weeklyInsight?.observations?.length,
+    });
+
     console.groupEnd();
   }, [dashboardData]);
 

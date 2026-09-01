@@ -1,6 +1,6 @@
 function EmptyState({
   title = "No check-ins yet",
-  message = "Your notes are still waiting. Once you add a few moments of energy, Aura will turn them into a clear picture of your day.",
+  message = "Your notes are still waiting. Once you add a few moments of energy, Steady Mind will turn them into a clear picture of your day.",
   error = false,
 }) {
   return (

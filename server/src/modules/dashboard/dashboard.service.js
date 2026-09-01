@@ -3,6 +3,7 @@ import { calculateUserBurnoutRisk } from "../burnout/burnout.service.js";
 import { formatLogDate } from "../burnout/burnout.utils.js";
 import { getEnergyLogByDate } from "../logs/energy/energy.query.js";
 import { getAllUserSocialInteractions } from "../logs/interactions/interaction.service.js";
+import { getLatestInsight } from "../weekly/weekly.service.js";
 import { FETCH_HISTORY } from "./dashboard.query.js";
 import {
   buildCustomQuery,
@@ -20,6 +21,8 @@ export const getDashboardSummary = async (clerkUserId) => {
 
   const recentInteractions = await getAllUserSocialInteractions(clerkUserId);
 
+  const weeklyInsight = await getLatestInsight(clerkUserId);
+
   return {
     clerkUserId,
     metrics: {
@@ -29,6 +32,7 @@ export const getDashboardSummary = async (clerkUserId) => {
     },
     burnoutRisk,
     recentInteractions: recentInteractions.slice(0, 5), // Return latest 5
+    weeklyInsight,
   };
 };
 
