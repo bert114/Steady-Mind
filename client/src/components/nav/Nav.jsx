@@ -23,6 +23,9 @@ function Nav() {
           <NavLink to="/weekly">Weekly</NavLink>
         </li>
         <li>
+          <NavLink to="/weekly-summary">Summary</NavLink>
+        </li>
+        <li>
           <NavLink to="/analytics">Analytics</NavLink>
         </li>
 

@@ -15,6 +15,9 @@ import clerk from "./modules/clerk-auth/clerk.route.js";
 import energyRoute from "./modules/logs/energy/energy.route.js";
 import recoveryRouter from "./modules/recovery/recovery.route.js";
 import weeklyRouter from "./modules/weekly/weekly.route.js";
+
+import weeklyV1Router from "./modules/weeklyv1/weekly.route.js";
+
 const app = express();
 
 const allowedOrigins = [
@@ -65,6 +68,8 @@ app.use("/api/v1", clerk);
 app.use("/api/v1/boundary", boundaryRoutes);
 
 app.use("/api/v1/weekly", weeklyRouter);
+
+app.use("/api/v1/weekly/v1", weeklyV1Router);
 
 app.all("*", (req, res, next) => {
   next(new AppError(`Can't find ${req.originalUrl} on this server!`, 404));

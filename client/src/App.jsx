@@ -20,10 +20,14 @@ import {
 } from "@clerk/clerk-react";
 
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
+import { useWeekyHook } from "./features/weekly-summary/useWeekyHook.jsx";
+import WeeklySummary from "./pages/WeeklySummary.jsx";
 
 function App() {
   const { getToken } = useAuth();
   const { user } = useUser();
+
+  const { data } = useWeekyHook();
 
   useLayoutEffect(() => {
     injectAuthTokenProvider(getToken);
@@ -71,6 +75,10 @@ function App() {
               <Route path="/burnout" element={<Burnout />} />
               <Route path="/recovery" element={<Recovery />} />
               <Route path="/weekly" element={<Weekly />} />
+              <Route
+                path="/weekly-summary"
+                element={<WeeklySummary data={data} />}
+              />
               <Route path="/analytics" element={<Analytics />} />
               <Route path="*" element={<h2>Page Not Found</h2>} />
             </Routes>
