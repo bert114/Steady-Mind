@@ -1,7 +1,9 @@
 import { useCallback, useEffect, useState } from "react";
-import { fetchCurrentWeek } from "./weekly.service";
+import { fetchCurrentWeek } from "./weekly.service.js";
 
-export function useWeekyHook() {
+const DEFAULT_ERROR = "Your weekly summary could not be loaded.";
+
+export function useWeeklySummary() {
   const [data, setData] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState("");
@@ -15,7 +17,7 @@ export function useWeekyHook() {
       setError(
         requestError.response?.data?.message ||
           requestError.message ||
-          "Your weekly summary could not be loaded.",
+          DEFAULT_ERROR,
       );
     } finally {
       setIsLoading(false);

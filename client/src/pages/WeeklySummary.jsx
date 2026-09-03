@@ -1,32 +1,56 @@
-import { useEffect } from "react";
+import EmptyState from "../components/states/EmptySate.jsx";
+import LoadingState from "../components/states/LoadingState.jsx";
+import { useWeeklySummary } from "../features/weekly-summary/useWeeklySummary.js";
+import {
+  buildFeltMetrics,
+  hasSummaryData,
+} from "../features/weekly-summary/weeklySummary.utils.js";
+import DrainedMetrics from "../features/weekly-summary/components/DrainedMetrics.jsx";
+import FeltMetrics from "../features/weekly-summary/components/FeltMetrics.jsx";
+import WeeklySummaryHeader from "../features/weekly-summary/components/WeeklySummaryHeader.jsx";
+import "../features/weekly-summary/weeklySummary.css";
 
-function WeeklySummary({ data }) {
-  useEffect(() => {
-    console.log(data);
-  }, [data]);
+function WeeklySummary() {
+  const { data, isLoading, error, refetch } = useWeeklySummary();
 
-  return <h1>Weekly Summary View</h1>;
-  const battery = data?.battery;
-  const mood = data?.mood;
-  const drain = data?.drain_score;
+  if (isLoading && !data) {
+    return (
+      <section className="summary-shell" aria-busy="true">
+        <LoadingState />
+      </section>
+    );
+  }
+
+  if (error && !data) {
+    return <EmptyState title="Weekly summary unavailable" message={error} error />;
+  }
+
+  if (!hasSummaryData(data)) {
+    return (
+      <section className="summary-shell">
+        <EmptyState
+          title="Your week is waiting"
+          message="Log a few check-ins and interactions to get your weekly summary."
+        />
+      </section>
+    );
+  }
 
   return (
-    <section className="weekly-metrics" aria-label="This week's summary">
-      <h1 className="weekly-summary__title">Weekly Summary</h1>
+    <section className="summary-shell">
+      <WeeklySummaryHeader
+        weekStart={data.weekStart}
+        isLoading={isLoading}
+        onRefresh={refetch}
+      />
 
-      <ul>
-        <li>
-          Average Energy: {battery?.label ?? "--"} ({battery?.value ?? 0})
-        </li>
-        <li>
-          Average Mood: {mood?.label ?? "--"} ({mood?.value ?? 0})
-        </li>
-        <li>
-          Avg. Social Drain: {drain?.label ?? "--"} ({drain?.value ?? 0})
-        </li>
+      <FeltMetrics metrics={buildFeltMetrics(data)} />
 
-        <li>Avg. Social Interaction: {data?.interactionCount?.value ?? 0}</li>
-      </ul>
+      <DrainedMetrics
+        drainAverage={data.drain?.average}
+        interactionCount={data.interactions?.length ?? 0}
+        highestDrain={data.highestDrainingRelationship}
+      />
     </section>
   );
 }
