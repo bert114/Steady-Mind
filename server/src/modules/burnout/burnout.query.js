@@ -28,5 +28,6 @@ export async function checkUserExists(clerkId) {
     `SELECT clerk_id FROM users WHERE clerk_id = $1`,
     [clerkId],
   );
-  return result.length > 0;
+  const rows = Array.isArray(result) ? result : result?.rows || [];
+  return rows.length > 0;
 }

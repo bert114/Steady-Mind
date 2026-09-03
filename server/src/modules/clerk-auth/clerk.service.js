@@ -3,9 +3,9 @@ import db from "../../config/db.js";
 
 export const syncUser = async (clerkId, email) => {
   const query = `
-    INSERT INTO users (id, email) 
+    INSERT INTO users (clerk_id, email) 
     VALUES ($1, $2) 
-    ON CONFLICT (id) DO NOTHING
+    ON CONFLICT (clerk_id) DO NOTHING
   `;
   await db.query(query, [clerkId, email]);
 };

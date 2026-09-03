@@ -15,6 +15,7 @@ createRoot(document.getElementById("root")).render(
     <ClerkProvider
       publishableKey={PUBLISHABLE_KEY}
       afterSignOutUrl="/Steady-Mind/"
+      signUpForceRedirectUrl="/Steady-Mind/"
     >
       <App />
     </ClerkProvider>
