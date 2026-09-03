@@ -1,15 +1,16 @@
-import { fetchDailyEnergy } from "./weekly.query.js";
-import { computeEnergyMetrics } from "./weekly.translator.js";
+import { fetchDailyLogs } from "./weekly.query.js";
+import { computeEnergyMetrics, computeMoodMetrics } from "./weekly.translator.js";
 import { startOfWeekKey } from "./weekly.util.js";
 
 export async function getWeeklyOverview(userId) {
   const weekStart = startOfWeekKey();
 
-  const dailyEnergy = await fetchDailyEnergy(userId, weekStart);
+  const dailyLogs = await fetchDailyLogs(userId, weekStart);
 
   return {
     weekStart,
-    energy: computeEnergyMetrics(dailyEnergy),
-    daily: dailyEnergy,
+    energy: computeEnergyMetrics(dailyLogs),
+    mood: computeMoodMetrics(dailyLogs),
+    daily: dailyLogs,
   };
 }
