@@ -2,7 +2,7 @@ name: Deploy Client to GitHub Pages
 
 on:
   push:
-    branches: ["client"]
+    branches: ["steady-mind"]
 
   workflow_dispatch:
 
