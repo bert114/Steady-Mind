@@ -1,55 +1,33 @@
 import db from "../../config/db.js";
 import {
-  calculateAverage,
+  calculateAverages,
   formatLogDates,
-  identifyBurnoutDays,
+  getAverageDrainScore,
+  getDetailedDrainingMessages,
+  getHighestDrain,
 } from "./weekly.helper.js";
-import Weekly, { WeeklyEnergy } from "./weekly.query.js";
+import { GET_WEEKLYINTERACTIONS, weeklyBattery_Mood } from "./weekly.query.js";
 
-export async function getCurrentWeekInsight(userId, table) {
-  let query = "";
+async function getWeeklyOverview(userId) {
+  const result = await db.query(weeklyBattery_Mood, [userId]);
+  const interactions = await db.query(GET_WEEKLYINTERACTIONS, [userId]);
 
-  switch (table) {
-    case "battery":
-      query = Weekly.battery;
-      break;
-    case "mood":
-      query = Weekly.mood;
-      break;
-    case "drain_score":
-      query = Weekly.drain_score;
-      break;
-    default:
-      throw new Error("Invalid table specified");
-  }
+  const cleanInteraction = formatLogDates(interactions);
 
-  const result = await db.query(query, [userId]);
+  const drainDetection = getDetailedDrainingMessages(cleanInteraction);
 
-  const { total, log_count } = result[0];
+  const { averageBattery, averageMood } = calculateAverages(result);
+  const highestDrainRelationship = getHighestDrain(interactions);
 
-  return calculateAverage(total, log_count);
+  return {
+    averageBattery,
+    averageMood: Math.floor(averageMood),
+    interaction: {
+      average: getAverageDrainScore(interactions),
+      total: interactions.length,
+      burnoutDetected: drainDetection,
+    },
+  };
 }
 
-export async function numberOfInteractions(userId) {
-  const result = await db.query(Weekly.social_interactions_count, [userId]);
-
-  const { total } = result[0];
-
-  return total;
-}
-
-export async function getWeeklyEnergy(userId) {
-  const result = await db.query(WeeklyEnergy.getWeeklyEnergy, [userId]);
-
-  return formatLogDates(result);
-}
-
-export async function getBurnoutScore(userId) {
-  const result = await db.query(Weekly.burnout_score, [userId]);
-
-  const formattedResult = formatLogDates(result);
-
-  const burnoutDays = identifyBurnoutDays(formattedResult);
-
-  return burnoutDays;
-}
+export { getWeeklyOverview };

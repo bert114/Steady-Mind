@@ -5,7 +5,7 @@ function WeeklySummary({ data }) {
     console.log(data);
   }, [data]);
 
-  return <h1>Weekly Summary</h1>;
+  return <h1>Weekly Summary View</h1>;
   const battery = data?.battery;
   const mood = data?.mood;
   const drain = data?.drain_score;
