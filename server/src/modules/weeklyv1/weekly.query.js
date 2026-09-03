@@ -17,3 +17,21 @@ export async function fetchDailyLogs(userId, weekStart) {
 
   return unwrapRows(result);
 }
+
+export async function fetchWeekInteractions(userId, weekStart) {
+  const result = await db.query(
+    `SELECT si.id, si.drain_score, si.interaction_time,
+            si.custom_name, rt.name AS relationship_type
+     FROM social_interactions si
+     JOIN daily_logs dl ON si.daily_log_id = dl.id
+     LEFT JOIN relationship_types rt ON si.relationship_type_id = rt.id
+     WHERE dl.user_id = $1
+       AND si.drain_score IS NOT NULL
+       AND si.interaction_time >= $2::date
+       AND si.interaction_time < $2::date + INTERVAL '7 days'
+     ORDER BY si.interaction_time ASC`,
+    [userId, weekStart],
+  );
+
+  return unwrapRows(result);
+}
